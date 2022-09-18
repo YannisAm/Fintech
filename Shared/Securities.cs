@@ -11,7 +11,7 @@ namespace Fintech.Shared
         public int Id { get; set; }
         public string SecurityName { get; set; } = string.Empty;
         public float Price { get; set; }
-        public DateTime DateTimeObtained { get; set; } = DateTime.Now; //  apply an aoption for user to change it if he wants
+        public DateTime DateTimeObtained { get; set; } = DateTime.Now; //  apply an option for user to change it if he wants
 
 
     }
