@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintech.Server", "Server\Fintech.Server.csproj", "{A5DD1965-7BEC-4620-9BD3-F8B122A55888}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fintech.Server", "Server\Fintech.Server.csproj", "{A5DD1965-7BEC-4620-9BD3-F8B122A55888}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintech.Client", "Client\Fintech.Client.csproj", "{30504AB2-31C9-44A8-8F43-36DF519910AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fintech.Client", "Client\Fintech.Client.csproj", "{30504AB2-31C9-44A8-8F43-36DF519910AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintech.Shared", "Shared\Fintech.Shared.csproj", "{C9475716-C6FB-4B1C-AEEC-36CB7D61C5AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fintech.Shared", "Shared\Fintech.Shared.csproj", "{C9475716-C6FB-4B1C-AEEC-36CB7D61C5AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

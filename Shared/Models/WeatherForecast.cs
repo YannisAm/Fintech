@@ -1,4 +1,4 @@
-namespace Fintech.Shared
+namespace Fintech.Shared.Models
 {
     public class WeatherForecast
     {

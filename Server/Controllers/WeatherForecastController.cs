@@ -1,4 +1,4 @@
-using Fintech.Shared;
+using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fintech.Server.Controllers
