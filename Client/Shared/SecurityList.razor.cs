@@ -1,6 +1,9 @@
-﻿namespace Fintech.Client.Shared
+﻿using Microsoft.AspNetCore.Components;
+
+namespace Fintech.Client.Shared
 {
-    public class SecurityList
+    public partial class SecurityList : ComponentBase
     {
+
     }
 }
