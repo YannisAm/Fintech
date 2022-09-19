@@ -1,5 +1,17 @@
 ﻿<h3>SecurityList</h3>
-
-@code {
-
-}
+<table>
+    <tr>
+        <th>Security Name</th>
+        <th>Price of the security</th>
+        <th>Date-time obtained</th>
+        <th>Description</th>
+    </tr>
+    @foreach (var security in Securities){
+        <tr>
+            <th>@security.SecurityName</th>
+            <th>@security.Price</th>
+            <th>@security.DateTimeObtained</th>
+            <th>@security.Description</th>
+        </tr>
+    }
+</table>

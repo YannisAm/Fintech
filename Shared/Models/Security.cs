@@ -12,5 +12,6 @@ namespace Fintech.Shared.Models
         public string SecurityName { get; set; } = string.Empty;
         public float Price { get; set; }
         public DateTime DateTimeObtained { get; set; } = DateTime.Now; //  apply an option for user to change it if he wants
+        public string Description { get; set; } = string.Empty;
     }
 }
