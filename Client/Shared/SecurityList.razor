@@ -1,5 +1,41 @@
-﻿<h3>SecurityList</h3>
+﻿@inject HttpClient Http
 
-@code {
+<table class="table">
+    <caption>
+        Security List
+    </caption>
+    <thead>
+        <tr>
+            <th scope="col">Security Name</th>
+            <th scope="col">Price of the security</th>
+            <th scope="col">Stocks owned</th>
+            <th scope="col">Value of stocks</th>
+            <th scope="col">Date-time obtained</th>
+            <th scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var security in Securities)
+        {
+            <tr>
+                <th scope="row"><a href="">@security.SecurityName</a></th>
+                <th>@security.Price</th>
+                <th>@security.StockesOwned</th>
+                <th>@security.StocksValue</th>
+                <th>@security.DateTimeObtained</th>
+                <th>@security.Description</th>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th scope="col">Sum</th>
+            <th scope="col">-</th>
+            <th scope="col">@*@StockesOwned*@</th>
+            <th scope="col">@*@ValueOfStocks*@</th>
+            <th scope="col">-</th>
+            <th scope="col">-</th>
+        </tr>
+    </tfoot>
+</table>
 
-}
