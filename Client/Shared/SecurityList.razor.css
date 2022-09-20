@@ -5,25 +5,25 @@
     border: 3px solid black;
 }
 
-thead th:nth-child(1) {
-    width: 10%;
+/*thead th:nth-child(1) {
+    max-width: 10%;
 }
 
 thead th:nth-child(2) {
-    width: 15%;
+    max-width: 15%;
 }
 
 thead th:nth-child(3) {
-    width: 10%;
+    max-width: 10%;
 }
 
 thead th:nth-child(4) {
-    width: 15%;
+    max-width: 15%;
 }
 
 thead th:nth-child(6) {
-    width: 30%; 
-}
+    max-width: 30%; 
+}*/
 
 th,
 td {
@@ -78,4 +78,15 @@ tfoot tr th {
 tbody tr th a {
     text-decoration: none;
     color: black;
+    transition: transform 2s;
+}
+
+tbody tr th a:hover {
+    transform: scale(1.1);
+    color: #f85d5d;
+}
+
+tbody th {
+    border: 3px solid black;
+    border-top: 3px solid black;
 }
