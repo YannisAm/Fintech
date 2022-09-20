@@ -1,4 +1,6 @@
-﻿<table class="table">
+﻿@inject HttpClient Http
+
+<table class="table">
     <caption>
         Security List
     </caption>
@@ -29,10 +31,11 @@
         <tr>
             <th scope="col">Sum</th>
             <th scope="col">-</th>
-            <th scope="col">@StockesOwned</th>
-            <th scope="col">@ValueOfStocks</th>
+            <th scope="col">@*@StockesOwned*@</th>
+            <th scope="col">@*@ValueOfStocks*@</th>
             <th scope="col">-</th>
             <th scope="col">-</th>
         </tr>
     </tfoot>
 </table>
+
