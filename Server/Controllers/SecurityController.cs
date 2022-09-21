@@ -9,22 +9,39 @@ namespace Fintech.Server.Controllers
     [ApiController]
     public class SecurityController : ControllerBase
     {
-        private readonly DataContext _context;
+        private readonly ISecurityService _securityService;
 
-        public SecurityController(DataContext context)
+        public SecurityController(ISecurityService securityService)
         {
-            _context = context; 
+            _securityService = securityService;
         }
-        
+
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<Security>>>> GetSecurity ()
+        public async Task<ActionResult<ServiceResponse<List<Security>>>> GetSecurities()
         {
-            var securities = await _context.Securities.ToListAsync();
-            var response = new ServiceResponse<List<Security>>()
-            {
-                Data = securities
-            };
-            return Ok(response);
+            var result = await _securityService.GetSecuritiesAsync();
+            return Ok(result);
+        }
+
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<ServiceResponse<List<Security>>>> GetSecurityById([FromRoute]int id)
+        //{
+        //    var result = await _securityService.GetSecurityAsync(id);
+        //    return Ok(result);
+        //}
+
+        //[HttpGet]
+        //public async Task<ActionResult<ServiceResponse<List<Security>>>> GetSecurityyById([FromQuery]int id)
+        //{
+        //    var result = await _securityService.GetSecuritiesAsync();
+        //    return Ok(result);
+        //}
+
+        [HttpPost]
+        public async Task<ActionResult<ServiceResponse<int>>> CreateSecurity(Security security)
+        {
+            var result = await _securityService.CreateSecurityAsync(security);
+            return Ok(result);
         }
     }
 }

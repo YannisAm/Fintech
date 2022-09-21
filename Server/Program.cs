@@ -1,6 +1,7 @@
 global using Fintech.Shared;
 global using Microsoft.EntityFrameworkCore;
-using Fintech.Server.Data;
+global using Fintech.Server.Data;
+global using Fintech.Server.Services.SecurityService;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ISecurityService, SecurityService>();
 
 var app = builder.Build();
 
