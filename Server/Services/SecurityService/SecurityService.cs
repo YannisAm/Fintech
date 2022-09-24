@@ -30,5 +30,17 @@ namespace Fintech.Server.Services.SecurityService
                 Success = result > 0
             };
         }
+
+        public async Task<ServiceResponse<int>> EditSecurityAsync(Security security)
+        {
+            _context.Securities.Update(security);
+            int result = await _context.SaveChangesAsync();
+
+            return new ServiceResponse<int>
+            {
+                Data = result,
+                Success = result > 0
+            };
+        }
     }
 }

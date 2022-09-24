@@ -33,5 +33,18 @@ namespace Fintech.Client.Services.SecurityService
                 }
             }
         }
+
+        public async Task EditSecurity(Security security)
+        {
+            var response = await _http.PostAsJsonAsync("api/security", security);
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<ServiceResponse<int>>();
+                if (!(result?.Success ?? false))
+                {
+
+                }
+            }
+        }
     }
 }

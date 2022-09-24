@@ -15,6 +15,7 @@ else {
                 <th scope="col">Value of stocks</th>
                 <th scope="col">Date-time obtained</th>
                 <th scope="col">Description</th>
+                <th scope="col">Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@ else {
                     <th>@security.StocksValue</th>
                     <th>@security.DateTimeObtained</th>
                     <th>@security.Description</th>
+                    <th><a href="/editsecurity/@security.Id" class="btn btn-primary">Edit</a></th>
                 </tr>
             }
         </tbody>

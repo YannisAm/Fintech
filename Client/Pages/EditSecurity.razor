@@ -1,0 +1,47 @@
+﻿@page "/editsecurity/{id:int}"
+
+@if (security == null) {
+    <span>Loading Security.....</span>
+}
+else {
+    @if (security != null)
+    {
+        <div class="row w-100">
+            <div class="col-6">
+                Description
+            </div>
+            <div class="col-6">
+                <input type="text" class="form-control" @bind="editedSecurity.Description" />
+            </div>
+        </div>
+        <div class="row w-100">
+            <div class="col-6">
+                Price
+            </div>
+            <div class="col-6">
+                <input type="number" class="form-control" @bind="editedSecurity.Price" />
+            </div>
+        </div>
+        <div class="row w-100">
+            <div class="col-6">
+                StockesOwned
+            </div>
+            <div class="col-6">
+                <input type="number" class="form-control" @bind="editedSecurity.StockesOwned" />
+            </div>
+        </div>
+        <div class="row w-100">
+            <div class="col-6">
+                StocksValue
+            </div>
+            <div class="col-6">
+                <input type="number" class="form-control" @bind="editedSecurity.StocksValue" />
+            </div>
+        </div>
+        <div class="row w-100">
+            <div class="col-12">
+                <button class="btn btn-primary" @onclick="async () => await Edit(editedSecurity)">Update</button>
+            </div>
+        </div>
+    }
+}

@@ -6,5 +6,6 @@ namespace Fintech.Server.Services.SecurityService
     {
         Task<ServiceResponse<List<Security>>> GetSecuritiesAsync();
         Task<ServiceResponse<int>> CreateSecurityAsync(Security security);
+        Task<ServiceResponse<int>> EditSecurityAsync(Security security);
     }
 }
