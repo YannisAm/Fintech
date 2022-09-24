@@ -1,5 +1,5 @@
 ﻿using Fintech.Shared.Models;
-
+using System.Net.Http.Json;
 
 namespace Fintech.Client.Services.SecurityService
 {
@@ -36,7 +36,7 @@ namespace Fintech.Client.Services.SecurityService
 
         public async Task EditSecurity(Security security)
         {
-            var response = await _http.PostAsJsonAsync("api/security", security);
+            var response = await _http.PutAsJsonAsync("api/security", security);
             if (response.IsSuccessStatusCode)
             {
                 var result = await response.Content.ReadFromJsonAsync<ServiceResponse<int>>();
@@ -46,5 +46,7 @@ namespace Fintech.Client.Services.SecurityService
                 }
             }
         }
+
+        
     }
 }

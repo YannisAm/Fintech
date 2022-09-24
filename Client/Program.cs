@@ -1,10 +1,10 @@
 global using Fintech.Shared;
 global using System.Net.Http.Json;
 global using Fintech.Client.Services.SecurityService;
+global using Blazored.Modal;
 using Fintech.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

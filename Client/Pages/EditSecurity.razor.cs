@@ -7,21 +7,20 @@ namespace Fintech.Client.Pages
     {
         [Inject]
         public ISecurityService SecurityService { get; set; }
+
         private Security? security = null;
 
         [Parameter]
         public int Id { get; set; }
-
-        Security editedSecurity = new Security();
 
         protected override async Task OnParametersSetAsync()
         {
             security = SecurityService.Securities.Find(s => s.Id == Id);
         }
 
-        public async Task Edit (Security editetSecurity)
+        public async Task Edit (Security security)
         {
-            await SecurityService.EditSecurity(editedSecurity);
+            await SecurityService.EditSecurity(security);
             
         }
 

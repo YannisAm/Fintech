@@ -1,5 +1,7 @@
 ﻿@page "/editsecurity/{id:int}"
 
+<h1>You can change the security you clicked</h1>
+
 @if (security == null) {
     <span>Loading Security.....</span>
 }
@@ -8,10 +10,18 @@ else {
     {
         <div class="row w-100">
             <div class="col-6">
+                Security Name
+            </div>
+            <div class="col-6">
+                <input type="text"  class="form-control" @bind="security.SecurityName" />
+            </div>
+        </div>
+        <div class="row w-100">
+            <div class="col-6">
                 Description
             </div>
             <div class="col-6">
-                <input type="text" class="form-control" @bind="editedSecurity.Description" />
+                <input type="text"  class="form-control" @bind="security.Description" />
             </div>
         </div>
         <div class="row w-100">
@@ -19,7 +29,7 @@ else {
                 Price
             </div>
             <div class="col-6">
-                <input type="number" class="form-control" @bind="editedSecurity.Price" />
+                <input type="number"  class="form-control" @bind="security.Price" />
             </div>
         </div>
         <div class="row w-100">
@@ -27,21 +37,14 @@ else {
                 StockesOwned
             </div>
             <div class="col-6">
-                <input type="number" class="form-control" @bind="editedSecurity.StockesOwned" />
-            </div>
-        </div>
-        <div class="row w-100">
-            <div class="col-6">
-                StocksValue
-            </div>
-            <div class="col-6">
-                <input type="number" class="form-control" @bind="editedSecurity.StocksValue" />
+                <input type="number"  class="form-control" @bind="security.StockesOwned" />
             </div>
         </div>
         <div class="row w-100">
             <div class="col-12">
-                <button class="btn btn-primary" @onclick="async () => await Edit(editedSecurity)">Update</button>
+                <button class="btn btn-primary" @onclick="async () => await Edit(security)">Update</button>
             </div>
         </div>
+        
     }
 }

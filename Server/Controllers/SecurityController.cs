@@ -43,7 +43,7 @@ namespace Fintech.Server.Controllers
             var result = await _securityService.CreateSecurityAsync(security);
             return Ok(result);
         }
-        [HttpPost]
+        [HttpPut]
         public async Task<ActionResult<ServiceResponse<int>>> EditSecurity(Security security)
         {
             var result = await _securityService.EditSecurityAsync(security);
