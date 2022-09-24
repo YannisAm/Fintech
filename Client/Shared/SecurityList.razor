@@ -1,41 +1,51 @@
-﻿@inject HttpClient Http
-
-<table class="table">
-    <caption>
-        Security List
-    </caption>
-    <thead>
-        <tr>
-            <th scope="col">Security Name</th>
-            <th scope="col">Price of the security</th>
-            <th scope="col">Stocks owned</th>
-            <th scope="col">Value of stocks</th>
-            <th scope="col">Date-time obtained</th>
-            <th scope="col">Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var security in Securities)
-        {
+﻿@if (SecurityService.Securities ==null || SecurityService.Securities.Count == 0) 
+{
+    <span>Loading Securities....</span>
+}
+else {
+    <table class="table">
+        <caption>
+            Security List
+        </caption>
+        <thead>
             <tr>
-                <th scope="row"><a href="">@security.SecurityName</a></th>
-                <th>@security.Price</th>
-                <th>@security.StockesOwned</th>
-                <th>@security.StocksValue</th>
-                <th>@security.DateTimeObtained</th>
-                <th>@security.Description</th>
+                <th scope="col">Security Name</th>
+                <th scope="col">Price of the security</th>
+                <th scope="col">Stocks owned</th>
+                <th scope="col">Value of stocks</th>
+                <th scope="col">Date-time obtained</th>
+                <th scope="col">Description</th>
+                <th scope="col">Edit</th>
             </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <th scope="col">Sum</th>
-            <th scope="col">-</th>
-            <th scope="col">@*@StockesOwned*@</th>
-            <th scope="col">@*@ValueOfStocks*@</th>
-            <th scope="col">-</th>
-            <th scope="col">-</th>
-        </tr>
-    </tfoot>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var security in SecurityService.Securities)
+            {
+                <tr>
+                    <th scope="row"><a href="">@security.SecurityName</a></th>
+                    <th>@security.Price</th>
+                    <th>@security.StockesOwned</th>
+                    <th>$ @ValueOfEachStock(security)</th>
+                    <th>@security.DateTimeObtained</th>
+                    <th>@security.Description</th>
+                    <th><a href="/editsecurity/@security.Id" class="btn btn-primary">Edit</a></th>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col">Sum</th>
+                <th scope="col">-</th>
+                <th scope="col">@NumberOfStocks</th>
+                <th scope="col">@SumOfStocks</th>
+                <th scope="col">-</th>
+                <th scope="col">-</th>
+            </tr>
+        </tfoot>
+    </table>
+
+}
+
+
+
 

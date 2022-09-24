@@ -3,3 +3,43 @@
 <PageTitle>Add security</PageTitle>
 
 <h1>In this section, you can add your security you obtained, the quantity and the price of it</h1>
+
+@if (Security != null){
+    <div class="row w-100">
+        <div class="col-6">
+            SecurityName
+        </div>
+        <div class="col-6">
+            <input type="text" class="form-control" @bind="Security.SecurityName"/>
+        </div>
+    </div>
+    <div class="row w-100">
+        <div class="col-6">
+            Description
+        </div>
+        <div class="col-6">
+            <input type="text" class="form-control" @bind="Security.Description" />
+        </div>
+    </div>
+    <div class="row w-100">
+        <div class="col-6">
+            Price
+        </div>
+        <div class="col-6">
+            <input type="number" class="form-control" @bind="Security.Price" />
+        </div>
+    </div>
+    <div class="row w-100">
+        <div class="col-6">
+            StockesOwned
+        </div>
+        <div class="col-6">
+            <input type="number" class="form-control" @bind="Security.StockesOwned" />
+        </div>
+    </div>
+    <div class="row w-100">
+        <div class="col-12">
+            <button class="btn btn-primary" @onclick="async () => await Create()">Save</button>
+        </div>
+    </div>
+}
