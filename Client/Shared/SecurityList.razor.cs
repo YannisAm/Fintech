@@ -9,31 +9,29 @@ namespace Fintech.Client.Shared
     public partial class SecurityList : ComponentBase
     {
         [Inject]
-        public ISecurityService? SecurityService { get; set; } = null;
+        public ISecurityService SecurityService { get; set; }
 
-        private static List<Security> Securities = new List<Security>();
+        private List<Security> Securities = new();
 
-        private static float ValueOfEachStock (Security security)
-        {
-            float valueOfStock = security.Price * security.StockesOwned;
-            return valueOfStock;
-        }
+        private static float ValueOfEachStock(Security security)
+            => security.Price * security.StockesOwned;
 
-        private static float SumOfStocks (SecurityService securities)
+
+        private float SumOfStocks()
         {
             float sumOfStocks = 0f;
-            foreach (var security in securities.Securities)
+            foreach (var security in Securities)
             {
-                sumOfStocks += security.StockesOwned;
+                sumOfStocks += ValueOfEachStock(security);
             }
             return sumOfStocks;
 
         }
 
-        private static int NumberOfStocks (SecurityService securities)
+        private int NumberOfStocks()
         {
             int numberOfStocks = 0;
-            foreach (var security in securities.Securities)
+            foreach (var security in Securities)
             {
                 numberOfStocks += security.StockesOwned;
             }
@@ -43,7 +41,12 @@ namespace Fintech.Client.Shared
 
         protected override async Task OnInitializedAsync()
         {
-            await SecurityService.GetSecurities();
+            Securities = await SecurityService.GetSecurities();
         }
+
+        //public async Task Delete(int securityId)
+        //{
+        //    await SecurityService.DeleteSecurity(securityId);
+        //}
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
+using Fintech.Client;
 
 namespace Fintech.Client.Pages
 {
@@ -15,14 +16,14 @@ namespace Fintech.Client.Pages
 
         protected override async Task OnParametersSetAsync()
         {
-            security = SecurityService.Securities.Find(s => s.Id == Id);
+            security = await SecurityService.GetSecurityById(Id);
         }
 
         public async Task Edit (Security security)
         {
             await SecurityService.EditSecurity(security);
-            
+            NavigateToPortfolio navigate = new NavigateToPortfolio();
+            navigate.Navigate();
         }
-
     }
 }

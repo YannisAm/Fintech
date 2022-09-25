@@ -19,6 +19,16 @@ namespace Fintech.Server.Services.SecurityService
             };
         }
 
+        public async Task<ServiceResponse<Security>> GetSecurityByIdAsync(int id)
+        {
+            var security = await _context.Securities.FirstOrDefaultAsync(s => s.Id == id);
+
+            return new ServiceResponse<Security>
+            {
+                Data = security
+            };
+        }
+
         public async Task<ServiceResponse<int>> CreateSecurityAsync(Security security)
         {
             _context.Securities.Add(security);
@@ -42,5 +52,11 @@ namespace Fintech.Server.Services.SecurityService
                 Success = result > 0
             };
         }
+
+
+        //public Task<ServiceResponse<int>> DeleteSecurityAsync(int securityId)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

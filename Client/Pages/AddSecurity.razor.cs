@@ -1,5 +1,6 @@
 ﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace Fintech.Client.Pages
 {
@@ -7,11 +8,15 @@ namespace Fintech.Client.Pages
     {
         [Inject]
         public ISecurityService SecurityService { get; set; }
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
         public Security Security { get; set; } = new();
 
         public async Task Create()
         {
             await SecurityService.CreateSecurity(Security);
+            NavigateToPortfolio navigate = new NavigateToPortfolio();
+            navigate.Navigate();
         }
     }
 }

@@ -23,12 +23,12 @@ namespace Fintech.Server.Controllers
             return Ok(result);
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<ServiceResponse<List<Security>>>> GetSecurityById([FromRoute]int id)
-        //{
-        //    var result = await _securityService.GetSecurityAsync(id);
-        //    return Ok(result);
-        //}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ServiceResponse<Security>>> GetSecurityById([FromRoute] int id)
+        {
+            var result = await _securityService.GetSecurityByIdAsync(id);
+            return Ok(result);
+        }
 
         //[HttpGet]
         //public async Task<ActionResult<ServiceResponse<List<Security>>>> GetSecurityyById([FromQuery]int id)
@@ -49,5 +49,12 @@ namespace Fintech.Server.Controllers
             var result = await _securityService.EditSecurityAsync(security);
             return Ok(result);
         }
+
+        //[HttpDelete("{securityId}")]
+        //public async Task<ActionResult<ServiceResponse<int>>> DeleteSecurity([FromRoute] int securityId)
+        //{
+        //    var result = await _securityService.DeleteSecurityAsync(securityId);
+        //    return Ok(result);
+        //}
     }
 }

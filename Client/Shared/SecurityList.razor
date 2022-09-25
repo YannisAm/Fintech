@@ -1,4 +1,4 @@
-﻿@if (SecurityService.Securities ==null || SecurityService.Securities.Count == 0) 
+﻿@if (Securities ==null || Securities.Count == 0) 
 {
     <span>Loading Securities....</span>
 }
@@ -15,11 +15,11 @@ else {
                 <th scope="col">Value of stocks</th>
                 <th scope="col">Date-time obtained</th>
                 <th scope="col">Description</th>
-                <th scope="col">Edit</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var security in SecurityService.Securities)
+            @foreach (var security in Securities)
             {
                 <tr>
                     <th scope="row"><a href="">@security.SecurityName</a></th>
@@ -28,7 +28,10 @@ else {
                     <th>$ @ValueOfEachStock(security)</th>
                     <th>@security.DateTimeObtained</th>
                     <th>@security.Description</th>
-                    <th><a href="/editsecurity/@security.Id" class="btn btn-primary">Edit</a></th>
+                    <th>
+                        <a href="/editsecurity/@security.Id" class="btn btn-primary">Edit</a>
+                        @*<a @onclick="async () => await Delete(security)" class="btn btn-primary">Delete</a>*@
+                        </th>
                 </tr>
             }
         </tbody>
@@ -36,8 +39,8 @@ else {
             <tr>
                 <th scope="col">Sum</th>
                 <th scope="col">-</th>
-                <th scope="col">@NumberOfStocks</th>
-                <th scope="col">@SumOfStocks</th>
+                <th scope="col">@NumberOfStocks()</th>
+                <th scope="col">@SumOfStocks()</th>
                 <th scope="col">-</th>
                 <th scope="col">-</th>
             </tr>

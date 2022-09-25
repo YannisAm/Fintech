@@ -14,11 +14,24 @@ namespace Fintech.Client.Services.SecurityService
 
         public List<Security> Securities { get; set; } = new List<Security>();
 
-        public async Task GetSecurities()
+        public async Task<Security?> GetSecurityById(int id)
+        {
+            var result = await _http.GetAsync($"api/security/{id}");
+            if (result.IsSuccessStatusCode)
+            {
+                var response = await result.Content.ReadFromJsonAsync<ServiceResponse<Security>>();
+                if (response != null)
+                    return response.Data;
+            }
+            return null;
+        }
+
+        public async Task<List<Security>> GetSecurities()
         {
             var result = await _http.GetFromJsonAsync<ServiceResponse<List<Security>>>("api/security");
             if (result != null && result.Data != null)
-                Securities = result.Data;
+                return result.Data;
+            return new List<Security>();
         }
 
         public async Task CreateSecurity(Security security)
