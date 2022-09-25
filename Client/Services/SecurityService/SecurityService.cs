@@ -13,6 +13,7 @@ namespace Fintech.Client.Services.SecurityService
         }
 
         public List<Security> Securities { get; set; } = new List<Security>();
+        public string Message { get; set; } = "Loading security...";
 
         public async Task<Security?> GetSecurityById(int id)
         {
@@ -65,5 +66,19 @@ namespace Fintech.Client.Services.SecurityService
             var response = await _http.DeleteAsync($"api/security/{securityId}");
         }
 
+        public async Task SearchSecurity(string searchText)
+        {
+            var result = await _http.GetFromJsonAsync<ServiceResponse<List<Security>>>($"api/security/search/{searchText}");
+            if (result != null && result.Data != null)
+                Securities = result.Data;
+            if (Securities.Count == 0)
+                Message = "No securities found.";
+        }
+
+        public async Task<List<string>> GetSecuritySearchSuggestion(string searchTextSuggestion)
+        {
+            var result = await _http.GetFromJsonAsync<ServiceResponse<List<string>>>($"api/security/search/{searchTextSuggestion}");
+            return result.Data;
+        }
     }
 }

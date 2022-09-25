@@ -56,5 +56,19 @@ namespace Fintech.Server.Controllers
             var result = await _securityService.DeleteSecurityAsync(securityId);
             return Ok(result);
         }
+
+        [HttpGet("search/{searchText}")]
+        public async Task<ActionResult<ServiceResponse<List<Security>>>> SearchSecurities(string searchText)
+        {
+            var result = await _securityService.Searchsecurity(searchText);
+            return Ok(result);
+        }
+
+        [HttpGet("search/{searchTextSuggestion}")]
+        public async Task<ActionResult<ServiceResponse<List<Security>>>> GetSecuritySearchSuggestion(string searchTextSuggestion)
+        {
+            var result = await _securityService.GetSecuritySearchSuggestion(searchTextSuggestion);
+            return Ok(result);
+        }
     }
 }

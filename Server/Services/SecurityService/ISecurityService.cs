@@ -9,6 +9,8 @@ namespace Fintech.Server.Services.SecurityService
         Task<ServiceResponse<int>> CreateSecurityAsync(Security security);
         Task<ServiceResponse<int>> EditSecurityAsync(Security security);
         Task<ServiceResponse<Security>> DeleteSecurityAsync(int securityId);
+        Task<ServiceResponse<List<Security>>> Searchsecurity(string searchText);
+        Task<ServiceResponse<List<string>>> GetSecuritySearchSuggestion(string searchText);
 
     }
 }

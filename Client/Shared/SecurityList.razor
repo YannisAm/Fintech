@@ -1,6 +1,6 @@
 ﻿@if (Securities ==null || Securities.Count == 0) 
 {
-    <span>Loading Securities....</span>
+    <span>@SecurityService.Message</span>
 }
 else {
     <table class="table">

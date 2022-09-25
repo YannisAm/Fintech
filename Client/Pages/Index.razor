@@ -1,9 +1,27 @@
 ﻿@page "/"
+@page "/search/{searchText}"
 
-<PageTitle>Index</PageTitle>
+
+@inject ISecurityService SecurityService
+
+<PageTitle>Fintech Services</PageTitle>
 
 <h1>Fintech app</h1>
 
 <p>This Fintech app, provides to the user, the ease to track all of the securities, that have been acquired.</p>
 
 <!-- must make a form tha it will have a button to save the security in the database, name of the sec, quantity, date acquired and the price it was acquired -->
+
+
+@code {
+    [Parameter]
+    public string? SearchText { get; set; } = null;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if(SearchText != null)
+        {
+            await SecurityService.SearchSecurity(SearchText);
+        }
+    }
+}

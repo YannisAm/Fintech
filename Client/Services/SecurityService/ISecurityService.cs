@@ -9,5 +9,8 @@ namespace Fintech.Client.Services.SecurityService
         Task CreateSecurity(Security security);
         Task EditSecurity(Security security);
         Task DeleteSecurity(int securityId);
+        string Message { get; set; } //to display if no security was to be found
+        Task SearchSecurity(string searchText);
+        Task<List<string>> GetSecuritySearchSuggestion(string searchText);
     }
 }
