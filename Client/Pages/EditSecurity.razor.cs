@@ -8,6 +8,8 @@ namespace Fintech.Client.Pages
     {
         [Inject]
         public ISecurityService SecurityService { get; set; }
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
 
         private Security? security = null;
 
@@ -22,8 +24,12 @@ namespace Fintech.Client.Pages
         public async Task Edit (Security security)
         {
             await SecurityService.EditSecurity(security);
-            NavigateToPortfolio navigate = new NavigateToPortfolio();
-            navigate.Navigate();
+            Navigate();
+        }
+
+        private void Navigate()
+        {
+            NavigationManager.NavigateTo("/portfolio", true);
         }
     }
 }

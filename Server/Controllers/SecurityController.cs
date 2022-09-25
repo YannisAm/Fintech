@@ -50,11 +50,11 @@ namespace Fintech.Server.Controllers
             return Ok(result);
         }
 
-        //[HttpDelete("{securityId}")]
-        //public async Task<ActionResult<ServiceResponse<int>>> DeleteSecurity([FromRoute] int securityId)
-        //{
-        //    var result = await _securityService.DeleteSecurityAsync(securityId);
-        //    return Ok(result);
-        //}
+        [HttpDelete("{securityId}")]
+        public async Task<ActionResult<ServiceResponse<int>>> DeleteSecurity([FromRoute] int securityId)
+        {
+            var result = await _securityService.DeleteSecurityAsync(securityId);
+            return Ok(result);
+        }
     }
 }

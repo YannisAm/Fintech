@@ -15,8 +15,12 @@ namespace Fintech.Client.Pages
         public async Task Create()
         {
             await SecurityService.CreateSecurity(Security);
-            NavigateToPortfolio navigate = new NavigateToPortfolio();
-            navigate.Navigate();
+            Navigate();
+        }
+
+        private void Navigate()
+        {
+            NavigationManager.NavigateTo("/portfolio", true);
         }
     }
 }

@@ -11,7 +11,7 @@ else {
             <tr>
                 <th scope="col">Security Name</th>
                 <th scope="col">Price of the security</th>
-                <th scope="col">Stocks owned</th>
+                <th scope="col">Securities owned</th>
                 <th scope="col">Value of stocks</th>
                 <th scope="col">Date-time obtained</th>
                 <th scope="col">Description</th>
@@ -30,7 +30,7 @@ else {
                     <th>@security.Description</th>
                     <th>
                         <a href="/editsecurity/@security.Id" class="btn btn-primary">Edit</a>
-                        @*<a @onclick="async () => await Delete(security)" class="btn btn-primary">Delete</a>*@
+                        <a @onclick="async () => await Delete(security.Id)" class="btn btn-primary">Delete</a>
                         </th>
                 </tr>
             }
@@ -40,7 +40,7 @@ else {
                 <th scope="col">Sum</th>
                 <th scope="col">-</th>
                 <th scope="col">@NumberOfStocks()</th>
-                <th scope="col">@SumOfStocks()</th>
+                <th scope="col">$ @SumOfStocks()</th>
                 <th scope="col">-</th>
                 <th scope="col">-</th>
             </tr>

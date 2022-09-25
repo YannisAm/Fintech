@@ -53,10 +53,17 @@ namespace Fintech.Server.Services.SecurityService
             };
         }
 
+        public async Task<ServiceResponse<Security>> DeleteSecurityAsync(int securityId)
+        {
+            var foundSecurity = await _context.Securities
+                .FirstOrDefaultAsync(s => s.Id == securityId);
+            _context.Securities.Remove(foundSecurity);
+            await _context.SaveChangesAsync();
 
-        //public Task<ServiceResponse<int>> DeleteSecurityAsync(int securityId)
-        //{
-        //    throw new NotImplementedException();
-        //}
+            return new ServiceResponse<Security>
+            {
+                Message = "Your security has been deleted"
+            };
+        }
     }
 }

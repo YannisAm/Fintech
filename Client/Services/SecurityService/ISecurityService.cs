@@ -8,5 +8,6 @@ namespace Fintech.Client.Services.SecurityService
         Task<Security?> GetSecurityById(int id);
         Task CreateSecurity(Security security);
         Task EditSecurity(Security security);
+        Task DeleteSecurity(int securityId);
     }
 }

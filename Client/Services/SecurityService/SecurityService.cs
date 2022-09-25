@@ -60,6 +60,10 @@ namespace Fintech.Client.Services.SecurityService
             }
         }
 
-        
+        public async Task DeleteSecurity(int securityId)
+        {
+            var response = await _http.DeleteAsync($"api/security/{securityId}");
+        }
+
     }
 }

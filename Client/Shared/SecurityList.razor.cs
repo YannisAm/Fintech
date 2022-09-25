@@ -9,7 +9,7 @@ namespace Fintech.Client.Shared
     public partial class SecurityList : ComponentBase
     {
         [Inject]
-        public ISecurityService SecurityService { get; set; }
+        public ISecurityService? SecurityService { get; set; } = null;
 
         private List<Security> Securities = new();
 
@@ -44,9 +44,9 @@ namespace Fintech.Client.Shared
             Securities = await SecurityService.GetSecurities();
         }
 
-        //public async Task Delete(int securityId)
-        //{
-        //    await SecurityService.DeleteSecurity(securityId);
-        //}
+        public async Task Delete(int securityId)
+        {
+            await SecurityService.DeleteSecurity(securityId);
+        }
     }
 }
