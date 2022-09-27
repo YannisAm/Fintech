@@ -15,23 +15,18 @@ else {
                 <th scope="col">Value of stocks</th>
                 <th scope="col">Date-time obtained</th>
                 <th scope="col">Description</th>
-                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var security in Securities)
             {
                 <tr>
-                    <th scope="row"><a href="">@security.SecurityName</a></th>
+                    <th scope="row"><a href="/securitydetails/@security.Id">@security.SecurityName</a></th>
                     <th>@security.Price</th>
                     <th>@security.StockesOwned</th>
                     <th>$ @ValueOfEachStock(security)</th>
                     <th>@security.DateTimeObtained</th>
-                    <th>@security.Description</th>
-                    <th>
-                        <a href="/editsecurity/@security.Id" class="btn btn-primary">Edit</a>
-                        <a @onclick="async () => await Delete(security.Id)" class="btn btn-primary">Delete</a>
-                        </th>
+                    <th>@security.Description</th> <!-- It will have the description till some words and the rest of the description will be shown in securitydetails -->
                 </tr>
             }
         </tbody>

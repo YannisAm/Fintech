@@ -64,6 +64,10 @@ namespace Fintech.Client.Services.SecurityService
         public async Task DeleteSecurity(int securityId)
         {
             var response = await _http.DeleteAsync($"api/security/{securityId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+            }
         }
 
         public async Task SearchSecurity(string searchText)

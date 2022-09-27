@@ -38,15 +38,9 @@ namespace Fintech.Client.Shared
             return numberOfStocks;
         }
 
-
         protected override async Task OnInitializedAsync()
         {
             Securities = await SecurityService.GetSecurities();
-        }
-
-        public async Task Delete(int securityId)
-        {
-            await SecurityService.DeleteSecurity(securityId);
         }
     }
 }

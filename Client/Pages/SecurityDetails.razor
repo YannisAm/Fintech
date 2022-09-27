@@ -1,0 +1,45 @@
+﻿@page "/securitydetails/{id:int}"
+
+<title>@security.SecurityName</title>
+
+@if (security != null)
+{
+    <div class="row w-100">
+        <div class="col-6">
+            SecurityName
+        </div>
+        <div class="col-6">
+            <p>@security.SecurityName</p>
+        </div>
+    </div>
+    <div class="row w-100">
+        <div class="col-6">
+            Price
+        </div>
+        <div class="col-6">
+            <p>@security.Price</p>
+        </div>
+    </div>
+    <div class="row w-100">
+        <div class="col-6">
+            StockesOwned
+        </div>
+        <div class="col-6">
+            <p>@security.StockesOwned</p>
+        </div>
+    </div>
+    <div class="row w-100">
+        <div class="col-6">
+            Description
+        </div>
+        <div class="col-6">
+            <p>@security.Description</p>
+        </div>
+    </div>
+    <div class="row w-100">
+        <div class="col-12">
+            <a href="/editsecurity/@security.Id" class="btn btn-primary">Edit</a>
+            <button class="btn btn-primary" @onclick="async () => await Delete(id)">Delete</button>
+        </div>
+    </div>
+}
