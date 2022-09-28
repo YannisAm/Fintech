@@ -68,7 +68,7 @@ namespace Fintech.Server.Services.SecurityService
             };
         }
 
-        public async Task<ServiceResponse<List<Security>>> Searchsecurity(string searchText)
+        public async Task<ServiceResponse<List<Security>>> SearchSecurity(string searchText)
         {
             var response = new ServiceResponse<List<Security>>
             {
@@ -80,10 +80,10 @@ namespace Fintech.Server.Services.SecurityService
         private async Task<List<Security>> FindSecuritiesBySearchText(string searchText)
         {
             return await _context.Securities
-                                   .Where(s => s.Description.ToLower().Contains(searchText.ToLower())
-                                   ||
-                                   s.SecurityName.ToLower().Contains(searchText.ToLower()))
-                                   .ToListAsync();
+                        .Where(s => s.Description.ToLower().Contains(searchText.ToLower())
+                        ||
+                        s.SecurityName.ToLower().Contains(searchText.ToLower()))
+                        .ToListAsync();
         }
 
         public async Task<ServiceResponse<List<string>>> GetSecuritySearchSuggestion(string searchText)

@@ -60,7 +60,7 @@ namespace Fintech.Server.Controllers
         [HttpGet("search/{searchText}")]
         public async Task<ActionResult<ServiceResponse<List<Security>>>> SearchSecurities(string searchText)
         {
-            var result = await _securityService.Searchsecurity(searchText);
+            var result = await _securityService.SearchSecurity(searchText);
             return Ok(result);
         }
 

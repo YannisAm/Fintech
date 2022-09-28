@@ -42,5 +42,29 @@ namespace Fintech.Client.Shared
         {
             Securities = await SecurityService.GetSecurities();
         }
+
+        private string CutTheText (string description)
+        {
+            const int maxLength = 20;
+
+            var words = description.Split(' ');
+            if (words.Length > maxLength)
+            {
+                var totalCharacters = 0;
+                var summaryWords = new List<string>();
+
+                foreach (var word in words)
+                {
+                    summaryWords.Add(word);
+
+                    totalCharacters += word.Length + 1;
+                    if (totalCharacters > maxLength)
+                        break;
+                }
+
+                return String.Join(" ", summaryWords) + "...";
+            }
+            return description;
+        }
     }
 }

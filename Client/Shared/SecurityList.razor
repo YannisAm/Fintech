@@ -26,7 +26,7 @@ else {
                     <th>@security.StockesOwned</th>
                     <th>$ @ValueOfEachStock(security)</th>
                     <th>@security.DateTimeObtained</th>
-                    <th>@security.Description</th> <!-- It will have the description till some words and the rest of the description will be shown in securitydetails -->
+                    <th>@CutTheText(security.Description)</th>
                 </tr>
             }
         </tbody>
