@@ -12,12 +12,9 @@ namespace Fintech.Client.Pages
         [Parameter]
         public int id { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnParametersSetAsync()
         {
-            if (security != null)
-            {
-                security = await SecurityService.GetSecurityById(id);
-            }
+            security = await SecurityService.GetSecurityById(id);
         }
 
         public async Task Delete(int securityId)
