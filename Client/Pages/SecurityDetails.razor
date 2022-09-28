@@ -40,7 +40,11 @@
     <div class="row w-100">
         <div class="col-12">
             <a href="/editsecurity/@security.Id" class="btn btn-primary">Edit</a>
-            <button class="btn btn-primary" @onclick="async () => await Delete(id)">Delete</button>
+            <button type="button" class="btn btn-danger btn-sm" @onclick="async () => OpenDeleteDialog(security)">Delete</button>
         </div>
     </div>
+}
+@if (DeleteDialogOpen) 
+{
+    <ModelDialog Title="Are you sure?" Text="Do you want to delete the security?" OnClose="@OnDeleteDialogClose" DialogType="ModelDialog.ModalDialogType.DeleteCancel"></ModelDialog>
 }
