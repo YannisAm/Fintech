@@ -1,0 +1,29 @@
+﻿@page "/addPortfolio"
+
+<PageTitle>Add portfolio</PageTitle>
+
+
+@if (Portfolio != null)
+{
+    <div class="row w-100">
+        <div class="col-6">
+            Portfolio Name
+        </div>
+        <div class="col-6">
+            <input type="text" class="form-control" @bind="Portfolio.NameOfPortfolio" />
+        </div>
+    </div>
+    <div class="row w-100">
+        <div class="col-6">
+            Description
+        </div>
+        <div class="col-6">
+            <input type="text" class="form-control" @bind="Portfolio.Description" />
+        </div>
+    </div>
+    <div class="row w-100">
+        <div class="col-12">
+            <button class="btn btn-primary" @onclick="async () => await Create()">Save</button>
+        </div>
+    </div>
+}

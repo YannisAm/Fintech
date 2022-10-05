@@ -1,0 +1,73 @@
+﻿using Fintech.Shared.Models;
+using System.Net.Http.Json;
+
+namespace Fintech.Client.Services.PortfolioService
+{
+    public class PortfolioService : IPortfolioService
+    {
+        private readonly HttpClient _http;
+
+        public PortfolioService(HttpClient http)
+        {
+            _http = http;
+        }
+
+        public List<Portfolio> Portfolios { get; set; } = new List<Portfolio>();
+        public string Message { get; set; } = "Loading portfolio...";
+
+        public async Task CreatePortfolio(Portfolio portfolio)
+        {
+            var response = await _http.PostAsJsonAsync("api/portfolio", portfolio);
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<ServiceResponse<int>>();
+                if (!(result?.Success ?? false))
+                {
+
+                }
+            }
+        }
+
+        public async Task DeletePortfolio(int portfolioId)
+        {
+            var response = await _http.DeleteAsync($"api/portfolio/{portfolioId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+            }
+        }
+
+        public async Task EditPortfolio(Portfolio portfolio)
+        {
+            var response = await _http.PutAsJsonAsync("api/portfolio", portfolio);
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<ServiceResponse<int>>();
+                if (!(result?.Success ?? false))
+                {
+
+                }
+            }
+        }
+
+        public async Task<Portfolio?> GetPortfolioById(int portfolioid)
+        {
+            var result = await _http.GetAsync($"api/portfolio/{portfolioid}");
+            if (result.IsSuccessStatusCode)
+            {
+                var response = await result.Content.ReadFromJsonAsync<ServiceResponse<Portfolio>>();
+                if (response != null)
+                    return response.Data;
+            }
+            return null;
+        }
+
+        public async Task<List<Portfolio>> GetPortfolios()
+        {
+            var result = await _http.GetFromJsonAsync<ServiceResponse<List<Portfolio>>>("api/portfolio");
+            if (result != null && result.Data != null)
+                return result.Data;
+            return new List<Portfolio>();
+        }
+    }
+}

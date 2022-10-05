@@ -5,6 +5,7 @@
     border: 3px solid black;
 }
 
+
 th,
 td {
     padding: 20px;
@@ -17,16 +18,17 @@ tbody td {
 tfoot th {
     text-align: left;
 }
+
 thead,
 tfoot {
     color: white;
     text-shadow: 1px 1px 1px black;
 }
 
-thead th,
-tfoot th{
-    border: 3px solid black;
-}
+    thead th,
+    tfoot th {
+        border: 3px solid black;
+    }
 
 tbody tr:nth-child(odd) {
     background-color: #c4c2c2;
@@ -61,10 +63,10 @@ tbody tr th a {
     transition: transform 2s;
 }
 
-tbody tr th a:hover {
-    transform: scale(1.1);
-    color: #f85d5d;
-}
+    tbody tr th a:hover {
+        transform: scale(1.1);
+        color: #f85d5d;
+    }
 
 tbody th {
     border: 3px solid black;

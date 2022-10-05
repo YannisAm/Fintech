@@ -1,0 +1,43 @@
+﻿@if (Portfolios == null || Portfolios.Count == 0)
+{
+    <button class="btn btn-primary" @onclick="Navigation">Add Portfolio</button>
+
+}
+else
+{
+    <table class="table">
+        <caption>
+            Portfolio List
+        </caption>
+        <thead>
+            <tr>
+                <th scope="col">Portfolio Name</th>
+                <th scope="col">Securities owned</th>
+                <th scope="col">Date-time created</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var portfolio in Portfolios)
+            {
+                <tr>
+                    <th scope="row"><a href="/portfoliodetails/@portfolio.PortfolioId">@portfolio.NameOfPortfolio</a></th>
+                    <th>@CountSecurities(portfolio)</th>
+                    <th>@portfolio.DateTimeCreated</th>
+                    <th>@portfolio.Description</th>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col">Sum</th>
+            </tr>
+        </tfoot>
+    </table>
+    
+
+}
+
+
+
+

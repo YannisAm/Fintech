@@ -22,6 +22,6 @@ namespace Fintech.Shared.Models
         public DateTime DateTimeObtained { get; set; } = DateTime.UtcNow; //  apply an option for user to change it if he wants
         public string? Description { get; set; } = string.Empty;
 
-        public Portfolio Portofolio { get; set; }
+        public Portfolio Portfolio { get; set; }
     }
 }
