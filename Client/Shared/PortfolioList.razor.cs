@@ -6,7 +6,7 @@ namespace Fintech.Client.Shared
     public partial class PortfolioList : ComponentBase
     {
         [Inject]
-        public IPortfolioService? PortfolioService { get; set; } = null;
+        public IPortfolioService PortfolioService { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
@@ -23,9 +23,10 @@ namespace Fintech.Client.Shared
             return countSecurities = portfolio.Securities.Count();
         }
 
-        private void Navigation()
+        private void NavigationToPortfolio()
         {
             NavigationManager.NavigateTo("/addPortfolio", true);
         }
+
     }
 }

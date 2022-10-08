@@ -1,6 +1,6 @@
 ﻿@if (Portfolios == null || Portfolios.Count == 0)
 {
-    <button class="btn btn-primary" @onclick="Navigation">Add Portfolio</button>
+    <button class="btn btn-primary" @onclick="NavigationToPortfolio">Add Portfolio</button>
 
 }
 else
@@ -34,6 +34,8 @@ else
             </tr>
         </tfoot>
     </table>
+
+   
     
 
 }

@@ -9,8 +9,6 @@ namespace Fintech.Client.Shared
     {
         [Inject]
         public ISecurityService? SecurityService { get; set; } = null;
-        [Inject]
-        public NavigationManager NavigationManager { get; set; }
 
         private List<Security> Securities = new();
 
@@ -69,9 +67,6 @@ namespace Fintech.Client.Shared
             return description;
         }
 
-        private void Navigation()
-        {
-            NavigationManager.NavigateTo("/addSecurity", true);
-        }
+        
     }
 }

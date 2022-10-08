@@ -20,5 +20,11 @@ namespace Fintech.Client.Pages
             portfolio = await PortfolioService.GetPortfolioById(id);
         }
 
+
+        private void NavigationToSecurity()
+        {
+            NavigationManager.NavigateTo("/addSecurity", true);
+        }
+
     }
 }

@@ -12,7 +12,7 @@ namespace Fintech.Shared.Models
         [Key]
         public int PortfolioId { get; set; }
         [Required]
-        public string? NameOfPortfolio { get; set; }
+        public string NameOfPortfolio { get; set; }
         public string Description { get; set; } = string.Empty;
         public DateTime DateTimeCreated { get; set; } = DateTime.UtcNow;
 

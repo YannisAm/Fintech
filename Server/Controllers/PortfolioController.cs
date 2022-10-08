@@ -8,9 +8,9 @@ namespace Fintech.Server.Controllers
     [ApiController]
     public class PortfolioController : ControllerBase
     {
-        private readonly PortfolioService _portfolioService;
+        private readonly IPortfolioService _portfolioService;
 
-        public PortfolioController(PortfolioService portfolioService)
+        public PortfolioController(IPortfolioService portfolioService)
         {
             _portfolioService = portfolioService;
         }
