@@ -15,8 +15,6 @@ namespace Fintech.Client.Shared
         private static float ValueOfEachStock(Security security)
             => security.Price * security.StockesOwned;
 
-        
-
         private float SumOfStocks()
         {
             float sumOfStocks = 0f;

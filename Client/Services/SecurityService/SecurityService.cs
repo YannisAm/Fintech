@@ -56,7 +56,7 @@ namespace Fintech.Client.Services.SecurityService
                 var result = await response.Content.ReadFromJsonAsync<ServiceResponse<int>>();
                 if (!(result?.Success ?? false))
                 {
-
+                    //na epistrefei kati apo to ServiceResponse, ena minima ktl wste na to emfanizoyme ston xristi
                 }
             }
         }

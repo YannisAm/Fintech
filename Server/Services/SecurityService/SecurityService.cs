@@ -64,7 +64,7 @@ namespace Fintech.Server.Services.SecurityService
             return new ServiceResponse<int>
             {
                 Data = result,
-                Message = "Your security has been deleted"
+                Message = "Your portfolio has been deleted"
             };
         }
 

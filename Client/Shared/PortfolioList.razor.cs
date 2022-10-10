@@ -6,7 +6,7 @@ namespace Fintech.Client.Shared
     public partial class PortfolioList : ComponentBase
     {
         [Inject]
-        public IPortfolioService PortfolioService { get; set; }
+        public IPortfolioService? PortfolioService { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
