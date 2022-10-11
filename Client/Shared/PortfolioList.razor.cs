@@ -20,7 +20,13 @@ namespace Fintech.Client.Shared
         protected int CountSecurities (Portfolio portfolio)
         {
             int countSecurities = 0;
-            return countSecurities = portfolio.Securities.Count();
+            if (portfolio.Securities != null)
+            {
+                return countSecurities = portfolio.Securities.Count();
+            }else
+            {
+                return 0;
+            }
         }
 
         private void NavigationToPortfolio()

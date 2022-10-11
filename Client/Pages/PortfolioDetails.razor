@@ -15,7 +15,11 @@
             StockesOwned
         </div>
         <div class="col-6">
-            <p>@portfolio.Securities</p>
+            @if (portfolio.Securities != null){
+                <p>@portfolio.Securities</p>
+            }else {
+                <p>0</p>
+            }
         </div>
     </div>
     <div class="row w-100">
@@ -40,8 +44,6 @@
             <button type="button" class="btn btn-danger" @onclick="async () => OpenDeleteDialog(security)">Delete</button>
         </div>
     </div>*@
-
-
     <button class="btn btn-primary" @onclick="NavigationToSecurity">Add Security</button>
 }
 

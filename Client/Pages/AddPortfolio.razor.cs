@@ -8,19 +8,19 @@ namespace Fintech.Client.Pages
     {
         [Inject]
         public IPortfolioService PortfolioService { get; set; }
-        //[Inject]
-        //public NavigationManager NavigationManager { get; set; }
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
         public Fintech.Shared.Models.Portfolio Portfolio { get; set; } = new();
 
         public async Task Create()
         {
             await PortfolioService.CreatePortfolio(Portfolio);
-            //Navigate();
+            Navigate();
         }
 
-        //private void Navigate()
-        //{
-        //    NavigationManager.NavigateTo("/portfolio", true);
-        //}
+        private void Navigate()
+        {
+            NavigationManager.NavigateTo("/portfolio", true);
+        }
     }
 }
