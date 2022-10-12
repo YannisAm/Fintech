@@ -1,5 +1,6 @@
 ﻿@if (Securities ==null || Securities.Count == 0) 
 {
+    <button class="btn btn-primary" @onclick="Navigate">Add Security</button>
 
 }
 else {
@@ -41,8 +42,7 @@ else {
             </tr>
         </tfoot>
     </table>
-    
-
+    <button class="btn btn-primary" @onclick="Navigate">Add Security</button>
 }
 
 
