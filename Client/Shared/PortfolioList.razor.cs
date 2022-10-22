@@ -23,7 +23,8 @@ namespace Fintech.Client.Shared
             if (portfolio.Securities != null)
             {
                 return countSecurities = portfolio.Securities.Count();
-            }else
+            }
+            else
             {
                 return 0;
             }

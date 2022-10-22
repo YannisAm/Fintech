@@ -16,11 +16,14 @@ namespace Fintech.Client.Pages
         public IPortfolioService PortfolioService { get; set; }
         public Security Security { get; set; } = new();
         private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
+        private Fintech.Shared.Models.Portfolio Portfolio { get; set; } = new();
+        [Parameter]
+        public int Id { get; set; }
 
         public async Task Create()
         {
             await SecurityService.CreateSecurity(Security);
-            Navigate();
+            //Navigate();
           //  ServiceResponse na valw
         }
 
@@ -31,8 +34,8 @@ namespace Fintech.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-             Portfolios = await PortfolioService.GetPortfolios();   //inject portfolio service
-                                                                    //oninitializeasync method
+             Portfolios = await PortfolioService.GetPortfolios();                                                           //inject portfolio service
+            Portfolio = await PortfolioService.GetPortfolioById(Id);                                                       //oninitializeasync method
         }
     }
 }

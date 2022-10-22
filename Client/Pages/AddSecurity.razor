@@ -1,4 +1,4 @@
-﻿@page "/addSecurity"
+﻿@page "/portfolioDetails/addSecurity/{Id:int}"
 
 <PageTitle>Add security</PageTitle>
 
@@ -44,18 +44,6 @@
                 <input type="number" class="form-control" @bind="Security.StockesOwned" />
             </div>
         </div>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                Portfolio
-                <span class="caret"></span>
-            </button>
-            @foreach (var portfolio in Portfolios)
-            {
-                <ul class="dropdown-menu" @bind="@portfolio.PortfolioId">
-                    <li><a href="#">@portfolio.NameOfPortfolio</a></li>
-                </ul>
-            }
-        </div>
         <div class="row w-100">
             <div class="col-12">
                 <button class="btn btn-primary" @onclick="async () => await Create()">Save</button>
@@ -63,4 +51,17 @@
         </div>
     }
 }
+@*dropdown menu
+<div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                Portfolio
+                <span class="caret"></span>
+            </button>
+    @foreach (var portfolio in Portfolios)
+    {
+                    <ul class="dropdown-menu" @bind="@portfolio.PortfolioId">
+                        <li><a href="#">@portfolio.NameOfPortfolio</a></li>
+                    </ul>
+    }
+        </div>*@
 

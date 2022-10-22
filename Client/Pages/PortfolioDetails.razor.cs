@@ -23,7 +23,7 @@ namespace Fintech.Client.Pages
 
         private void NavigationToSecurity()
         {
-            NavigationManager.NavigateTo("/addSecurity", true);
+            NavigationManager.NavigateTo("/portfolioDetails/addSecurity/portfolio.PortfolioId", true);
         }
 
     }
