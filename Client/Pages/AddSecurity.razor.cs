@@ -22,21 +22,21 @@ namespace Fintech.Client.Pages
 
         public async Task Create()
         {
-            await SecurityService.CreateSecurity(Security);
             SelectedPortfolio = PortfolioService.GetPortfolioByName(choice).Result;
-            Security.Portfolio = SelectedPortfolio;
+            await SecurityService.CreateSecurity(Security);
+
             //Navigate();
             //ServiceResponse na valw
         }
 
-        private void Navigate()
-        {
-            //NavigationManager.NavigateTo("/securities", true);
-        }
+        //private void Navigate()
+        //{
+        //    NavigationManager.NavigateTo("/securities", true);
+        //}
 
         protected override async Task OnInitializedAsync()
         {
-            Portfolios = await PortfolioService.GetPortfolios();                                                           //inject portfolio service
+            Portfolios = await PortfolioService.GetPortfolios();          
         }
 
 

@@ -50,6 +50,7 @@
             </div>
             <div class="col-md-4">
                 <select class="form-control" @bind="choice">
+                    <option selected disabled value="-1"> Choose one Portfolio</option>
                     @foreach (var portfolio in Portfolios)
                     {
                         <option value="@portfolio.PortfolioId">@portfolio.NameOfPortfolio</option>
