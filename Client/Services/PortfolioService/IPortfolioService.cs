@@ -6,6 +6,7 @@ namespace Fintech.Client.Services.PortfolioService
     {
         Task<List<Portfolio>> GetPortfolios();
         Task<Portfolio?> GetPortfolioById(int portfolioid);
+        Task<Portfolio> GetPortfolioByName(string name);
         Task CreatePortfolio(Portfolio portfolio);
         Task EditPortfolio(Portfolio portfolio);
         Task DeletePortfolio(int portfolioId);

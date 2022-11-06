@@ -28,6 +28,12 @@ namespace Fintech.Server.Controllers
             var result = await _portfolioService.GetPortfolioByIdAsync(id);
             return Ok(result);
         }
+        [HttpGet("{giannis/name}")]
+        public async Task<ActionResult<ServiceResponse<Portfolio>>> GetPortfolioByName( string name)
+        {
+            var result = await _portfolioService.GetPortfolioByNameAsync(name);
+            return Ok(result);
+        }
 
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<int>>> CreatePortfolio(Portfolio portfolio)

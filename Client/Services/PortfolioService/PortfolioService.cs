@@ -1,4 +1,5 @@
-﻿using Fintech.Shared.Models;
+﻿using Fintech.Client.Pages;
+using Fintech.Shared.Models;
 using System.Net.Http.Json;
 
 namespace Fintech.Client.Services.PortfolioService
@@ -12,10 +13,10 @@ namespace Fintech.Client.Services.PortfolioService
             _http = http;
         }
 
-        public List<Portfolio> Portfolios { get; set; } = new List<Portfolio>();
+        public List<Fintech.Shared.Models.Portfolio> Portfolios { get; set; } = new List<Fintech.Shared.Models.Portfolio>();
         public string Message { get; set; } = "Loading portfolio...";
 
-        public async Task CreatePortfolio(Portfolio portfolio)
+        public async Task CreatePortfolio(Fintech.Shared.Models.Portfolio portfolio)
         {
             var response = await _http.PostAsJsonAsync("api/portfolio", portfolio);
             if (response.IsSuccessStatusCode)
@@ -37,7 +38,7 @@ namespace Fintech.Client.Services.PortfolioService
             }
         }
 
-        public async Task EditPortfolio(Portfolio portfolio)
+        public async Task EditPortfolio(Fintech.Shared.Models.Portfolio portfolio)
         {
             var response = await _http.PutAsJsonAsync("api/portfolio", portfolio);
             if (response.IsSuccessStatusCode)
@@ -50,24 +51,36 @@ namespace Fintech.Client.Services.PortfolioService
             }
         }
 
-        public async Task<Portfolio?> GetPortfolioById(int portfolioid)
+        public async Task<Fintech.Shared.Models.Portfolio?> GetPortfolioById(int portfolioid)
         {
             var result = await _http.GetAsync($"api/portfolio/{portfolioid}");
             if (result.IsSuccessStatusCode)
             {
-                var response = await result.Content.ReadFromJsonAsync<ServiceResponse<Portfolio>>();
+                var response = await result.Content.ReadFromJsonAsync<ServiceResponse<Fintech.Shared.Models.Portfolio>>();
                 if (response != null)
                     return response.Data;
             }
             return null;
         }
 
-        public async Task<List<Portfolio>> GetPortfolios()
+        public async Task<Fintech.Shared.Models.Portfolio> GetPortfolioByName(string name)
         {
-            var result = await _http.GetFromJsonAsync<ServiceResponse<List<Portfolio>>>("api/portfolio");
+            var result = await _http.GetAsync($"api/giannis/portfolio/{name}");
+            if (result.IsSuccessStatusCode)
+            {
+                var response = await result.Content.ReadFromJsonAsync<ServiceResponse<Fintech.Shared.Models.Portfolio>>();
+                if (response != null)
+                    return response.Data;
+            }
+            return null;
+        }
+
+        public async Task<List<Fintech.Shared.Models.Portfolio>> GetPortfolios()
+        {
+            var result = await _http.GetFromJsonAsync<ServiceResponse<List<Fintech.Shared.Models.Portfolio>>>("api/portfolio");
             if (result != null && result.Data != null)
                 return result.Data;
-            return new List<Portfolio>();
+            return new List<Fintech.Shared.Models.Portfolio>();
         }
     }
 }

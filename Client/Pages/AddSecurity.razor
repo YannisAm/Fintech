@@ -49,8 +49,7 @@
                 Portfolio
             </div>
             <div class="col-md-4">
-                <select class="form-control" >
-                    <option value="" >Select Portfolio</option>
+                <select class="form-control" @bind="choice">
                     @foreach (var portfolio in Portfolios)
                     {
                         <option value="@portfolio.PortfolioId">@portfolio.NameOfPortfolio</option>
