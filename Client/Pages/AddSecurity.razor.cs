@@ -23,11 +23,12 @@ namespace Fintech.Client.Pages
         public async Task Create()
         {
             SelectedPortfolio = PortfolioService.GetPortfolioByName(choice).Result;
-            await SecurityService.CreateSecurity(Security);
+            await SecurityService.CreateSecurityWithPortfolio(Security, SelectedPortfolio);
 
             //Navigate();
             //ServiceResponse na valw
         }
+
 
         //private void Navigate()
         //{

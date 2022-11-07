@@ -87,6 +87,7 @@ namespace Fintech.Client.Services.SecurityService
 
         public async Task CreateSecurityWithPortfolio(Security security, Portfolio portfolio)
         {
+
             var response = await _http.PostAsJsonAsync($"api/security/giannis/{security},{portfolio}");
             if (response.IsSuccessStatusCode)
             {
