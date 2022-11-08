@@ -84,19 +84,5 @@ namespace Fintech.Client.Services.SecurityService
             var result = await _http.GetFromJsonAsync<ServiceResponse<List<string>>>($"api/security/search/{searchTextSuggestion}");
             return result.Data;
         }
-
-        public async Task CreateSecurityWithPortfolio(Security security, Portfolio portfolio)
-        {
-
-            var response = await _http.PostAsJsonAsync($"api/security/giannis/{security},{portfolio}");
-            if (response.IsSuccessStatusCode)
-            {
-                var result = await response.Content.ReadFromJsonAsync<ServiceResponse<int>>();
-                if (!(result?.Success ?? false))
-                {
-
-                }
-            }
-        }
     }
 }

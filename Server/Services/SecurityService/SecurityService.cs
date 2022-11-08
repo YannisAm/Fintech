@@ -1,4 +1,6 @@
-﻿using Fintech.Shared.Models;
+﻿using Fintech.Client.Pages;
+using Fintech.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fintech.Server.Services.SecurityService
 {
@@ -118,20 +120,6 @@ namespace Fintech.Server.Services.SecurityService
             }
 
             return new ServiceResponse<List<string>> { Data = result };
-        }
-
-        public async Task<ServiceResponse<int>> CreateSecurityWithPortfolioAsync(Security security, Portfolio portfolio)
-        {
-            security.Portfolio = portfolio;
-            _context.Securities.Add(security);
-            int result = await _context.SaveChangesAsync();
-
-            return new ServiceResponse<int>
-            {
-                Data = result,
-                Success = result > 0,
-                Message = "The" + security.SecurityName + "has been saved!"
-            };
         }
     }
 }

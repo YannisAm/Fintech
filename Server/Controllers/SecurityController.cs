@@ -43,12 +43,6 @@ namespace Fintech.Server.Controllers
             var result = await _securityService.CreateSecurityAsync(security);
             return Ok(result);
         }
-        [HttpPost("giannis/{security},{portfolio}")]
-        public async Task<ActionResult<ServiceResponse<int>>> CreateSecurityWithPortfolio(Security security, Portfolio portfolio)
-        {
-            var result = await _securityService.CreateSecurityWithPortfolioAsync(security, portfolio);
-            return Ok(result);
-        }
 
         [HttpPut]
         public async Task<ActionResult<ServiceResponse<int>>> EditSecurity(Security security)

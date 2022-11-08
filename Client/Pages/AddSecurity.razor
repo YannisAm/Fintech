@@ -12,57 +12,59 @@
 {
     @if (Security != null)
     {
-        <div class="row w-100">
-            <div class="col-6">
-                SecurityName
+        <EditForm Model="@Security">
+            <div class="row w-100">
+                <div class="col-6">
+                    SecurityName
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control" @bind="Security.SecurityName" />
+                </div>
             </div>
-            <div class="col-6">
-                <input type="text" class="form-control" @bind="Security.SecurityName" />
+            <div class="row w-100">
+                <div class="col-6">
+                    Description
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control" @bind="Security.Description" />
+                </div>
             </div>
-        </div>
-        <div class="row w-100">
-            <div class="col-6">
-                Description
+            <div class="row w-100">
+                <div class="col-6">
+                    Price
+                </div>
+                <div class="col-6">
+                    <input type="number" class="form-control" @bind="Security.Price" />
+                </div>
             </div>
-            <div class="col-6">
-                <input type="text" class="form-control" @bind="Security.Description" />
+            <div class="row w-100">
+                <div class="col-6">
+                    StockesOwned
+                </div>
+                <div class="col-6">
+                    <input type="number" class="form-control" @bind="Security.StockesOwned" />
+                </div>
             </div>
-        </div>
-        <div class="row w-100">
-            <div class="col-6">
-                Price
+            <div class="row w-100">
+                <div class="col-6">
+                    Portfolio
+                </div>
+                <div class="col-md-4">
+                    <InputSelect class="form-control" @bind-Value="PortfolioId">
+                        @foreach (var portfolio in Portfolios)
+                        {
+                            <option value="@portfolio.PortfolioId">@portfolio.NameOfPortfolio</option>
+                        }
+                    </InputSelect>
+                </div>
             </div>
-            <div class="col-6">
-                <input type="number" class="form-control" @bind="Security.Price" />
+            <div class="row w-100">
+                <div class="col-12">
+                    <button class="btn btn-primary" @onclick="async () => await Create()">Save</button>
+                </div>
             </div>
-        </div>
-        <div class="row w-100">
-            <div class="col-6">
-                StockesOwned
-            </div>
-            <div class="col-6">
-                <input type="number" class="form-control" @bind="Security.StockesOwned" />
-            </div>
-        </div>
-        <div class="row w-100">
-            <div class="col-6">
-                Portfolio
-            </div>
-            <div class="col-md-4">
-                <select class="form-control" @bind="choice">
-                    <option selected disabled value="-1"> Choose one Portfolio</option>
-                    @foreach (var portfolio in Portfolios)
-                    {
-                        <option value="@portfolio.PortfolioId">@portfolio.NameOfPortfolio</option>
-                    }
-                </select>
-            </div>
-        </div>
-        <div class="row w-100">
-            <div class="col-12">
-                <button class="btn btn-primary" @onclick="async () => await Create()">Save</button>
-            </div>
-        </div>
+        </EditForm>
+        
     }
 }
 

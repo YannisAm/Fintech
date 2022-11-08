@@ -7,7 +7,6 @@ namespace Fintech.Client.Services.SecurityService
         Task<List<Security>> GetSecurities();
         Task<Security?> GetSecurityById(int id);
         Task CreateSecurity(Security security);
-        Task CreateSecurityWithPortfolio(Security security, Portfolio portfolio);
         Task EditSecurity(Security security);
         Task DeleteSecurity(int securityId);
         string Message { get; set; } //to display if no security was to be found

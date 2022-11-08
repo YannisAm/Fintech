@@ -3,6 +3,7 @@ using Fintech.Client.Shared;
 using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
+using System.Runtime.CompilerServices;
 
 namespace Fintech.Client.Pages
 {
@@ -16,20 +17,14 @@ namespace Fintech.Client.Pages
         public IPortfolioService PortfolioService { get; set; }
         public Security Security { get; set; } = new();
         private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
-        private Fintech.Shared.Models.Portfolio SelectedPortfolio { get; set; }
-        private string choice { get; set; }
-
+        public string PortfolioId { get; set; }
 
         public async Task Create()
         {
-            SelectedPortfolio = PortfolioService.GetPortfolioByName(choice).Result;
-            await SecurityService.CreateSecurityWithPortfolio(Security, SelectedPortfolio);
-
-            //Navigate();
-            //ServiceResponse na valw
+            Security.Portfolio = await PortfolioService.GetPortfolioById(Int32.Parse(PortfolioId));
+            await SecurityService.CreateSecurity(Security);
         }
-
-
+        
         //private void Navigate()
         //{
         //    NavigationManager.NavigateTo("/securities", true);
@@ -37,9 +32,7 @@ namespace Fintech.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Portfolios = await PortfolioService.GetPortfolios();          
+            Portfolios = await PortfolioService.GetPortfolios();
         }
-
-
     }
 }
