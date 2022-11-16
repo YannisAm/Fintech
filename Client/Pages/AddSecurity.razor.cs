@@ -17,11 +17,11 @@ namespace Fintech.Client.Pages
         public IPortfolioService PortfolioService { get; set; }
         public Security Security { get; set; } = new();
         private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
-        public string PortfolioId { get; set; }
+        public int PortfolioId { get; set; }
 
         public async Task Create()
         {
-            Security.Portfolio = await PortfolioService.GetPortfolioById(Int32.Parse(PortfolioId));
+            Security.Portfolio = await PortfolioService.GetPortfolioById(PortfolioId);
             await SecurityService.CreateSecurity(Security);
         }
         

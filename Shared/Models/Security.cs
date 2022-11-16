@@ -25,6 +25,6 @@ namespace Fintech.Shared.Models
         public string? Description { get; set; } = string.Empty;
 
         
-        public Portfolio Portfolio { get; set; }
+        public virtual Portfolio Portfolio { get; set; }
     }
 }
