@@ -33,6 +33,7 @@ namespace Fintech.Server.Services.SecurityService
 
         public async Task<ServiceResponse<int>> CreateSecurityAsync(Security security)
         {
+            security.Portfolio = null;
             _context.Securities.Add(security);
             int result = await _context.SaveChangesAsync();
 
