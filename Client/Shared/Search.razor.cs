@@ -21,7 +21,7 @@ namespace Fintech.Client.Shared
                 await searchInput.FocusAsync();
             }
         }
-        
+
         public void SearchSecurity()
         {
             NavigationManager.NavigateTo($"search/{searchText}");
@@ -29,11 +29,11 @@ namespace Fintech.Client.Shared
 
         public async Task HandleSearch(KeyboardEventArgs args)
         {
-            if(args.Key == null || args.Key.Equals("Enter"))
+            if (args.Key == null || args.Key.Equals("Enter"))
             {
                 SearchSecurity();
             }
-            else if(searchText.Length > 1)
+            else if (searchText.Length > 1)
             {
                 suggestions = await SecurityService.GetSecuritySearchSuggestion(searchText);
             }

@@ -1,9 +1,5 @@
-﻿using Fintech.Client.Services.PortfolioService;
-using Fintech.Client.Shared;
-using Fintech.Shared.Models;
+﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Routing;
-using System.Runtime.CompilerServices;
 
 namespace Fintech.Client.Pages
 {
@@ -24,7 +20,7 @@ namespace Fintech.Client.Pages
             Security.Portfolio = await PortfolioService.GetPortfolioById(PortfolioId);
             await SecurityService.CreateSecurity(Security);
         }
-        
+
         //private void Navigate()
         //{
         //    NavigationManager.NavigateTo("/securities", true);

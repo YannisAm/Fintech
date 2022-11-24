@@ -17,7 +17,7 @@ namespace Fintech.Client.Shared
             Portfolios = await PortfolioService.GetPortfolios();
         }
 
-        protected int CountSecurities (Portfolio portfolio)
+        protected int CountSecurities(Portfolio portfolio)
         {
             int countSecurities = 0;
             if (portfolio.Securities != null)

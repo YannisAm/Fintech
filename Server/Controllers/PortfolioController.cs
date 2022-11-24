@@ -1,5 +1,4 @@
 ﻿using Fintech.Shared.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fintech.Server.Controllers
@@ -29,7 +28,7 @@ namespace Fintech.Server.Controllers
             return Ok(result);
         }
         [HttpGet("giannis/{name}")]
-        public async Task<ActionResult<ServiceResponse<Portfolio>>> GetPortfolioByName( string name)
+        public async Task<ActionResult<ServiceResponse<Portfolio>>> GetPortfolioByName(string name)
         {
             var result = await _portfolioService.GetPortfolioByNameAsync(name);
             return Ok(result);

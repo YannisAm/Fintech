@@ -1,6 +1,4 @@
-﻿using Fintech.Client.Pages;
-using Fintech.Shared.Models;
-using System.Net.Http.Json;
+﻿using Fintech.Shared.Models;
 
 namespace Fintech.Client.Services.PortfolioService
 {

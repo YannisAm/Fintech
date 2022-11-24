@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fintech.Shared.Models
 {
@@ -23,9 +17,11 @@ namespace Fintech.Shared.Models
         public float StocksValue { get; set; }
         public DateTime DateTimeObtained { get; set; } = DateTime.UtcNow; //  apply an option for user to change it if he wants
         public string? Description { get; set; } = string.Empty;
-
         
-        public Portfolio Portfolio { get; set; }
+        [ForeignKey("Portfolio")]
         public int PortfolioId { get; set; }
+        public virtual Portfolio Portfolio { get; set; }
+
+
     }
 }

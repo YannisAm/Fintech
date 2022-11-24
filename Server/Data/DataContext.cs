@@ -1,5 +1,4 @@
 ﻿using Fintech.Shared.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Fintech.Server.Data
 {
@@ -12,7 +11,7 @@ namespace Fintech.Server.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+
         }
 
         public DbSet<Security> Securities { get; set; }

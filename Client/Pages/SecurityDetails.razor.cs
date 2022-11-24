@@ -46,7 +46,7 @@ namespace Fintech.Client.Pages
             if (security != null)
             {
                 await SecurityService.DeleteSecurity(id);
-                
+
             }
         }
 

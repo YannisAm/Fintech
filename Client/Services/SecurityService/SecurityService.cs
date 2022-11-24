@@ -1,5 +1,4 @@
 ﻿using Fintech.Shared.Models;
-using System.Net.Http.Json;
 
 namespace Fintech.Client.Services.SecurityService
 {

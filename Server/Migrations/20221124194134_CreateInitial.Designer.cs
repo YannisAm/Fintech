@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fintech.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221022090250_new6")]
-    partial class new6
+    [Migration("20221124194134_CreateInitial")]
+    partial class CreateInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,11 +26,11 @@ namespace Fintech.Server.Migrations
 
             modelBuilder.Entity("Fintech.Shared.Models.Portfolio", b =>
                 {
-                    b.Property<int>("PortfolioId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PortfolioId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("DateTimeCreated")
                         .HasColumnType("datetime2");
@@ -43,7 +43,7 @@ namespace Fintech.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PortfolioId");
+                    b.HasKey("Id");
 
                     b.ToTable("Portofolios");
                 });

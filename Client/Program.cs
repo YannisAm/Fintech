@@ -1,7 +1,6 @@
-global using Fintech.Shared;
-global using System.Net.Http.Json;
-global using Fintech.Client.Services.SecurityService;
 global using Fintech.Client.Services.PortfolioService;
+global using Fintech.Client.Services.SecurityService;
+global using System.Net.Http.Json;
 using Fintech.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

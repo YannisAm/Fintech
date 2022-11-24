@@ -27,7 +27,7 @@ namespace Fintech.Server.Services.PortfolioService
         public async Task<ServiceResponse<int>> DeletePortfolioAsync(int portfolioId)
         {
             var foundPortfolio = await _context.Portofolios
-                .FirstOrDefaultAsync(p => p.PortfolioId == portfolioId);
+                .FirstOrDefaultAsync(p => p.Id == portfolioId);
             _context.Portofolios.Remove(foundPortfolio);
             var result = await _context.SaveChangesAsync();
 
@@ -53,7 +53,9 @@ namespace Fintech.Server.Services.PortfolioService
 
         public async Task<ServiceResponse<Portfolio>> GetPortfolioByIdAsync(int id)
         {
-            var portfolio = await _context.Portofolios.FirstOrDefaultAsync(p => p.PortfolioId == id);
+            var portfolio = await _context.Portofolios
+                .Include(p => p.Securities)
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             return new ServiceResponse<Portfolio>
             {

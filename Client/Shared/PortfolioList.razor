@@ -22,7 +22,7 @@ else
             @foreach (var portfolio in Portfolios)
             {
                 <tr>
-                    <th scope="row"><a href="/portfoliodetails/@portfolio.PortfolioId">@portfolio.NameOfPortfolio</a></th>
+                    <th scope="row"><a href="/portfoliodetails/@portfolio.Id">@portfolio.NameOfPortfolio</a></th>
                     <th>@CountSecurities(portfolio)</th>
                     <th>@portfolio.DateTimeCreated</th>
                     <th>@portfolio.Description</th>

@@ -1,7 +1,5 @@
 ﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc;
-using System.Net.Http.Json;
 
 namespace Fintech.Client.Shared
 {
@@ -42,7 +40,7 @@ namespace Fintech.Client.Shared
             Securities = await SecurityService.GetSecurities();
         }
 
-        private string CutTheText (string description)
+        private string CutTheText(string description)
         {
             const int maxLength = 20;
 
