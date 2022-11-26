@@ -1,6 +1,5 @@
 ﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
-using Fintech.Client;
 
 namespace Fintech.Client.Pages
 {
@@ -21,7 +20,7 @@ namespace Fintech.Client.Pages
             security = await SecurityService.GetSecurityById(Id);
         }
 
-        public async Task Edit (Security security)
+        public async Task Edit(Security security)
         {
             await SecurityService.EditSecurity(security);
             Navigate();

@@ -1,6 +1,6 @@
 ﻿@if (Securities ==null || Securities.Count == 0) 
 {
-    <span>@SecurityService.Message</span>
+
 }
 else {
     <table class="table">
@@ -14,6 +14,7 @@ else {
                 <th scope="col">Securities owned</th>
                 <th scope="col">Value of stocks</th>
                 <th scope="col">Date-time obtained</th>
+                <th scope="col">Portfolio</th>
                 <th scope="col">Description</th>
             </tr>
         </thead>
@@ -26,6 +27,7 @@ else {
                     <th>@security.StockesOwned</th>
                     <th>$ @ValueOfEachStock(security)</th>
                     <th>@security.DateTimeObtained</th>
+                    <th>@security.Portfolio</th>
                     <th>@CutTheText(security.Description)</th>
                 </tr>
             }
@@ -38,11 +40,14 @@ else {
                 <th scope="col">$ @SumOfStocks()</th>
                 <th scope="col">-</th>
                 <th scope="col">-</th>
+                <th scope="col">-</th>
             </tr>
         </tfoot>
     </table>
-
 }
+
+<button class="btn btn-primary" @onclick="NavigationToSecurity">Add Security</button>
+
 
 
 

@@ -1,8 +1,7 @@
-global using Fintech.Shared;
-global using Microsoft.EntityFrameworkCore;
 global using Fintech.Server.Data;
+global using Fintech.Server.Services.PortfolioService;
 global using Fintech.Server.Services.SecurityService;
-using Microsoft.AspNetCore.ResponseCompression;
+global using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ISecurityService, SecurityService>();
+builder.Services.AddScoped<IPortfolioService, PortfolioService>();
 
 var app = builder.Build();
 

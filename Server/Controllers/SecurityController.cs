@@ -1,6 +1,4 @@
-﻿using Fintech.Server.Data;
-using Fintech.Shared.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fintech.Server.Controllers
@@ -43,6 +41,7 @@ namespace Fintech.Server.Controllers
             var result = await _securityService.CreateSecurityAsync(security);
             return Ok(result);
         }
+
         [HttpPut]
         public async Task<ActionResult<ServiceResponse<int>>> EditSecurity(Security security)
         {

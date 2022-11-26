@@ -21,7 +21,9 @@ namespace Fintech.Server.Services.SecurityService
 
         public async Task<ServiceResponse<Security>> GetSecurityByIdAsync(int id)
         {
-            var security = await _context.Securities.FirstOrDefaultAsync(s => s.Id == id);
+            var security = await _context.Securities
+                .Include(s => s.Portfolio)
+                .FirstOrDefaultAsync(s => s.Id == id);
 
             return new ServiceResponse<Security>
             {
@@ -31,6 +33,7 @@ namespace Fintech.Server.Services.SecurityService
 
         public async Task<ServiceResponse<int>> CreateSecurityAsync(Security security)
         {
+            security.Portfolio = null;
             _context.Securities.Add(security);
             int result = await _context.SaveChangesAsync();
 
@@ -64,7 +67,7 @@ namespace Fintech.Server.Services.SecurityService
             return new ServiceResponse<int>
             {
                 Data = result,
-                Message = "Your security has been deleted"
+                Message = "Your portfolio has been deleted"
             };
         }
 

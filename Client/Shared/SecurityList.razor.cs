@@ -1,8 +1,5 @@
-﻿using Fintech.Shared;
-using Fintech.Shared.Models;
+﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc;
-using System.Net.Http.Json;
 
 namespace Fintech.Client.Shared
 {
@@ -10,12 +7,12 @@ namespace Fintech.Client.Shared
     {
         [Inject]
         public ISecurityService? SecurityService { get; set; } = null;
-
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
         private List<Security> Securities = new();
 
         private static float ValueOfEachStock(Security security)
             => security.Price * security.StockesOwned;
-
 
         private float SumOfStocks()
         {
@@ -43,7 +40,7 @@ namespace Fintech.Client.Shared
             Securities = await SecurityService.GetSecurities();
         }
 
-        private string CutTheText (string description)
+        private string CutTheText(string description)
         {
             const int maxLength = 20;
 
@@ -66,5 +63,13 @@ namespace Fintech.Client.Shared
             }
             return description;
         }
+
+        private void NavigationToSecurity()
+        {
+            NavigationManager.NavigateTo("/addSecurity", true);
+        }
+
+
+
     }
 }

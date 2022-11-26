@@ -1,0 +1,44 @@
+﻿@if (Portfolios == null || Portfolios.Count == 0)
+{
+    <span>you have no Portfolios. Plase click <button class="btn btn-primary" @onclick="NavigationToPortfolio">Add Portfolio</button> to add a new portfolio</span>
+
+    //make it to wait for 3 seconds before it show the message above
+}
+else
+{
+    <table class="table">
+        <caption>
+            Portfolio List
+        </caption>
+        <thead>
+            <tr>
+                <th scope="col">Portfolio Name</th>
+                <th scope="col">Securities owned</th>
+                <th scope="col">Date-time created</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var portfolio in Portfolios)
+            {
+                <tr>
+                    <th scope="row"><a href="/portfoliodetails/@portfolio.Id">@portfolio.NameOfPortfolio</a></th>
+                    <th>@CountSecurities(portfolio)</th>
+                    <th>@portfolio.DateTimeCreated</th>
+                    <th>@portfolio.Description</th>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="col">Sum</th>
+            </tr>
+        </tfoot>
+    </table>
+    <button class="btn btn-primary" @onclick="NavigationToPortfolio">Add Portfolio</button>
+}
+
+
+
+
+

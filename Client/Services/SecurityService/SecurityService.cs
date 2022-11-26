@@ -1,5 +1,4 @@
 ﻿using Fintech.Shared.Models;
-using System.Net.Http.Json;
 
 namespace Fintech.Client.Services.SecurityService
 {
@@ -7,7 +6,7 @@ namespace Fintech.Client.Services.SecurityService
     {
         private readonly HttpClient _http;
 
-        public SecurityService(HttpClient http)
+        public SecurityService(HttpClient http, IPortfolioService portfolioService)
         {
             _http = http;
         }
@@ -56,7 +55,7 @@ namespace Fintech.Client.Services.SecurityService
                 var result = await response.Content.ReadFromJsonAsync<ServiceResponse<int>>();
                 if (!(result?.Success ?? false))
                 {
-
+                    //na epistrefei kati apo to ServiceResponse, ena minima ktl wste na to emfanizoyme ston xristi
                 }
             }
         }

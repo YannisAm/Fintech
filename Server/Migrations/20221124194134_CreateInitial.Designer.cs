@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fintech.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220921164855_SecuritySeeding")]
-    partial class SecuritySeeding
+    [Migration("20221124194134_CreateInitial")]
+    partial class CreateInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,30 @@ namespace Fintech.Server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Fintech.Shared.Models.Portfolio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DateTimeCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameOfPortfolio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Portofolios");
+                });
 
             modelBuilder.Entity("Fintech.Shared.Models.Security", b =>
                 {
@@ -36,8 +60,10 @@ namespace Fintech.Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PortfolioId")
+                        .HasColumnType("int");
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
@@ -54,39 +80,25 @@ namespace Fintech.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Securities");
+                    b.HasIndex("PortfolioId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateTimeObtained = new DateTime(2022, 9, 21, 19, 48, 55, 263, DateTimeKind.Local).AddTicks(5052),
-                            Description = "The best ETF",
-                            Price = 152.69f,
-                            SecurityName = "VUAA",
-                            StockesOwned = 3,
-                            StocksValue = 458.07f
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateTimeObtained = new DateTime(2022, 9, 21, 19, 48, 55, 263, DateTimeKind.Local).AddTicks(5059),
-                            Description = "The best MSFT",
-                            Price = 352.42f,
-                            SecurityName = "MSFT",
-                            StockesOwned = 10,
-                            StocksValue = 3524.2f
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateTimeObtained = new DateTime(2022, 9, 21, 19, 48, 55, 263, DateTimeKind.Local).AddTicks(5065),
-                            Description = "The best technological company",
-                            Price = 1253.88f,
-                            SecurityName = "APPL",
-                            StockesOwned = 100,
-                            StocksValue = 12538.8f
-                        });
+                    b.ToTable("Securities");
+                });
+
+            modelBuilder.Entity("Fintech.Shared.Models.Security", b =>
+                {
+                    b.HasOne("Fintech.Shared.Models.Portfolio", "Portfolio")
+                        .WithMany("Securities")
+                        .HasForeignKey("PortfolioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Portfolio");
+                });
+
+            modelBuilder.Entity("Fintech.Shared.Models.Portfolio", b =>
+                {
+                    b.Navigation("Securities");
                 });
 #pragma warning restore 612, 618
         }
