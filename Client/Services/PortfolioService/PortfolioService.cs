@@ -1,4 +1,5 @@
-﻿using Fintech.Shared.Models;
+﻿using Fintech.Client.Pages;
+using Fintech.Shared.Models;
 
 namespace Fintech.Client.Services.PortfolioService
 {
@@ -63,10 +64,22 @@ namespace Fintech.Client.Services.PortfolioService
 
         public async Task<Fintech.Shared.Models.Portfolio> GetPortfolioByName(string name)
         {
-            var result = await _http.GetAsync($"api/giannis/portfolio/{name}");
+            var result = await _http.GetAsync($"api/find/portfolio/{name}");
             if (result.IsSuccessStatusCode)
             {
                 var response = await result.Content.ReadFromJsonAsync<ServiceResponse<Fintech.Shared.Models.Portfolio>>();
+                if (response != null)
+                    return response.Data;
+            }
+            return null;
+        }
+
+        public async Task<string> GetPortfolioNameBySecurity(Security security)
+        {
+            var result = await _http.GetAsync($"api/portfolio/kostas/giannis/{security}");
+            if (result.IsSuccessStatusCode)
+            {
+                var response = await result.Content.ReadFromJsonAsync<ServiceResponse<string>>();
                 if (response != null)
                     return response.Data;
             }

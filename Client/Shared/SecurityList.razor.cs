@@ -8,6 +8,8 @@ namespace Fintech.Client.Shared
         [Inject]
         public ISecurityService? SecurityService { get; set; } = null;
         [Inject]
+        public IPortfolioService? PortfolioService { get; set; } = null;
+        [Inject]
         public NavigationManager NavigationManager { get; set; }
         private List<Security> Securities = new();
 
@@ -69,7 +71,10 @@ namespace Fintech.Client.Shared
             NavigationManager.NavigateTo("/addSecurity", true);
         }
 
-
-
+        private async Task<string> GetName(Security security)
+        {
+            var name = await PortfolioService.GetPortfolioNameBySecurity(security);
+            return name;
+        }
     }
 }

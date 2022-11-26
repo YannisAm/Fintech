@@ -122,5 +122,7 @@ namespace Fintech.Server.Services.SecurityService
 
             return new ServiceResponse<List<string>> { Data = result };
         }
+
+        
     }
 }
