@@ -6,7 +6,7 @@ namespace Fintech.Client.Services.SecurityService
     {
         private readonly HttpClient _http;
 
-        public SecurityService(HttpClient http)
+        public SecurityService(HttpClient http, IPortfolioService portfolioService)
         {
             _http = http;
         }

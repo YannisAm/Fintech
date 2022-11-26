@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿ using System.ComponentModel.DataAnnotations;
 
 namespace Fintech.Shared.Models
 {
@@ -8,7 +8,7 @@ namespace Fintech.Shared.Models
         public int Id { get; set; }
         //public int PortfolioId { get; set; }
         [Required]
-        public string NameOfPortfolio { get; set; }
+        public string NameOfPortfolio { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public DateTime DateTimeCreated { get; set; } = DateTime.UtcNow;
 

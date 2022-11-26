@@ -21,7 +21,5 @@ namespace Fintech.Shared.Models
         [ForeignKey("Portfolio")]
         public int PortfolioId { get; set; }
         public virtual Portfolio Portfolio { get; set; }
-
-
     }
 }

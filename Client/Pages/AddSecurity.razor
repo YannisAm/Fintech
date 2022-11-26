@@ -12,57 +12,34 @@
 {
     @if (Security != null)
     {
-        <EditForm Model="@Security">
-            <div class="row w-100">
-                <div class="col-6">
-                    SecurityName
-                </div>
-                <div class="col-6">
-                    <input type="text" class="form-control" @bind="Security.SecurityName" />
-                </div>
+        <EditForm Model="Security">
+            <div>
+                <label for="SecurityName">Security Name</label>
+                <InputText id="securityName" @bind-Value="Security.SecurityName" class="form-control"></InputText>
             </div>
-            <div class="row w-100">
-                <div class="col-6">
-                    Description
-                </div>
-                <div class="col-6">
-                    <input type="text" class="form-control" @bind="Security.Description" />
-                </div>
+            <div>
+                <label for="Description">Description</label>
+                <InputText id="description" @bind-Value="Security.Description" class="form-control"></InputText>
             </div>
-            <div class="row w-100">
-                <div class="col-6">
-                    Price
-                </div>
-                <div class="col-6">
-                    <input type="number" class="form-control" @bind="Security.Price" />
-                </div>
+            <div>
+                <label for="Price">Price</label>
+                <InputNumber id="Price" @bind-Value="Security.Price" class="form-control"></InputNumber>
             </div>
-            <div class="row w-100">
-                <div class="col-6">
-                    StockesOwned
-                </div>
-                <div class="col-6">
-                    <input type="number" class="form-control" @bind="Security.StockesOwned" />
-                </div>
+            <div>
+                <label for="StokesOwned">Stokes Owned</label>
+                <InputNumber id="stokesOwned" @bind-Value="Security.StockesOwned" class="form-control"></InputNumber>
             </div>
-            <div class="row w-100">
-                <div class="col-6">
-                    Portfolio
-                </div>
-                <div class="col-md-4">
-                    <InputSelect class="form-control" @bind-Value="PortfolioId">
-                        @foreach (var portfolio in Portfolios)
-                        {
-                            <option value="@portfolio.Id">@portfolio.NameOfPortfolio</option>
-                        }
-                    </InputSelect>
-                </div>
+            <div>
+                <label>Portfolio</label>
+                <InputSelect id="portfolio" @bind-Value="Security.PortfolioId" class="form-select">
+                    @foreach (var portfolio in Portfolios)
+                    {
+                        <option value="@portfolio.Id">@portfolio.NameOfPortfolio</option>
+                    }
+                </InputSelect>
             </div>
-            <div class="row w-100">
-                <div class="col-12">
-                    <button class="btn btn-primary" @onclick="async () => await Create()">Save</button>
-                </div>
-            </div>
+            <br />
+            <button type="submit" class="btn btn-primary" @onclick="HandleSubmit">Save</button>
         </EditForm>
         
     }
