@@ -28,7 +28,7 @@ namespace Fintech.Server.Controllers
             return Ok(result);
         }
 
-        [HttpGet("kostas/giannis/{security}")]
+        [HttpGet("find/info/{security}")]
         public async Task<ActionResult<ServiceResponse<Security>>> GetPortfolioNameBySecurity(Security security)
         {
             var result = await _portfolioService.GetPortfolioNameBySecurityAsync(security);

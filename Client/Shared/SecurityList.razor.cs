@@ -1,5 +1,6 @@
 ﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
+using System.Runtime.CompilerServices;
 
 namespace Fintech.Client.Shared
 {
@@ -12,6 +13,9 @@ namespace Fintech.Client.Shared
         [Inject]
         public NavigationManager NavigationManager { get; set; }
         private List<Security> Securities = new();
+        private Portfolio Portfolio= new Portfolio();
+        private List<string> names = new ();
+        private int cnt = 0;
 
         private static float ValueOfEachStock(Security security)
             => security.Price * security.StockesOwned;
@@ -40,7 +44,18 @@ namespace Fintech.Client.Shared
         protected override async Task OnInitializedAsync()
         {
             Securities = await SecurityService.GetSecurities();
+            foreach (var security in Securities)
+                names.Add(await PortfolioService.GetPortfolioNameBySecurity(security));
         }
+
+        //protected override async Task OnParametersSetAsync()
+        //{
+        //    foreach (var security in Securities)
+        //    {
+        //        Portfolio = await PortfolioService.GetPortfolioById(security.PortfolioId);
+        //        security.Portfolio.NameOfPortfolio = Portfolio.NameOfPortfolio;
+        //    }
+        //}
 
         private string CutTheText(string description)
         {
@@ -71,10 +86,11 @@ namespace Fintech.Client.Shared
             NavigationManager.NavigateTo("/addSecurity", true);
         }
 
-        private async Task<string> GetName(Security security)
-        {
-            var name = await PortfolioService.GetPortfolioNameBySecurity(security);
-            return name;
-        }
+        //private async Task<string> GetName(Security security)
+        //{
+        //    var name = await PortfolioService.GetPortfolioNameBySecurity(security);
+        //    return name;
+        //}
+
     }
 }

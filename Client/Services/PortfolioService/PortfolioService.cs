@@ -76,7 +76,7 @@ namespace Fintech.Client.Services.PortfolioService
 
         public async Task<string> GetPortfolioNameBySecurity(Security security)
         {
-            var result = await _http.GetAsync($"api/portfolio/kostas/giannis/{security}");
+            var result = await _http.GetAsync($"api/portfolio/find/info/{security}");
             if (result.IsSuccessStatusCode)
             {
                 var response = await result.Content.ReadFromJsonAsync<ServiceResponse<string>>();
