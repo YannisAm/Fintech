@@ -78,5 +78,15 @@ namespace Fintech.Server.Services.PortfolioService
                 Data = await _context.Portofolios.ToListAsync()
             };
         }
+
+        public async Task<ServiceResponse<string>> GetPortfolioNameBySecurityAsync(Security security)
+        {
+            var portfolio = await _context.Portofolios.FirstOrDefaultAsync(p => p.Id == security.PortfolioId);
+
+            return new ServiceResponse<string>
+            {
+                Data = portfolio.NameOfPortfolio
+            };
+        }
     }
 }

@@ -28,12 +28,8 @@ namespace Fintech.Server.Controllers
             return Ok(result);
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<ServiceResponse<List<Security>>>> GetSecurityyById([FromQuery]int id)
-        //{
-        //    var result = await _securityService.GetSecuritiesAsync();
-        //    return Ok(result);
-        //}
+        
+
 
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<int>>> CreateSecurity(Security security)

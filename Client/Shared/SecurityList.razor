@@ -2,7 +2,8 @@
 {
 
 }
-else {
+else 
+{
     <table class="table">
         <caption>
             Security List
@@ -27,7 +28,7 @@ else {
                     <th>@security.StockesOwned</th>
                     <th>$ @ValueOfEachStock(security)</th>
                     <th>@security.DateTimeObtained</th>
-                    <th>@security.Portfolio</th>
+                    <th>@names[iterator++]</th> <!---->
                     <th>@CutTheText(security.Description)</th>
                 </tr>
             }
