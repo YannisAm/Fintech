@@ -10,7 +10,6 @@ namespace Fintech.Client.Services.PortfolioService
         Task CreatePortfolio(Portfolio portfolio);
         Task EditPortfolio(Portfolio portfolio);
         Task DeletePortfolio(int portfolioId);
-        Task<string> GetPortfolioNameBySecurity(Security security);
         string Message { get; set; } //to display if no portfolio was to be found
     }
 }

@@ -10,7 +10,5 @@ namespace Fintech.Server.Services.PortfolioService
         Task<ServiceResponse<int>> CreatePortfolioAsync(Portfolio portofolio);
         Task<ServiceResponse<int>> EditPortfolioAsync(Portfolio portofolio);
         Task<ServiceResponse<int>> DeletePortfolioAsync(int portfolioId);
-        Task<ServiceResponse<string>> GetPortfolioNameBySecurityAsync(Security security);
-
     }
 }
