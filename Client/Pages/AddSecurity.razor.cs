@@ -21,11 +21,7 @@ namespace Fintech.Client.Pages
         protected override async Task OnInitializedAsync()
         {
             Portfolios = await PortfolioService.GetPortfolios();
-        }
-
-        protected override async Task OnParametersSetAsync()
-        {
-            foreach(var portfolio in Portfolios)
+            foreach (var portfolio in Portfolios)
             {
                 if (Id == 0)
                 {
@@ -36,6 +32,7 @@ namespace Fintech.Client.Pages
             Security.Portfolio = await PortfolioService.GetPortfolioById(Id);
             Security.PortfolioId = Security.Portfolio.Id;
         }
+
 
         async Task HandleSubmit()
         {

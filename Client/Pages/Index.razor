@@ -14,12 +14,4 @@
 @code {
     [Parameter]
     public string? SearchText { get; set; } = null;
-
-    protected override async Task OnParametersSetAsync()
-    {
-        if(SearchText != null)
-        {
-            await SecurityService.SearchSecurity(SearchText);
-        }
-    }
 }

@@ -28,19 +28,6 @@ namespace Fintech.Server.Controllers
             return Ok(result);
         }
 
-        [HttpGet("find/info/{security}")]
-        public async Task<ActionResult<ServiceResponse<Security>>> GetPortfolioNameBySecurity(Security security)
-        {
-            var result = await _portfolioService.GetPortfolioNameBySecurityAsync(security);
-            return Ok(result);
-        }
-
-        [HttpGet("find/{name}")]
-        public async Task<ActionResult<ServiceResponse<Portfolio>>> GetPortfolioByName(string name)
-        {
-            var result = await _portfolioService.GetPortfolioByNameAsync(name);
-            return Ok(result);
-        }
 
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<int>>> CreatePortfolio(Portfolio portfolio)

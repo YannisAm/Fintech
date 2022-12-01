@@ -1,4 +1,5 @@
-﻿using Fintech.Shared.Models;
+﻿using Fintech.Client.Pages;
+using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace Fintech.Client.Shared
@@ -8,25 +9,34 @@ namespace Fintech.Client.Shared
         [Inject]
         public IPortfolioService? PortfolioService { get; set; }
         [Inject]
+        public ISecurityService? SecurityService { get; set; }
+        [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        private List<Portfolio> Portfolios = new();
+        private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
+        private List<Fintech.Shared.Models.Security> Securities = new();
+        private List<int> securitiesCount = new List<int>();
+        private int iterator = 0;
+        private int sumOfSecurities = 0;
 
         protected override async Task OnInitializedAsync()
         {
             Portfolios = await PortfolioService.GetPortfolios();
-        }
-
-        protected int CountSecurities(Portfolio portfolio)
-        {
-            int countSecurities = 0;
-            if (portfolio.Securities != null)
+            Securities = await SecurityService.GetSecurities();
+            
+            foreach(var portfolio in Portfolios)
             {
-                return countSecurities = portfolio.Securities.Count();
-            }
-            else
-            {
-                return 0;
+                int count = 0;
+                foreach(var security in Securities)
+                {
+                    if (portfolio.Id == security.PortfolioId)
+                    {
+                        count++;
+                        sumOfSecurities++;
+                    }
+                        
+                }
+                securitiesCount.Add(count);
             }
         }
 

@@ -68,20 +68,5 @@ namespace Fintech.Client.Services.SecurityService
                 var result = await response.Content.ReadAsStringAsync();
             }
         }
-
-        public async Task SearchSecurity(string searchText)
-        {
-            var result = await _http.GetFromJsonAsync<ServiceResponse<List<Security>>>($"api/security/search/{searchText}");
-            if (result != null && result.Data != null)
-                Securities = result.Data;
-            if (Securities.Count == 0)
-                Message = "No securities found.";
-        }
-
-        public async Task<List<string>> GetSecuritySearchSuggestion(string searchTextSuggestion)
-        {
-            var result = await _http.GetFromJsonAsync<ServiceResponse<List<string>>>($"api/security/search/{searchTextSuggestion}");
-            return result.Data;
-        }
     }
 }

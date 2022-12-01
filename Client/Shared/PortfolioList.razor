@@ -23,7 +23,7 @@ else
             {
                 <tr>
                     <th scope="row"><a href="/portfoliodetails/@portfolio.Id">@portfolio.NameOfPortfolio</a></th>
-                    <th>@CountSecurities(portfolio)</th>
+                    <th>@securitiesCount[iterator++]</th>
                     <th>@portfolio.DateTimeCreated</th>
                     <th>@portfolio.Description</th>
                 </tr>
@@ -32,6 +32,9 @@ else
         <tfoot>
             <tr>
                 <th scope="col">Sum</th>
+                <th scope="col">@sumOfSecurities</th>
+                <th>-</th>
+                <th>-</th>
             </tr>
         </tfoot>
     </table>
