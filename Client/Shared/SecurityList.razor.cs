@@ -16,9 +16,17 @@ namespace Fintech.Client.Shared
         private List<Security> Securities = new();
         private Portfolio Portfolio= new Portfolio();
         List<string> names = new List<string>();
-        int iterator = 0;              //We use this integer as an itirator to run the whole name list and to present every element on frontend
-
-
+        int iterator = 0;                                           //We use this integer as an itirator to run the whole name list and to 
+                                                                    //present every element on frontend
+        protected override async Task OnInitializedAsync()          //When the page is rendered we bring all the securities. Furthermore, we are getting the portfolios
+        {                                                           //and assigning them in a list, because we want to use them in the razor page.
+            Securities = await SecurityService.GetSecurities();
+            foreach (var security in Securities)
+            {
+                Portfolio = await PortfolioService.GetPortfolioById(security.PortfolioId);
+                names.Add(Portfolio.NameOfPortfolio);
+            }
+        }
         private static float ValueOfEachStock(Security security)
             => security.Price * security.StockesOwned;
 
@@ -43,6 +51,7 @@ namespace Fintech.Client.Shared
             return numberOfStocks;
         }
 
+        SecurityDetailsError
         protected override async Task OnInitializedAsync()          //When the page is rendered we bring all the securities. Furthermore, we are getting the portfolios
         {                                                           //and assigning them in a list, because we want to use them in the razor page.
             Securities = await SecurityService.GetSecurities();
@@ -52,6 +61,7 @@ namespace Fintech.Client.Shared
                 names.Add(Portfolio.NameOfPortfolio);
             }
         }
+
 
         private string CutTheText(string description)
         {

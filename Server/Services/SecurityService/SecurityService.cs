@@ -68,59 +68,5 @@ namespace Fintech.Server.Services.SecurityService
                 Message = "Your portfolio has been deleted"
             };
         }
-
-        public async Task<ServiceResponse<List<Security>>> SearchSecurity(string searchText)
-        {
-            var response = new ServiceResponse<List<Security>>
-            {
-                Data = await FindSecuritiesBySearchText(searchText)
-            };
-            return response;
-        }
-
-        private async Task<List<Security>> FindSecuritiesBySearchText(string searchText)
-        {
-            return await _context.Securities
-                        .Where(s => s.Description.ToLower().Contains(searchText.ToLower())
-                        ||
-                        s.SecurityName.ToLower().Contains(searchText.ToLower()))
-                        .ToListAsync();
-        }
-
-        public async Task<ServiceResponse<List<string>>> GetSecuritySearchSuggestion(string searchText)
-        {
-            var securities = await FindSecuritiesBySearchText(searchText);
-
-            List<string> result = new List<string>();
-
-            foreach (var security in securities)
-            {
-                if (security.SecurityName.Contains(searchText, StringComparison.OrdinalIgnoreCase))
-                {
-                    result.Add(security.SecurityName);
-                }
-
-                if (security.Description != null)
-                {
-                    var punctutation = security.Description.Where(char.IsPunctuation)
-                        .Distinct().ToArray();
-                    var words = security.Description.Split()
-                        .Select(s => s.Trim(punctutation));
-
-                    foreach (var word in words)
-                    {
-                        if (word.Contains(searchText, StringComparison.OrdinalIgnoreCase)
-                            && !result.Contains(word))
-                        {
-                            result.Add(word);
-                        }
-                    }
-                }
-            }
-
-            return new ServiceResponse<List<string>> { Data = result };
-        }
-
-        
     }
 }
