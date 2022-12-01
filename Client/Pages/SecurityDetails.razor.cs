@@ -36,7 +36,7 @@ namespace Fintech.Client.Pages
             StateHasChanged();
         }
 
-        protected override async Task OnParametersSetAsync()
+        protected override async Task OnInitializedAsync()
         {
             security = await SecurityService.GetSecurityById(id);
         }

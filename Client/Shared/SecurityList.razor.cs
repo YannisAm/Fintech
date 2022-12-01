@@ -43,8 +43,8 @@ namespace Fintech.Client.Shared
             return numberOfStocks;
         }
 
-        protected override async Task OnInitializedAsync()                      //When the page is rendered we bring all the securities. Furthermore, we are getting the portfolios
-        {                                                                       //and assigning them in a list, because we want to use them in the razor page.
+        protected override async Task OnInitializedAsync()          //When the page is rendered we bring all the securities. Furthermore, we are getting the portfolios
+        {                                                           //and assigning them in a list, because we want to use them in the razor page.
             Securities = await SecurityService.GetSecurities();
             foreach (var security in Securities)
             {
@@ -81,12 +81,6 @@ namespace Fintech.Client.Shared
         {
             NavigationManager.NavigateTo("/addSecurity", true);
         }
-
-        //private async Task<string> GetName(Security security)
-        //{
-        //    var name = await PortfolioService.GetPortfolioNameBySecurity(security);
-        //    return name;
-        //}
 
     }
 }
