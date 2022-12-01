@@ -52,7 +52,7 @@ namespace Fintech.Client.Pages
 
         private void Navigate()
         {
-            NavigationManager.NavigateTo("/portfolio", true);
+            NavigationManager.NavigateTo("/securities", true);
         }
     }
 }
