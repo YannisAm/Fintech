@@ -28,7 +28,7 @@ else
                     <th>@security.StockesOwned</th>
                     <th>$ @ValueOfEachStock(security)</th>
                     <th>@security.DateTimeObtained</th>
-                    <th>@names[iterator++]</th> <!---->
+                    <th>@names[iterator++]</th> <!--We get the iterator for the razor.cs page to present every name in our list-->
                     <th>@CutTheText(security.Description)</th>
                 </tr>
             }
