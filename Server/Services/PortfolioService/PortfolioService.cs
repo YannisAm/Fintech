@@ -53,7 +53,8 @@ namespace Fintech.Server.Services.PortfolioService
 
         public async Task<ServiceResponse<Portfolio>> GetPortfolioByIdAsync(int id)
         {
-            var portfolio = await _context.Portofolios.FirstOrDefaultAsync(p => p.Id == id);
+            var portfolio = await _context.Portofolios
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             return new ServiceResponse<Portfolio>
             {

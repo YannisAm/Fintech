@@ -12,6 +12,5 @@ namespace Fintech.Shared.Models
         public string Description { get; set; } = string.Empty;
         public DateTime DateTimeCreated { get; set; } = DateTime.UtcNow;
 
-        public virtual ICollection<Security>? Securities { get; set; }
     }
 }

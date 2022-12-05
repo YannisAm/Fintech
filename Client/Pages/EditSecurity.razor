@@ -27,13 +27,14 @@ else {
             </div>
             <div>
                 <label>Portfolio</label>
-                <InputSelect id="portfolio" @bind-Value="security.PortfolioId" class="form-select">
+                <InputSelect @bind-Value="security.PortfolioId" class="form-select">
                     @foreach (var portfolio in Portfolios)
                     {
                         <option value="@portfolio.Id">@portfolio.NameOfPortfolio</option>
                     }
                 </InputSelect>
             </div>
+            <br />
             <div>
                 <button type="submit" class="btn btn-primary" @onclick="HandleSubmit">Save</button>
             </div>

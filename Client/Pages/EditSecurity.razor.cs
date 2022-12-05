@@ -11,29 +11,24 @@ namespace Fintech.Client.Pages
         public IPortfolioService PortfolioService { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+        Security security = new Security { Portfolio = new Fintech.Shared.Models.Portfolio() };
 
-        private Security security;
+        //private Security security;
         private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
         [Parameter]
         public int Id { get; set; }
-        private Fintech.Shared.Models.Portfolio portfolaki;
-        private int portfolakiId;
 
         protected override async Task OnInitializedAsync()
         {
             Portfolios = await PortfolioService.GetPortfolios();
-        }
-
-        protected override async Task OnParametersSetAsync()
-        {
             security = await SecurityService.GetSecurityById(Id);
-
         }
+
 
         async Task HandleSubmit()
         {
             await SecurityService.EditSecurity(security);
-            //Navigate();
+            Navigate();
         }
 
         private void Navigate()
