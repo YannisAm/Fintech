@@ -43,7 +43,7 @@ namespace Fintech.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Portofolios");
+                    b.ToTable("Portofolios", (string)null);
                 });
 
             modelBuilder.Entity("Fintech.Shared.Models.Security", b =>
@@ -80,7 +80,7 @@ namespace Fintech.Server.Migrations
 
                     b.HasIndex("PortfolioId");
 
-                    b.ToTable("Securities");
+                    b.ToTable("Securities", (string)null);
                 });
 
             modelBuilder.Entity("Fintech.Shared.Models.Security", b =>

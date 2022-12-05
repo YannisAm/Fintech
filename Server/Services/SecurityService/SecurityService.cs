@@ -15,13 +15,17 @@ namespace Fintech.Server.Services.SecurityService
         {
             return new ServiceResponse<List<Security>>
             {
-                Data = await _context.Securities.ToListAsync()
+                Data = await _context.Securities
+                .Include(s => s.Portfolio)
+                .ToListAsync()
             };
         }
 
         public async Task<ServiceResponse<Security>> GetSecurityByIdAsync(int id)
         {
-            var security = await _context.Securities.FirstOrDefaultAsync(s => s.Id == id);
+            var security = await _context.Securities
+                .Include(s => s.Portfolio)
+                .FirstOrDefaultAsync(s => s.Id == id);
 
             return new ServiceResponse<Security>
             {
@@ -45,6 +49,7 @@ namespace Fintech.Server.Services.SecurityService
 
         public async Task<ServiceResponse<int>> EditSecurityAsync(Security security)
         {
+            security.Portfolio = null;
             _context.Securities.Update(security);
             int result = await _context.SaveChangesAsync();
 
