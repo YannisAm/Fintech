@@ -16,5 +16,6 @@ namespace Fintech.Server.Data
 
         public DbSet<Security> Securities { get; set; }
         public DbSet<Portfolio> Portofolios { get; set; }
+        public DbSet<RegisterUser> RegisterUsers { get; set; }
     }
 }
