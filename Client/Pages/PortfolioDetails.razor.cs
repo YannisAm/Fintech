@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Fintech.Shared.Models;
+using Microsoft.AspNetCore.Components;
 
 namespace Fintech.Client.Pages
 {
@@ -10,6 +11,8 @@ namespace Fintech.Client.Pages
         public NavigationManager NavigationManager { get; set; }
 
         private Fintech.Shared.Models.Portfolio? portfolio;
+        private Fintech.Shared.Models.Portfolio _portfolioToDelete;
+        public bool DeleteDialogOpen { get; set; }
 
         [Parameter]
         public int id { get; set; }
@@ -22,7 +25,34 @@ namespace Fintech.Client.Pages
 
         private void NavigationToSecurity()
         {
-            NavigationManager.NavigateTo("/portfolioDetails/addSecurity/portfolio.PortfolioId", true);
+            NavigationManager.NavigateTo("/portfolio", true);
+        }
+        private async Task OnDeleteDialogClose(bool accepted)
+        {
+            if (accepted)
+            {
+                await Delete(id);
+                _portfolioToDelete = null;
+                NavigationToSecurity();
+            }
+            DeleteDialogOpen = false;
+            StateHasChanged();
+        }
+
+        private async Task OpenDeleteDialog(Fintech.Shared.Models.Portfolio portfolio)
+        {
+            DeleteDialogOpen = true;
+            _portfolioToDelete = portfolio;
+            StateHasChanged();
+        }
+
+        public async Task Delete(int id)
+        {
+            if (portfolio != null)
+            {
+                await PortfolioService.DeletePortfolio(id);
+
+            }
         }
 
     }

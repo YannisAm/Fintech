@@ -10,7 +10,7 @@
             <p>@portfolio.NameOfPortfolio</p>
         </div>
     </div>
-    
+
     <div class="row w-100">
         <div class="col-6">
             Date-Time Created
@@ -27,15 +27,16 @@
             <p>@portfolio.Description</p>
         </div>
     </div>
-    
-
-
-
-    @*<div class="row w-100">
+    <div class="row w-100">
         <div class="col-12">
-            <a href="/editsecurity/@security.Id" class="btn btn-primary">Edit</a>
-            <button type="button" class="btn btn-danger" @onclick="async () => OpenDeleteDialog(security)">Delete</button>
+            <a href="/editportfolio/@portfolio.Id" class="btn btn-primary">Edit</a>
+            <button type="button" class="btn btn-danger" @onclick="async () => OpenDeleteDialog(portfolio)">Delete</button>
         </div>
-    </div>*@
+    </div>
+    }
+    
+@if (DeleteDialogOpen)
+{
+    <ModelDialog Title="Are you sure?" Text="Do you want to delete the security?" OnClose="@OnDeleteDialogClose" DialogType="ModelDialog.ModalDialogType.DeleteCancel"></ModelDialog>
 }
 
