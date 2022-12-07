@@ -2,7 +2,7 @@ global using Fintech.Server.Data;
 global using Fintech.Server.Services.PortfolioService;
 global using Fintech.Server.Services.SecurityService;
 global using Microsoft.EntityFrameworkCore;
-using Fintech.Server.Services.UserService;
+global using Fintech.Server.Services.AuthService;
 using Microsoft.EntityFrameworkCore.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ISecurityService, SecurityService>();
 builder.Services.AddScoped<IPortfolioService, PortfolioService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 

@@ -1,17 +1,25 @@
-﻿using Fintech.Client.Services.UserService;
-using Fintech.Shared.Models;
+﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace Fintech.Client.Pages
 {
     public partial class Register : ComponentBase
     {
-        private RegisterUser user = new();
-        private IUserService _userService;
+        [Inject]
+        public IAuthService AuthService { get; set; }
+        public Fintech.Shared.Models.RegisterUser _user { get; set; } = new();
 
-        private async void HandleSubmit()
+        string message = string.Empty;
+        string messageColor = string.Empty;
+
+        public async Task HandleSubmit()
         {
-            await _userService.CreateUser(user);
+            var result = await AuthService.CreateUser(_user);
+            message = result.Message;
+            if (result.Success)
+                messageColor = "text-success";
+            else
+                messageColor = "text-danger";
         }
     }
 }

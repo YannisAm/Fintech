@@ -1,8 +1,8 @@
 global using Fintech.Client.Services.PortfolioService;
 global using Fintech.Client.Services.SecurityService;
+global using Fintech.Client.Services.AuthService;
 global using System.Net.Http.Json;
 using Fintech.Client;
-using Fintech.Client.Services.UserService;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -14,7 +14,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddScoped<ISecurityService, SecurityService>();
 builder.Services.AddScoped<IPortfolioService, PortfolioService>();
-builder.Services.AddScoped<IUserService, UserService>();
-
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 await builder.Build().RunAsync();

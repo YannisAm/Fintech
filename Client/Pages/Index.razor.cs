@@ -1,5 +1,4 @@
-﻿using Fintech.Client.Services.UserService;
-using Fintech.Shared.Models;
+﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace Fintech.Client.Pages
@@ -8,13 +7,14 @@ namespace Fintech.Client.Pages
     {
         private bool log = true;
         public RegisterUser user = new();
-        public NavigationManager NavigationManager;
-        public IUserService userService;
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
 
 
         private async void HandleSubmit()
         {
-            
+
         }
 
         private void Navigate()
