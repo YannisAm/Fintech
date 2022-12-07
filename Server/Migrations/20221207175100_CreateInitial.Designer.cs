@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fintech.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221126082551_new")]
-    partial class @new
+    [Migration("20221207175100_CreateInitial")]
+    partial class CreateInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -85,20 +85,43 @@ namespace Fintech.Server.Migrations
                     b.ToTable("Securities");
                 });
 
+            modelBuilder.Entity("Fintech.Shared.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("DateTimeCreated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("Fintech.Shared.Models.Security", b =>
                 {
                     b.HasOne("Fintech.Shared.Models.Portfolio", "Portfolio")
-                        .WithMany("Securities")
+                        .WithMany()
                         .HasForeignKey("PortfolioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Portfolio");
-                });
-
-            modelBuilder.Entity("Fintech.Shared.Models.Portfolio", b =>
-                {
-                    b.Navigation("Securities");
                 });
 #pragma warning restore 612, 618
         }
