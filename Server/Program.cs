@@ -3,6 +3,7 @@ global using Fintech.Server.Services.PortfolioService;
 global using Fintech.Server.Services.SecurityService;
 global using Microsoft.EntityFrameworkCore;
 global using Fintech.Server.Services.AuthService;
+global using Blazored.LocalStorage;
 using Microsoft.EntityFrameworkCore.Internal;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ISecurityService, SecurityService>();
 builder.Services.AddScoped<IPortfolioService, PortfolioService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddBlazoredLocalStorage();
 
 var app = builder.Build();
 
