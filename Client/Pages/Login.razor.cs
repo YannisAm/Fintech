@@ -10,6 +10,8 @@ namespace Fintech.Client.Pages
         public ILocalStorageService LocalStorage { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+        [Inject]
+        public AuthenticationStateProvider  AuthenticationStateProvider { get; set; }
         public Fintech.Shared.Models.Login user { get; set; } = new();
         private string errorMessage = string.Empty;
 
@@ -24,7 +26,8 @@ namespace Fintech.Client.Pages
                 errorMessage = string.Empty;
 
                 await LocalStorage.SetItemAsync("authToken", result.Data);
-                NavigationManager.NavigateTo("/index", true);
+                await AuthenticationStateProvider.GetAuthenticationStateAsync();
+                NavigationManager.NavigateTo("/home", true);
             }
             else
                 errorMessage = result.Message;
