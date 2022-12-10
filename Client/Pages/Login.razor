@@ -1,4 +1,6 @@
-﻿@page "/"
+﻿@page "/login"
+
+<PageTitle>Login</PageTitle>
 
 <h3>Login</h3>
 
@@ -14,9 +16,9 @@
         <InputText id="password" @bind-Value="user.Password" class="form-control" type="password"></InputText>
     </div>
     <ValidationMessage For="@(() => user.Password)" />
-    <a class="mb-5" href="#">Forgot the password?</a>
+    <a class="mb-5" href="/register">Forgot the password?</a>
     <br />
-    <button type="submit" class="btn btn-primary" @onclick="HandleLogin">Sign In</button>
+    <button type="submit" class="btn btn-primary" @onclick="HandleLogin">Login</button>
     <button type="button" class="btn btn-primary" @onclick="Navigate">Register</button>
 </EditForm>
 

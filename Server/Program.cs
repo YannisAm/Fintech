@@ -42,6 +42,8 @@ else
     app.UseHsts();
 }
 
+app.UseAuthentication();
+
 app.UseSwagger();
 
 app.UseHttpsRedirection();
