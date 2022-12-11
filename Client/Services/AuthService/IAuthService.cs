@@ -5,5 +5,6 @@ namespace Fintech.Client.Services.AuthService
     public interface IAuthService
     {
         Task<ServiceResponse<int>> CreateUser(RegisterUser request);
+        Task<ServiceResponse<string>> LogIn(Login login);
     }
 }

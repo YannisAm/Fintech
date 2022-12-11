@@ -15,22 +15,32 @@ namespace Fintech.Client.Pages
         public Security Security { get; set; } = new();
         private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
         private int Id = 0;
+        bool flag;
         
         
 
         protected override async Task OnInitializedAsync()
         {
-            Portfolios = await PortfolioService.GetPortfolios();
-            foreach (var portfolio in Portfolios)
+            try
             {
-                if (Id == 0)
+                Portfolios = await PortfolioService.GetPortfolios();
+                foreach (var portfolio in Portfolios)
                 {
-                    Id = portfolio.Id;
-                    break;
+                    if (Id == 0)
+                    {
+                        Id = portfolio.Id;
+                        break;
+                    }
                 }
+                Security.Portfolio = await PortfolioService.GetPortfolioById(Id);
+                Security.PortfolioId = Security.Portfolio.Id;
             }
-            Security.Portfolio = await PortfolioService.GetPortfolioById(Id);
-            Security.PortfolioId = Security.Portfolio.Id;
+            catch (NullReferenceException ex)
+            {
+
+                flag = true;
+            }
+            
         }
 
 

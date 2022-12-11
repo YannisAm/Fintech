@@ -1,31 +1,6 @@
 ﻿@page "/"
 
-<PageTitle>Fintech Services</PageTitle>
+<PageTitle>Fintech</PageTitle>
 
-<h1>Fintech app</h1>
+<h3>This is the index page</h3>
 
-@if (!log)
-{
-    //if the user is connected maybe he has a pie with all his expenses etc. Otherwise there will be a log in or
-    //register form.
-}
-else
-{
-    <EditForm Model="user">
-        <DataAnnotationsValidator/>
-        <div class="mb-3">
-            <label for="email">Email</label>
-            <InputText id="email" @bind-Value="user.Email" class="form-control"></InputText>
-        </div>
-        <ValidationMessage For="@(() => user.Email)" />
-        <div class="mb-3">
-            <label for="password">Password</label>
-            <InputText id="password" @bind-Value="user.Password" class="form-control" type="password"></InputText>
-        </div>
-        <ValidationMessage For="@(() => user.Password)" />
-        <a class="mb-5" href="#">Forgot the password?</a>
-        <br />
-        <button type="submit" class="btn btn-primary" @onclick="HandleSubmit">Sign In</button>
-        <button type="button" class="btn btn-primary" @onclick="Navigate">Register</button>
-    </EditForm>
-}

@@ -6,39 +6,47 @@
 }
 else
 {
-    <table class="table">
-        <caption>
-            Portfolio List
-        </caption>
-        <thead>
-            <tr>
-                <th scope="col">Portfolio Name</th>
-                <th scope="col">Securities owned</th>
-                <th scope="col">Date-time created</th>
-                <th scope="col">Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var portfolio in Portfolios)
-            {
-                <tr>
-                    <th scope="row"><a href="/portfoliodetails/@portfolio.Id">@portfolio.NameOfPortfolio</a></th>
-                    <th>@securitiesCount[iterator++]</th>
-                    <th>@portfolio.DateTimeCreated</th>
-                    <th>@portfolio.Description</th>
-                </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <th scope="col">Sum</th>
-                <th scope="col">@sumOfSecurities</th>
-                <th>-</th>
-                <th>-</th>
-            </tr>
-        </tfoot>
-    </table>
-    <button class="btn btn-primary" @onclick="NavigationToPortfolio">Add Portfolio</button>
+    <AuthorizeView>
+        <Authorized>
+            <table class="table">
+                <caption>
+                    Portfolio List
+                </caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Portfolio Name</th>
+                        <th scope="col">Securities owned</th>
+                        <th scope="col">Date-time created</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var portfolio in Portfolios)
+                    {
+                        <tr>
+                            <th scope="row"><a href="/portfoliodetails/@portfolio.Id">@portfolio.NameOfPortfolio</a></th>
+                            <th>@securitiesCount[iterator++]</th>
+                            <th>@portfolio.DateTimeCreated</th>
+                            <th>@portfolio.Description</th>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="col">Sum</th>
+                        <th scope="col">@sumOfSecurities</th>
+                        <th>-</th>
+                        <th>-</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <button class="btn btn-primary" @onclick="NavigationToPortfolio">Add Portfolio</button>
+        </Authorized>
+        <NotAuthorized>
+            <h3>Please first <a href="login">login</a> to see the portfolios</h3>
+        </NotAuthorized>
+    </AuthorizeView>
+    
 }
 
 
