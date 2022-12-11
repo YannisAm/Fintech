@@ -6,5 +6,6 @@ namespace Fintech.Client.Services.AuthService
     {
         Task<ServiceResponse<int>> CreateUser(RegisterUser request);
         Task<ServiceResponse<string>> LogIn(Login login);
+        Task<ServiceResponse<bool>> ChangePassword(UserChangePassword request);
     }
 }
