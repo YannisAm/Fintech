@@ -7,14 +7,14 @@ namespace Fintech.Client.Pages
     {
         [Inject]
         public IAuthService AuthService { get; set; }
-        public Fintech.Shared.Models.RegisterUser _user { get; set; } = new();
+        public Fintech.Shared.Models.RegisterUser request { get; set; } = new();
 
         string message = string.Empty;
         string messageColor = string.Empty;
 
         public async Task HandleSubmit()
         {
-            var result = await AuthService.CreateUser(_user);
+            var result = await AuthService.CreateUser(request);
             message = result.Message;
             if (result.Success)
                 messageColor = "text-success";

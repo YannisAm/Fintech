@@ -1,5 +1,6 @@
 ﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -111,6 +112,31 @@ namespace Fintech.Server.Services.AuthService
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
             return jwt;
+        }
+
+        public async Task<ServiceResponse<bool>> ChangePassword(int userId, string newPassword)
+        {
+            var user = await _context.Users.FindAsync(userId);
+
+            if(user == null)
+                return new ServiceResponse<bool> 
+                { 
+                    Success = false,
+                    Message = "Uset not found"
+                };
+
+            CreatePasswordHash(newPassword, out byte[] passwordHash, out byte[] passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            await _context.SaveChangesAsync();
+
+            return new ServiceResponse<bool>
+            {
+                Data = true,
+                Message = "Password has been changed"
+            };
         }
     }
 }

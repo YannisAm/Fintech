@@ -10,6 +10,12 @@ namespace Fintech.Client.Services.AuthService
             _http = http;
         }
 
+        public async Task<ServiceResponse<bool>> ChangePassword(UserChangePassword request)
+        {
+            var result = await _http.PostAsJsonAsync("api/auth/change-password", request.Password);
+            return await result.Content.ReadFromJsonAsync<ServiceResponse<bool>>();
+        }
+
         public async Task<ServiceResponse<int>> CreateUser(RegisterUser request)
         {
             var result = await _http.PostAsJsonAsync("api/auth/register", request);

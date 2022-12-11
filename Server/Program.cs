@@ -5,6 +5,8 @@ global using Microsoft.EntityFrameworkCore;
 global using Fintech.Server.Services.AuthService;
 global using Blazored.LocalStorage;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +25,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ISecurityService, SecurityService>();
 builder.Services.AddScoped<IPortfolioService, PortfolioService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value)),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
 
 builder.Services.AddBlazoredLocalStorage();
 
@@ -52,6 +66,9 @@ app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 
 app.MapRazorPages();
