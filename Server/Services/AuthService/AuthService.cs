@@ -60,7 +60,6 @@ namespace Fintech.Server.Services.AuthService
             {
                 response.Data = CreateToken(user);
             }
-            response.Data = "token";
             return response;
         }
 

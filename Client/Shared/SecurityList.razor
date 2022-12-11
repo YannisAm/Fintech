@@ -4,50 +4,59 @@
 }
 else 
 {
-    <table class="table">
-        <caption>
-            Security List
-        </caption>
-        <thead>
-            <tr>
-                <th scope="col">Security Name</th>
-                <th scope="col">Price of the security</th>
-                <th scope="col">Securities owned</th>
-                <th scope="col">Value of stocks</th>
-                <th scope="col">Date-time obtained</th>
-                <th scope="col">Portfolio</th>
-                <th scope="col">Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var security in Securities)
-            {
-                <tr>
-                    <th scope="row"><a href="/securitydetails/@security.Id">@security.SecurityName</a></th>
-                    <th>$ @security.Price</th>
-                    <th>@security.StockesOwned</th>
-                    <th>$ @ValueOfEachStock(security)</th>
-                    <th>@security.DateTimeObtained</th>
-                    <th>@names[iterator++]</th> <!--We get the iterator for the razor.cs page to present every name in our list-->
-                    <th>@CutTheText(security.Description)</th>
-                </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <th scope="col">Sum</th>
-                <th scope="col">-</th>
-                <th scope="col">@NumberOfStocks()</th>
-                <th scope="col">$ @SumOfStocks()</th>
-                <th scope="col">-</th>
-                <th scope="col">-</th>
-                <th scope="col">-</th>
-            </tr>
-        </tfoot>
-    </table>
+    <AuthorizeView>
+        <Authorized>
+            <table class="table">
+                <caption>
+                    Security List
+                </caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Security Name</th>
+                        <th scope="col">Price of the security</th>
+                        <th scope="col">Securities owned</th>
+                        <th scope="col">Value of stocks</th>
+                        <th scope="col">Date-time obtained</th>
+                        <th scope="col">Portfolio</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var security in Securities)
+                    {
+                        <tr>
+                            <th scope="row"><a href="/securitydetails/@security.Id">@security.SecurityName</a></th>
+                            <th>$ @security.Price</th>
+                            <th>@security.StockesOwned</th>
+                            <th>$ @ValueOfEachStock(security)</th>
+                            <th>@security.DateTimeObtained</th>
+                            <th>@names[iterator++]</th> <!--We get the iterator for the razor.cs page to present every name in our list-->
+                            <th>@CutTheText(security.Description)</th>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th scope="col">Sum</th>
+                        <th scope="col">-</th>
+                        <th scope="col">@NumberOfStocks()</th>
+                        <th scope="col">$ @SumOfStocks()</th>
+                        <th scope="col">-</th>
+                        <th scope="col">-</th>
+                        <th scope="col">-</th>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <button id="button-need-margin" class="btn btn-primary" @onclick="NavigationToSecurity">Add Security</button>
+        </Authorized>
+        <NotAuthorized>
+            <h3>Please first <a href="login">login</a> to see the securities</h3>
+        </NotAuthorized>
+    </AuthorizeView>
+    
 }
 
-<button id="button-need-margin" class="btn btn-primary" @onclick="NavigationToSecurity">Add Security</button>
 
 
 

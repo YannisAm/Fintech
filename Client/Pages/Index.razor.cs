@@ -2,7 +2,7 @@
 
 namespace Fintech.Client.Pages
 {
-    public partial class Login : ComponentBase
+    public partial class Index : ComponentBase
     {
         [Inject]
         public IAuthService AuthService { get; set; }
