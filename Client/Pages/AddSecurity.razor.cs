@@ -40,7 +40,6 @@ namespace Fintech.Client.Pages
 
                 flag = true;
             }
-            
         }
 
 

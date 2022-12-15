@@ -1,6 +1,13 @@
 ﻿@if (Securities ==null || Securities.Count == 0) 
 {
-
+    <AuthorizeView>
+        <Authorized>
+            <span>you have no Securities. Plase click <button class="btn btn-primary" @onclick="NavigationToSecurity">Add Security</button> to add a new security</span>
+        </Authorized>
+        <NotAuthorized>
+            <h3>Please first <a href="login">login</a> to see the securities</h3>
+        </NotAuthorized>
+    </AuthorizeView>
 }
 else 
 {

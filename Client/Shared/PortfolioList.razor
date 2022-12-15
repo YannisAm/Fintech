@@ -1,6 +1,13 @@
 ﻿@if (Portfolios == null || Portfolios.Count == 0)
 {
-    <span>you have no Portfolios. Plase click <button class="btn btn-primary" @onclick="NavigationToPortfolio">Add Portfolio</button> to add a new portfolio</span>
+    <AuthorizeView>
+        <Authorized>
+            <span>you have no Portfolios. Plase click <button class="btn btn-primary" @onclick="NavigationToPortfolio">Add Portfolio</button> to add a new portfolio</span>
+        </Authorized>
+        <NotAuthorized>
+            <h3>Please first <a href="login">login</a> to see the portfolios</h3>
+        </NotAuthorized>
+    </AuthorizeView>
 
     //make it to wait for 3 seconds before it show the message above
 }
