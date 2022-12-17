@@ -1,5 +1,6 @@
 ﻿using Fintech.Shared.Models;
 
+
 namespace Fintech.Server.Services.PortfolioService
 {
     public class PortfolioService : IPortfolioService
@@ -15,6 +16,7 @@ namespace Fintech.Server.Services.PortfolioService
         {
             _context.Portofolios.Add(portofolio);
             var result = await _context.SaveChangesAsync();
+
 
             return new ServiceResponse<int>
             {
