@@ -13,27 +13,25 @@ namespace Fintech.Client.Pages
         [Inject]
         public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         public Fintech.Shared.Models.Portfolio Portfolio { get; set; } = new();
-        private string userId;
+        private string userEmail;
 
         protected override async Task OnInitializedAsync()
         {
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
-
             if (user.Identity.IsAuthenticated)
             {
                 var claimsIdentity = (ClaimsIdentity)user.Identity;
-                var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-                userId = userIdClaim?.Value;
+                var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.Email);
+                userEmail = userIdClaim?.Value.ToString();
+                Portfolio.UserEmail = userEmail;
             }
-
-            Portfolio.UserId = userId;
         }
 
         public async Task Create()
         {
             await PortfolioService.CreatePortfolio(Portfolio);
-            Navigate();
+            //Navigate();
         }
 
         private void Navigate()

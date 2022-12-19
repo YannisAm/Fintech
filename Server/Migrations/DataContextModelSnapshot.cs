@@ -41,9 +41,13 @@ namespace Fintech.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Portofolios", (string)null);
+                    b.ToTable("Portofolios");
                 });
 
             modelBuilder.Entity("Fintech.Shared.Models.Security", b =>
@@ -80,7 +84,7 @@ namespace Fintech.Server.Migrations
 
                     b.HasIndex("PortfolioId");
 
-                    b.ToTable("Securities", (string)null);
+                    b.ToTable("Securities");
                 });
 
             modelBuilder.Entity("Fintech.Shared.Models.User", b =>
@@ -108,7 +112,7 @@ namespace Fintech.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Fintech.Shared.Models.Security", b =>

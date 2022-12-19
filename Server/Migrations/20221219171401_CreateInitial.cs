@@ -17,7 +17,8 @@ namespace Fintech.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NameOfPortfolio = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateTimeCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserEmail = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,14 +74,7 @@ namespace Fintech.Server.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Securities");
-
-            migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "Portofolios");
+            
         }
     }
 }

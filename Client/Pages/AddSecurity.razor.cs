@@ -35,9 +35,8 @@ namespace Fintech.Client.Pages
                 Security.Portfolio = await PortfolioService.GetPortfolioById(Id);
                 Security.PortfolioId = Security.Portfolio.Id;
             }
-            catch (NullReferenceException ex)
+            catch (NullReferenceException)
             {
-
                 flag = true;
             }
         }
