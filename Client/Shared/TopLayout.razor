@@ -1,12 +1,39 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
+
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar>
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        Fintech
+        <UserButton />
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_drawerOpen">
+        <TopNavMenu />
+    </MudDrawer>
+    <MudMainContent MaxWidth="MaxWidth.Medium">
+        @Body
+    </MudMainContent>
+</MudLayout>
+@*<div class="page">
     <main>
         <div class="nav-menu">
-            <TopNavMenu />
+            
         </div>
         <article class="content px-2">
             @Body
         </article>
     </main>
-</div>
+</div>*@
+
+@code {
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
