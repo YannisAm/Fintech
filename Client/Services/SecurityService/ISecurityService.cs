@@ -4,7 +4,7 @@ namespace Fintech.Client.Services.SecurityService
 {
     public interface ISecurityService
     {
-        Task<List<Security>> GetSecurities();
+        Task<List<Security>> GetSecurities(string email);
         Task<Security?> GetSecurityById(int id);
         Task CreateSecurity(Security security);
         Task EditSecurity(Security security);

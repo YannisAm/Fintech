@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fintech.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221207175100_CreateInitial")]
+    [Migration("20221219171401_CreateInitial")]
     partial class CreateInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,6 +40,10 @@ namespace Fintech.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameOfPortfolio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

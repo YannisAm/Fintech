@@ -26,9 +26,9 @@ namespace Fintech.Client.Services.SecurityService
             return null;
         }
 
-        public async Task<List<Security>> GetSecurities()
+        public async Task<List<Security>> GetSecurities(string email)
         {
-            var result = await _http.GetFromJsonAsync<ServiceResponse<List<Security>>>("api/security");
+            var result = await _http.GetFromJsonAsync<ServiceResponse<List<Security>>>($"api/security/findUser/{email}");
             if (result != null && result.Data != null)
                 return result.Data;
             return new List<Security>();

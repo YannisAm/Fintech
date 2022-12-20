@@ -11,11 +11,12 @@ namespace Fintech.Server.Services.SecurityService
             _context = context;
         }
 
-        public async Task<ServiceResponse<List<Security>>> GetSecuritiesAsync()
+        public async Task<ServiceResponse<List<Security>>> GetSecuritiesAsync(string email)
         {
             return new ServiceResponse<List<Security>>
             {
                 Data = await _context.Securities
+                .Where(s => s.UserEmail == email)
                 .Include(s => s.Portfolio)
                 .ToListAsync()
             };

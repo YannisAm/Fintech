@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 
 namespace Fintech.Client.Shared
 {
@@ -13,6 +14,9 @@ namespace Fintech.Client.Shared
         public IPortfolioService? PortfolioService { get; set; } = null;
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+        [Inject]
+        public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        private string userEmail;
         private List<Security> Securities = new();
         private Portfolio Portfolio= new Portfolio();
         List<string> names = new List<string>();
@@ -20,13 +24,23 @@ namespace Fintech.Client.Shared
                                                                     //present every element on frontend
         protected override async Task OnInitializedAsync()          //When the page is rendered we bring all the securities. Furthermore, we are getting the portfolios
         {                                                           //and assigning them in a list, because we want to use them in the razor page.
-            Securities = await SecurityService.GetSecurities();
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            if (user.Identity.IsAuthenticated)
+            {
+                var claimsIdentity = (ClaimsIdentity)user.Identity;
+                var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                userEmail = userIdClaim?.Value;
+            }
+
+            Securities = await SecurityService.GetSecurities(userEmail);
             foreach (var security in Securities)
             {
                 Portfolio = await PortfolioService.GetPortfolioById(security.PortfolioId);
                 names.Add(Portfolio.NameOfPortfolio);
             }
         }
+
         private static float ValueOfEachStock(Security security)
             => security.Price * security.StockesOwned;
 

@@ -14,10 +14,10 @@ namespace Fintech.Server.Controllers
             _securityService = securityService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<Security>>>> GetSecurities()
+        [HttpGet("findUser/{email}")]
+        public async Task<ActionResult<ServiceResponse<List<Security>>>> GetSecurities(string email)
         {
-            var result = await _securityService.GetSecuritiesAsync();
+            var result = await _securityService.GetSecuritiesAsync(email);
             return Ok(result);
         }
 

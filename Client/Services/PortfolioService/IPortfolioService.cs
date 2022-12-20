@@ -4,7 +4,7 @@ namespace Fintech.Client.Services.PortfolioService
 {
     public interface IPortfolioService
     {
-        Task<List<Portfolio>> GetPortfolios();
+        Task<List<Portfolio>> GetPortfolios(string email);
         Task<Portfolio?> GetPortfolioById(int portfolioid);
         Task<Portfolio> GetPortfolioByName(string name);
         Task CreatePortfolio(Portfolio portfolio);

@@ -5,25 +5,15 @@
 
 @if (Portfolio != null)
 {
-    <div class="row w-100">
-        <div class="col-6">
-            Portfolio Name
+    <EditForm Model="Portfolio">
+        <div>
+            <label for="PortfolioName">Portfolio Name</label>
+            <InputText id="portfolioName" @bind-Value="Portfolio.NameOfPortfolio" class="form-control"></InputText>
         </div>
-        <div class="col-6">
-            <input type="text" class="form-control" @bind="Portfolio.NameOfPortfolio" />
+        <div class="pb-3">
+            <label for="Description">Description</label>
+            <InputText id="description" @bind-Value="Portfolio.Description" class="form-control"></InputText>
         </div>
-    </div>
-    <div class="row w-100">
-        <div class="col-6">
-            Description
-        </div>
-        <div class="col-6">
-            <input type="text" class="form-control" @bind="Portfolio.Description" />
-        </div>
-    </div>
-    <div class="row w-100">
-        <div class="col-12">
-            <button class="btn btn-primary" @onclick="async () => await Create()">Save</button>
-        </div>
-    </div>
+        <button type="submit" class="btn btn-primary" @onclick="Create">Save</button>
+    </EditForm>
 }

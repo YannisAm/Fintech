@@ -74,9 +74,9 @@ namespace Fintech.Client.Services.PortfolioService
             return null;
         }
 
-        public async Task<List<Fintech.Shared.Models.Portfolio>> GetPortfolios()
+        public async Task<List<Fintech.Shared.Models.Portfolio>> GetPortfolios(string email)
         {
-            var result = await _http.GetFromJsonAsync<ServiceResponse<List<Fintech.Shared.Models.Portfolio>>>("api/portfolio");
+            var result = await _http.GetFromJsonAsync<ServiceResponse<List<Fintech.Shared.Models.Portfolio>>>($"api/portfolio/userFind/{email}");
             if (result != null && result.Data != null)
                 return result.Data;
             return new List<Fintech.Shared.Models.Portfolio>();
