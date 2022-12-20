@@ -14,10 +14,10 @@ namespace Fintech.Server.Controllers
             _portfolioService = portfolioService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<Portfolio>>>> GetPortfolios()
+        [HttpGet("userFind/{email}")]
+        public async Task<ActionResult<ServiceResponse<List<Portfolio>>>> GetPortfolios(string email)
         {
-            var result = await _portfolioService.GetPortfoliosAsync();
+            var result = await _portfolioService.GetPortfoliosAsync(email);
             return Ok(result);
         }
 

@@ -22,8 +22,8 @@ namespace Fintech.Client.Pages
             if (user.Identity.IsAuthenticated)
             {
                 var claimsIdentity = (ClaimsIdentity)user.Identity;
-                var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.Email);
-                userEmail = userIdClaim?.Value.ToString();
+                var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                userEmail = userIdClaim?.Value;
                 Portfolio.UserEmail = userEmail;
             }
         }
@@ -31,7 +31,7 @@ namespace Fintech.Client.Pages
         public async Task Create()
         {
             await PortfolioService.CreatePortfolio(Portfolio);
-            //Navigate();
+            Navigate();
         }
 
         private void Navigate()

@@ -36,7 +36,7 @@ namespace Fintech.Server.Services.PortfolioService
             return new ServiceResponse<int>
             {
                 Data = result,
-                Message = "Your security has been deleted"
+                Message = "Your portfolio has been deleted"
             };
         }
 
@@ -64,13 +64,14 @@ namespace Fintech.Server.Services.PortfolioService
             };
         }
 
-        public async Task<ServiceResponse<List<Portfolio>>> GetPortfoliosAsync()
+        public async Task<ServiceResponse<List<Portfolio>>> GetPortfoliosAsync(string email)
         {
             return new ServiceResponse<List<Portfolio>>
             {
-                Data = await _context.Portofolios.ToListAsync()
+                Data = await _context.Portofolios
+                        .Where(p => p.UserEmail == email)    
+                        .ToListAsync()
             };
         }
-
     }
 }

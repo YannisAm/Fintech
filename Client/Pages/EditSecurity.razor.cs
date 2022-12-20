@@ -1,5 +1,6 @@
 ﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
+using System.Security.Claims;
 
 namespace Fintech.Client.Pages
 {
@@ -17,10 +18,22 @@ namespace Fintech.Client.Pages
         private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
         [Parameter]
         public int Id { get; set; }
+        [Inject]
+        public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        private string userEmail;
 
         protected override async Task OnInitializedAsync()
         {
-            Portfolios = await PortfolioService.GetPortfolios();
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            if (user.Identity.IsAuthenticated)
+            {
+                var claimsIdentity = (ClaimsIdentity)user.Identity;
+                var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+                userEmail = userIdClaim?.Value;
+            }
+
+            Portfolios = await PortfolioService.GetPortfolios(userEmail);
             security = await SecurityService.GetSecurityById(Id);
         }
 

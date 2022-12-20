@@ -18,7 +18,8 @@ namespace Fintech.Shared.Models
         public float StocksValue { get; set; }
         public DateTime DateTimeObtained { get; set; } = DateTime.UtcNow; //  apply an option for user to change it if he wants
         public string? Description { get; set; } = string.Empty;
-        
+        public string UserEmail { get; set; } = string.Empty;
+
         [ForeignKey("Portfolio")]
         public int PortfolioId { get; set; }
         public virtual Portfolio Portfolio { get; set; }
