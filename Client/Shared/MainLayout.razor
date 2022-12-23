@@ -8,7 +8,14 @@
     <MudAppBar Elevation="1" Style="@($"background-color:{Colors.Blue.Darken4};")" Dense="true">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
         <MudSpacer />
-        <MudButton OnClick="@((e)=> MoveToHome(e))" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.h6">Fintech</MudButton>
+        <AuthorizeView>
+            <Authorized>
+                <MudButton OnClick="@((e)=> MoveToHomeAuthorized(e))" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.h6">Fintech</MudButton>
+            </Authorized>
+            <NotAuthorized>
+                <MudButton OnClick="@((e)=> MoveToHomeNotAuthorized(e))" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.h6">Fintech</MudButton>
+            </NotAuthorized>
+        </AuthorizeView>
         <MudSpacer />
         <UserButton />
     </MudAppBar>
@@ -59,8 +66,13 @@
         navigationManager.NavigateTo("/home");
     }
 
-    public void MoveToHome(MouseEventArgs e)
+    public void MoveToHomeAuthorized(MouseEventArgs e)
     {
         navigationManager.NavigateTo("/home");
+    }
+
+    public void MoveToHomeNotAuthorized(MouseEventArgs e)
+    {
+        navigationManager.NavigateTo("/");
     }
 }
