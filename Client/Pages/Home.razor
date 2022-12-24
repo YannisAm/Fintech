@@ -6,18 +6,18 @@
 
 <MudLayout Class="align-content-start">
     <MudContainer MaxWidth="MaxWidth.ExtraSmall" >
-        <MudSelect T="Fintech.Shared.Models.Portfolio" Label="Portfolio" AnchorOrigin="Origin.BottomCenter" FullWidth="true">
+        <MudSelect Value="@(portfolioK)"  ValueChanged="OnSelectedValueChange" T="Fintech.Shared.Models.Portfolio" Label="Portfolio" AnchorOrigin="Origin.BottomCenter" FullWidth="true">
             @foreach (var portfolio in Portfolios)
             {
-                <MudSelectItem @onclick="ChangePortfolio" Value="@(portfolio)">@portfolio.NameOfPortfolio</MudSelectItem>
+                <MudSelectItem>@portfolio.NameOfPortfolio</MudSelectItem>
                
             }
         </MudSelect>
     </MudContainer>
     <MudDivider />
     <br />
-    <p>Data is @data</p>
-    <p>LAbel is @labels</p>
+    <p>Data is @Data</p>
+    <p>Label is @Labels</p>
     @*<MudChart ChartType="ChartType.Pie" InputData="@Data" InputLabels="@Labels" Width="300px" Height="300px" />*@
 </MudLayout>
 
@@ -33,11 +33,11 @@
 
     private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
     private List<Fintech.Shared.Models.Security> Securities = new();
-    private Fintech.Shared.Models.Portfolio portfolio;
-    private double[] data;
-    private string[] labels;
-    private int i;
-    private int j;
+    public Fintech.Shared.Models.Portfolio portfolioK { get; set; }
+    public double[] Data { get; set; }
+    public string[] Labels { get; set;}
+    private int i = 0;
+    private int j = 0;
 
     protected override async Task OnInitializedAsync()
     {
@@ -54,28 +54,32 @@
         Securities = await SecurityService.GetSecurities(userEmail);
     }
 
-    public void ChangePortfolio()
+    private void OnSelectedValueChange()
     {
+        Console.WriteLine(portfolioK);
 
-        foreach(var security in Securities)
-        {
-            if(security.PortfolioId == portfolio.Id)
-            {
-                i++;
-            }
-        }
+        //foreach(var security in Securities)
+        //{
+        //    if(security.PortfolioId == portfolioSelected.Id)
+        //    {
+        //        i++;
+        //    }
+        //}
 
-        double[] data = new double[i];
-        string[] labels = new string[i];
+        //double[] data = new double[i];
+        //string[] labels = new string[i];
 
-        foreach (var security in Securities)
-        {
-            if (security.PortfolioId == portfolio.Id)
-            {
-                data[j] = security.StockesOwned;
-                labels[j] = security.SecurityName;
-                j++;
-            }
-        }
+        //foreach (var security in Securities)
+        //{
+        //    if (security.PortfolioId == portfolioSelected.Id)
+        //    {
+        //        data[j] = security.StockesOwned;
+        //        labels[j] = security.SecurityName;
+        //        j++;
+        //    }
+        //}
+
+        //Data = data;
+        //Labels = labels;
     }
 }
