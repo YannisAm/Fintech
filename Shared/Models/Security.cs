@@ -11,11 +11,11 @@ namespace Fintech.Shared.Models
         [Required]
         public string SecurityName { get; set; } = string.Empty;
         [Required]
-        public float Price { get; set; }
+        public double Price { get; set; }
         [Required]
         public int StockesOwned { get; set; } = 0;
         [Required]
-        public float StocksValue { get; set; }
+        public double StocksValue { get; set; }
         public DateTime DateTimeObtained { get; set; } = DateTime.UtcNow; //  apply an option for user to change it if he wants
         public string? Description { get; set; } = string.Empty;
         public string UserEmail { get; set; } = string.Empty;

@@ -6,19 +6,16 @@
 
 <MudLayout Class="align-content-start">
     <MudContainer MaxWidth="MaxWidth.ExtraSmall" >
-        <MudSelect Value="@(portfolioK)"  ValueChanged="OnSelectedValueChange" T="Fintech.Shared.Models.Portfolio" Label="Portfolio" AnchorOrigin="Origin.BottomCenter" FullWidth="true">
+        <MudSelect ValueChanged="OnSelectedValueChange" T="Fintech.Shared.Models.Portfolio" Label="Portfolio" AnchorOrigin="Origin.BottomCenter" FullWidth="true">
             @foreach (var portfolio in Portfolios)
             {
-                <MudSelectItem>@portfolio.NameOfPortfolio</MudSelectItem>
-               
+                <MudSelectItem Value="@(portfolio)">@portfolio.NameOfPortfolio</MudSelectItem>
             }
         </MudSelect>
     </MudContainer>
     <MudDivider />
     <br />
-    <p>Data is @Data</p>
-    <p>Label is @Labels</p>
-    @*<MudChart ChartType="ChartType.Pie" InputData="@Data" InputLabels="@Labels" Width="300px" Height="300px" />*@
+    <MudChart ChartType="ChartType.Pie" InputData="@Data" InputLabels="@Labels" Width="300px" Height="300px" />
 </MudLayout>
 
 @code{
@@ -33,11 +30,10 @@
 
     private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
     private List<Fintech.Shared.Models.Security> Securities = new();
-    public Fintech.Shared.Models.Portfolio portfolioK { get; set; }
+    public Fintech.Shared.Models.Portfolio Portfolio { get; set; }
+    public Fintech.Shared.Models.Portfolio portfolio { get; set; }
     public double[] Data { get; set; }
-    public string[] Labels { get; set;}
-    private int i = 0;
-    private int j = 0;
+    public string[] Labels { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -56,30 +52,6 @@
 
     private void OnSelectedValueChange()
     {
-        Console.WriteLine(portfolioK);
-
-        //foreach(var security in Securities)
-        //{
-        //    if(security.PortfolioId == portfolioSelected.Id)
-        //    {
-        //        i++;
-        //    }
-        //}
-
-        //double[] data = new double[i];
-        //string[] labels = new string[i];
-
-        //foreach (var security in Securities)
-        //{
-        //    if (security.PortfolioId == portfolioSelected.Id)
-        //    {
-        //        data[j] = security.StockesOwned;
-        //        labels[j] = security.SecurityName;
-        //        j++;
-        //    }
-        //}
-
-        //Data = data;
-        //Labels = labels;
+        
     }
 }

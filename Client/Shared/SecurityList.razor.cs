@@ -41,12 +41,12 @@ namespace Fintech.Client.Shared
             }
         }
 
-        private static float ValueOfEachStock(Security security)
+        private static double ValueOfEachStock(Security security)
             => security.Price * security.StockesOwned;
 
-        private float SumOfStocks()
+        private double SumOfStocks()
         {
-            float sumOfStocks = 0f;
+            double sumOfStocks = 0f;
             foreach (var security in Securities)
             {
                 sumOfStocks += ValueOfEachStock(security);
