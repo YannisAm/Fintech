@@ -6,7 +6,7 @@
 
 <MudLayout Class="align-content-start">
     <MudContainer MaxWidth="MaxWidth.ExtraSmall" >
-        <MudSelect Value="SelectedPortfolio" T="Fintech.Shared.Models.Portfolio" Label="Portfolio" AnchorOrigin="Origin.BottomCenter" FullWidth="true" SelectedValuesChanged="@((Portfolio) => HandleSelectionChanged(SelectedPortfolio))">
+        <MudSelect T="Fintech.Shared.Models.Portfolio" Label="Portfolio" AnchorOrigin="Origin.BottomCenter" FullWidth="true" ValueChanged="OnValueChanged">
             @foreach (var portfolio in Portfolios)
             {
                 <MudSelectItem Value="@(portfolio)">@portfolio.NameOfPortfolio</MudSelectItem>
@@ -49,9 +49,9 @@
         Securities = await SecurityService.GetSecurities(userEmail);
     }
 
-    private void HandleSelectionChanged(Fintech.Shared.Models.Portfolio SelectedPortfolio)
+    private void OnValueChanged(Fintech.Shared.Models.Portfolio selected)
     {
+        SelectedPortfolio = selected;
         Console.WriteLine(SelectedPortfolio.NameOfPortfolio);
-        Console.WriteLine(5);
     }
 }
