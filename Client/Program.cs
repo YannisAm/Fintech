@@ -7,6 +7,7 @@ global using Microsoft.AspNetCore.Components.Authorization;
 using Fintech.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor.Services;
 
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -17,6 +18,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<ISecurityService, SecurityService>();
 builder.Services.AddScoped<IPortfolioService, PortfolioService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddMudServices();
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddOptions();

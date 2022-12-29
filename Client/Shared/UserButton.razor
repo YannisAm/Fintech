@@ -1,21 +1,13 @@
-﻿<div class="dropdown">
-    <button @onclick="ToggleUserMenu"
-            @onfocusout="HideUserMenu"
-            class="btn btn-secondary dropdown-toggle user-button">
-        <i class="oi oi-person"></i>
-    </button>
-    <div class="dropdown-menu dropdown-menu-right @UserMenuCssClass">
-        <AuthorizeView>
-            <Authorized>
-                <a href="profile" class="dropdown-item">Profile</a>
-                <hr />
-                <AdminMenu />
-                <button class="dropdown-item" @onclick="Logout">Logout</button>
-            </Authorized>
-            <NotAuthorized>
-                <a href="login" class="dropdown-item">Login</a>
-                <a href="register" class="dropdown-item">Register</a>
-            </NotAuthorized>
-        </AuthorizeView>
-    </div>
-</div>
+﻿<MudMenu Color="Color.Tertiary" Icon="@Icons.Filled.Person" ActivationEvent="MouseEvent.LeftClick" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter">
+    <AuthorizeView>
+        <Authorized>
+            <MudMenuItem Href="profile">Profile</MudMenuItem>
+            <MudMenuItem @onclick="Logout">Logout</MudMenuItem>
+        </Authorized>
+        <NotAuthorized>
+            <MudMenuItem Href="Login">Login</MudMenuItem>
+            <MudDivider />
+            <MudMenuItem Href="Register">Register</MudMenuItem>
+        </NotAuthorized>
+    </AuthorizeView>
+</MudMenu>

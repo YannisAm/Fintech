@@ -1,7 +1,101 @@
-﻿@page "/home"
+﻿@using Fintech.Shared.Models;
+@using Microsoft.AspNetCore.Components;
+@using System.Security.Claims;
 
-<PageTitle>Fintech Services</PageTitle>
+@page "/home"
 
-<h1>Fintech app</h1>
+<AuthorizeView>
+    <Authorized>
+        <MudLayout Class="align-content-start">
+            @if (Portfolios.Count != 0 && Portfolios != null)
+            {
+                <MudContainer MaxWidth="MaxWidth.ExtraSmall">
+                    <MudSelect T="Fintech.Shared.Models.Portfolio" Label="Portfolio" AnchorOrigin="Origin.BottomCenter" FullWidth="true" ValueChanged="OnValueChanged">
+                        @foreach (var portfolio in Portfolios)
+                        {
+                            <MudSelectItem Value="@(portfolio)">@portfolio.NameOfPortfolio</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudContainer>
+                <br />
+                <br />
+                <MudDivider />
+                <br />
+                <br />
+                <br />
+                <MudChart ChartType="ChartType.Pie" InputData="@Data" InputLabels="@Labels" Width="300px" Height="300px" />
+
+            }
+            else
+            {
+                <MudText Typo="Typo.body1">
+                    You have not yet a Portfolio to display something. Please
+                    press <MudButton DisableRipple="true" Style="text-transform:none" Href="/addPortfolio" Variant="Variant.Text">Add Portfolio</MudButton> to be redirected to
+                    add a new portfolio
+                </MudText>
+            }
+        </MudLayout>
+    </Authorized>
+    <NotAuthorized>
+        <h3>Please first <a href="login">login</a> to view the home page</h3>
+    </NotAuthorized>
+</AuthorizeView>
+
 
     
+
+
+@code{
+
+    [Inject]
+    public IPortfolioService PortfolioService { get; set; }
+    [Inject]
+    public ISecurityService SecurityService { get; set; }
+    [Inject]
+    public AuthenticationStateProvider AuthenticationState { get; set; }
+    private string userEmail;
+
+    private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
+    private List<Fintech.Shared.Models.Security> Securities = new();
+    public Fintech.Shared.Models.Portfolio Portfolio { get; set; }
+    public Fintech.Shared.Models.Portfolio SelectedPortfolio { get; set; }
+    public double[] Data { get; set; }
+    public string[] Labels { get; set; }
+    private List<double> dataList;
+    private List<string> labelList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationState.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if (user.Identity.IsAuthenticated)
+        {
+            var claimsIdentity = (ClaimsIdentity)user.Identity;
+            var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
+            userEmail = userIdClaim?.Value;
+        }
+
+        Portfolios = await PortfolioService.GetPortfolios(userEmail);
+        Securities = await SecurityService.GetSecurities(userEmail);
+    }
+
+    private void OnValueChanged(Fintech.Shared.Models.Portfolio selected)
+    {
+        dataList = new();
+        labelList = new();
+
+        SelectedPortfolio = selected;
+        Console.WriteLine(SelectedPortfolio.NameOfPortfolio);
+
+        foreach(var security in Securities)
+        {
+            if(security.PortfolioId == SelectedPortfolio.Id)
+            {
+                labelList.Add(security.SecurityName);
+                dataList.Add(security.StockesOwned);
+            }
+        }
+        Data = dataList.ToArray();
+        Labels = labelList.ToArray();
+    }
+}
