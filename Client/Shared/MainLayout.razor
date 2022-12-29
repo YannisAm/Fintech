@@ -13,7 +13,7 @@
                 <MudButton OnClick="@((e)=> MoveToHomeAuthorized(e))" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.h6">Fintech</MudButton>
             </Authorized>
             <NotAuthorized>
-                <MudButton OnClick="@((e)=> MoveToHomeNotAuthorized(e))" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.h6">Fintech</MudButton>
+                <MudButton OnClick="@((e)=> MoveToHomeNotAuthorizedAppBar(e))" Style="@($"color:{Colors.Shades.White};")" Typo="Typo.h6">Fintech</MudButton>
             </NotAuthorized>
         </AuthorizeView>
         <MudSpacer />
@@ -21,9 +21,12 @@
     </MudAppBar>
     <MudDrawer @bind-Open="@open" Elevation="1" Style="@($"background-color:{Colors.Cyan.Lighten4};")">
         <MudNavMenu >
-            <MudNavLink Icon="@Icons.Filled.Home" OnClick="@((e)=> HandleClickHome(e))" Match="NavLinkMatch.All">Home</MudNavLink>
             <AuthorizeView>
+                <NotAuthorized>
+                    <MudNavLink Icon="@Icons.Filled.Home" OnClick="@((e)=> MoveToHomeNotAuthorized(e))" Match="NavLinkMatch.All">Home</MudNavLink>
+                </NotAuthorized>
                 <Authorized>
+                    <MudNavLink Icon="@Icons.Filled.Home" OnClick="@((e)=> HandleClickHome(e))" Match="NavLinkMatch.All">Home</MudNavLink>
                     <MudNavLink Icon="@Icons.Filled.AccountBalanceWallet" OnClick="@((e)=> HandleClickPortfolio(e))" Match="NavLinkMatch.Prefix">Portfolios</MudNavLink>
                     <MudNavLink Icon="@Icons.Filled.Money" OnClick="@((e)=> HandleClickSecurity(e))" Match="NavLinkMatch.Prefix">Securities</MudNavLink>
                 </Authorized>
@@ -71,8 +74,14 @@
         navigationManager.NavigateTo("/home");
     }
 
+    public void MoveToHomeNotAuthorizedAppBar(MouseEventArgs e)
+    {
+        navigationManager.NavigateTo("/");
+    }
+
     public void MoveToHomeNotAuthorized(MouseEventArgs e)
     {
+        ToggleDrawer();
         navigationManager.NavigateTo("/");
     }
 }
