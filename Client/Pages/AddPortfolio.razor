@@ -3,9 +3,9 @@
 <PageTitle>Add portfolio</PageTitle>
 
 <MudLayout>
-    <MudForm OnValidSubmit="Create">
-        <MudTextField T="string" Label="Portfolio Name" Required="true" Value="@Portfolio.NameOfPortfolio"></MudTextField>
-        <MudTextField T="string" Label="Description" Required="false" Value="@Portfolio.Description"></MudTextField>
-        <MudButton On ButtonType="ButtonType.Submit" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Submit</MudButton>
+    <MudForm Model="@Portfolio">
+        <MudTextField T="string" Label="Portfolio Name" Required="true" @bind-Value="@Portfolio.NameOfPortfolio"></MudTextField>
+        <MudTextField T="string" Label="Description" Required="false" @bind-Value="@Portfolio.Description"></MudTextField>
+        <MudButton Class="mt-5" OnClick="(() => Create())" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Submit</MudButton>
     </MudForm>
 </MudLayout>
