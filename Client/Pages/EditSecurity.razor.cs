@@ -37,15 +37,9 @@ namespace Fintech.Client.Pages
             security = await SecurityService.GetSecurityById(Id);
         }
 
-
         async Task HandleSubmit()
         {
             await SecurityService.EditSecurity(security);
-            Navigate();
-        }
-
-        private void Navigate()
-        {
             NavigationManager.NavigateTo("/securities", true);
         }
     }

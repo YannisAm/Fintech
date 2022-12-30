@@ -26,11 +26,6 @@ namespace Fintech.Client.Pages
         async Task HandleSubmit()
         {
             await PortfolioService.EditPortfolio(portfolio);
-            Navigate();
-        }
-
-        private void Navigate()
-        {
             NavigationManager.NavigateTo("/portfolio", true);
         }
     }

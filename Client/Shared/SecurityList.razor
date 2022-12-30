@@ -35,7 +35,7 @@ else
                             <th scope="row"><a href="/securitydetails/@security.Id">@security.SecurityName</a></th>
                             <th>$ @security.Price</th>
                             <th>@security.StockesOwned</th>
-                            <th>$ @ValueOfEachStock(security)</th>
+                            <th>$ @security.StocksValue</th>
                             <th>@security.DateTimeObtained</th>
                             <th>@names[iterator++]</th> <!--We get the iterator for the razor.cs page to present every name in our list-->
                             <th>@CutTheText(security.Description)</th>

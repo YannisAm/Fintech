@@ -8,36 +8,31 @@
 else {
     @if (security != null)
     {
-        <EditForm Model="security">
-            <div>
-                <label for="securityName">Security Name</label>
-                <InputText id="securityName" @bind-Value="security.SecurityName" class="form-control"></InputText>
-            </div>
-            <div>
-                <label for="description">Description</label>
-                <InputText id="description" @bind-Value="security.Description" class="form-control"></InputText>
-            </div>
-            <div>
-                <label for="price">Price</label>
-                <InputNumber id="price" @bind-Value="security.Price" class="form-control"></InputNumber>
-            </div>
-            <div>
-                <label for="stokesOwned">Stocks Ownes</label>
-                <InputNumber id="stocksOwned" @bind-Value="security.StockesOwned" class="form-control"></InputNumber>
-            </div>
-            <div>
-                <label>Portfolio</label>
-                <InputSelect @bind-Value="security.PortfolioId" class="form-select">
-                    @foreach (var portfolio in Portfolios)
-                    {
-                        <option value="@portfolio.Id">@portfolio.NameOfPortfolio</option>
-                    }
-                </InputSelect>
-            </div>
-            <br />
-            <div>
-                <button type="submit" class="btn btn-primary" @onclick="HandleSubmit">Save</button>
-            </div>
-        </EditForm>
+        <AuthorizeView>
+            <Authorized>
+                <MudLayout>
+                    <MudPaper Class="pa-4 ma-4" Style="width: 600px; height:auto;">
+                        <MudForm Model="@security">
+                            <MudTextField T="string" Style="width: 200px;" Label="Security Name" Required="true" @bind-Value="@security.SecurityName"></MudTextField>
+                            <MudTextField Lines="5" Style="width: 200px;" T="string" Label="Description" Required="false" @bind-Value="@security.Description"></MudTextField>
+                            <MudNumericField Style="width: 200px;" Label="Security Price" Required="true" @bind-Value="@security.Price"></MudNumericField>
+                            <MudNumericField Style="width: 200px;" Label="Quantity Owned" Required="true" @bind-Value="@security.StockesOwned"></MudNumericField>
+                            <MudSelect Style="width: 200px;" T="Fintech.Shared.Models.Portfolio" Label="Portfolio" AnchorOrigin="Origin.BottomCenter" FullWidth="true" Required="true">
+                                @foreach (var portfolio in Portfolios)
+                                {
+                                    <MudSelectItem Value="@(portfolio)">@portfolio.NameOfPortfolio</MudSelectItem>
+                                }
+                            </MudSelect>
+                            <MudButton Class="mt-5" OnClick="(() => HandleSubmit())" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Submit</MudButton>
+                            <br />
+                            <MudText Class="mt-5" Typo="Typo.caption">* The field is required.</MudText>
+                        </MudForm>
+                    </MudPaper>
+                </MudLayout>
+            </Authorized>
+            <NotAuthorized>
+                <MudText Class="pa-4 ma-4" Typo="Typo.h3">Please first <a href="login">login</a> to view this page</MudText>
+            </NotAuthorized>
+        </AuthorizeView>
     }
 }

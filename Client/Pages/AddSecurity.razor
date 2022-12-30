@@ -2,46 +2,40 @@
 
 <PageTitle>Add security</PageTitle>
 
-<h1>In this section, you can add your security you obtained, the quantity and the price of it</h1>
-
 @if (flag) 
 {
-    <span>You have to add first a portfolio</span>
-
-}else 
+    <MudText Typo="Typo.body2">You have to add first a portfolio</MudText>
+}
+else 
 {
     @if (Security != null)
     {
-        <EditForm Model="Security">
-            <div>
-                <label for="SecurityName">Security Name</label>
-                <InputText id="securityName" @bind-Value="Security.SecurityName" class="form-control"></InputText>
-            </div>
-            <div>
-                <label for="Description">Description</label>
-                <InputText id="description" @bind-Value="Security.Description" class="form-control"></InputText>
-            </div>
-            <div>
-                <label for="Price">Price</label>
-                <InputNumber id="Price" @bind-Value="Security.Price" class="form-control"></InputNumber>
-            </div>
-            <div>
-                <label for="StokesOwned">Stokes Owned</label>
-                <InputNumber id="stokesOwned" @bind-Value="Security.StockesOwned" class="form-control"></InputNumber>
-            </div>
-            <div>
-                <label>Portfolio</label>
-                <InputSelect id="portfolio" @bind-Value="Security.PortfolioId" class="form-select">
-                    @foreach (var portfolio in Portfolios)
-                    {
-                        <option value="@portfolio.Id">@portfolio.NameOfPortfolio</option>
-                    }
-                </InputSelect>
-            </div>
-            <br />
-            <button type="submit" class="btn btn-primary" @onclick="HandleSubmit">Save</button>
-        </EditForm>
-        
+        <AuthorizeView>
+            <Authorized>
+                <MudLayout>
+                    <MudPaper Class="pa-4 ma-4" Style="width: 600px; height:auto;">
+                        <MudForm Model="@Security">
+                            <MudTextField T="string" Style="width: 200px;" Label="Security Name" Required="true" @bind-Value="@Security.SecurityName"></MudTextField>
+                            <MudTextField Lines="5" Style="width: 200px;" T="string" Label="Description" Required="false" @bind-Value="@Security.Description"></MudTextField>
+                            <MudNumericField Style="width: 200px;" Label="Security Price" Required="true" @bind-Value="@Security.Price"></MudNumericField>
+                            <MudNumericField Style="width: 200px;" Label="Quantity Owned" Required="true" @bind-Value="@Security.StockesOwned"></MudNumericField>
+                            <MudSelect Style="width: 200px;" T="Fintech.Shared.Models.Portfolio" Label="Portfolio" AnchorOrigin="Origin.BottomCenter" FullWidth="true" Required="true">
+                                @foreach (var portfolio in Portfolios)
+                                {
+                                    <MudSelectItem Value="@(portfolio)">@portfolio.NameOfPortfolio</MudSelectItem>
+                                }
+                            </MudSelect>
+                            <MudButton Class="mt-5" OnClick="(() => HandleSubmit())" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Submit</MudButton>
+                            <br />
+                            <MudText Class="mt-5" Typo="Typo.caption">* The field is required.</MudText>
+                        </MudForm>
+                    </MudPaper>
+                </MudLayout>
+            </Authorized>
+            <NotAuthorized>
+                <MudText Class="pa-4 ma-4" Typo="Typo.h3">Please first <a href="login">login</a> to view this page</MudText>
+            </NotAuthorized>
+        </AuthorizeView>
     }
 }
 

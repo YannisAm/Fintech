@@ -1,26 +1,29 @@
 ﻿@page "/editportfolio/{Id:int}"
 
-<h1>You can change the security you clicked</h1>
+<MudText Typo="Typo.subtitle1">You can change the follow fields of <i><b>@portfolio.NameOfPortfolio</b></i> Portfolio</MudText>
 
-@if (portfolio == null) {
-    <span>Loading Security.....</span>
+@if (portfolio == null) 
+{
+    <MudText Typo="Typo.subtitle1">Loading...</MudText>
 }
 else {
     @if (portfolio != null)
     {
-        <EditForm Model="portfolio">
-            <div>
-                <label for="portfolioName">Portfolio Name</label>
-                <InputText id="portfolioName" @bind-Value="portfolio.NameOfPortfolio" class="form-control"></InputText>
-            </div>
-            <div>
-                <label for="description">Description</label>
-                <InputText id="description" @bind-Value="portfolio.Description" class="form-control"></InputText>
-            </div>
-            <br />
-            <div>
-                <button type="submit" class="btn btn-primary" @onclick="HandleSubmit">Save</button>
-            </div>
-        </EditForm>
+        <AuthorizeView>
+            <Authorized>
+                <MudLayout>
+                    <MudPaper Class="pa-4 ma-4" Style="width: 600px;">
+                        <MudForm Model="@portfolio">
+                            <MudTextField Style="width: 200px;" T="string" Label="Portfolio Name" Required="true" @bind-Value="@portfolio.NameOfPortfolio"></MudTextField>
+                            <MudTextField Lines="5" Style="width: 200px;" T="string" Label="Description" Required="false" @bind-Value="@portfolio.Description"></MudTextField>
+                            <MudButton Class="mt-5" OnClick="(() => HandleSubmit())" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Submit</MudButton>
+                        </MudForm>
+                    </MudPaper>
+                </MudLayout>
+            </Authorized>
+            <NotAuthorized>
+                <MudText Typo="Typo.h3">Please first <a href="login">login</a> to view this page</MudText>
+            </NotAuthorized>
+        </AuthorizeView>
     }
 }

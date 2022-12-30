@@ -58,12 +58,8 @@ namespace Fintech.Client.Pages
 
         async Task HandleSubmit()
         {
+            Security.StocksValue = Security.StockesOwned * Security.Price;
             await SecurityService.CreateSecurity(Security);
-            Navigate();
-        }
-
-        private void Navigate()
-        {
             NavigationManager.NavigateTo("/securities", true);
         }
     }

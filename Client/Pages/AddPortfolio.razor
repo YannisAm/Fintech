@@ -2,10 +2,19 @@
 
 <PageTitle>Add portfolio</PageTitle>
 
-<MudLayout>
-    <MudForm Model="@Portfolio">
-        <MudTextField T="string" Label="Portfolio Name" Required="true" @bind-Value="@Portfolio.NameOfPortfolio"></MudTextField>
-        <MudTextField T="string" Label="Description" Required="false" @bind-Value="@Portfolio.Description"></MudTextField>
-        <MudButton Class="mt-5" OnClick="(() => Create())" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Submit</MudButton>
-    </MudForm>
-</MudLayout>
+<AuthorizeView>
+    <Authorized>
+        <MudLayout>
+            <MudPaper Class="pa-4 ma-4" Style="width: 600px;">
+                <MudForm Model="@Portfolio">
+                    <MudTextField Style="width: 200px;" T="string" Label="Portfolio Name" Required="true" @bind-Value="@Portfolio.NameOfPortfolio"></MudTextField>
+                    <MudTextField Lines="5" Style="width: 200px;" T="string" Label="Description" Required="false" @bind-Value="@Portfolio.Description"></MudTextField>
+                    <MudButton Class="mt-5" OnClick="(() => Create())" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Submit</MudButton>
+                </MudForm>
+            </MudPaper>
+        </MudLayout>
+    </Authorized>
+    <NotAuthorized>
+        <MudText Typo="Typo.h3">Please first <a href="login">login</a> to view this page</MudText>
+    </NotAuthorized>
+</AuthorizeView>
