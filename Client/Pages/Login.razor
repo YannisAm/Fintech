@@ -2,9 +2,31 @@
 
 <PageTitle>Login</PageTitle>
 
-<h3>Login</h3>
+<MudText Typo="Typo.h3">Login</MudText>
 
-<EditForm Model="user">
+<AuthorizeView>
+    <NotAuthorized>
+        <MudLayout>
+            <MudPaper Class="pa-4 ma-4" Style="width: 600px;">
+                <MudForm Model="@user">
+                    <MudTextField For="@(() => user.Email)" Style="width: 200px;" T="string" Label="Email" Required="true" @bind-Value="@user.Email"></MudTextField>
+                    <MudTextField For="@(() => user.Password)" Style="width: 200px;" T="string" Label="Password" Required="true" @bind-Value="@user.Password" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password"></MudTextField>
+                    <MudButton Class="mt-5" OnClick="(() => HandleLogin())" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Login" Color="Color.Primary">Login</MudButton>
+                    <MudButton Class="mt-5" OnClick="(() => Navigate())" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.AppRegistration" Color="Color.Tertiary">Register</MudButton>
+                    <MudText Class="text-danger" Color="Color.Error">@errorMessage</MudText>
+                    <br />
+                    <MudText Class="mt-5" Typo="Typo.caption">* The field is required.</MudText>
+                </MudForm>
+            </MudPaper>
+        </MudLayout>
+    </NotAuthorized>
+    <Authorized>
+        <MudText Typo="Typo.h3">You are already logged in</MudText>
+    </Authorized>
+</AuthorizeView>
+
+
+@*<EditForm Model="user">
     <DataAnnotationsValidator />
     <div class="mb-3">
         <label for="email">Email</label>
@@ -24,4 +46,4 @@
 
 <div class="text-danger">
     <span>@errorMessage</span>
-</div>
+</div>*@

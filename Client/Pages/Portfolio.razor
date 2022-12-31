@@ -4,6 +4,12 @@
 
 <PageTitle>All Portfolios</PageTitle>
 
-<h1 class="title">All Portfolios</h1>
-
-<PortfolioList />
+<MudText Typo="Typo.h1">All Portfolios</MudText>
+<AuthorizeView>
+    <Authorized>
+        <PortfolioList />
+    </Authorized>
+    <NotAuthorized>
+        <MudText Class="pa-4 ma-4" Typo="Typo.h3">Please first <a href="login">login</a> to view this page</MudText>
+    </NotAuthorized>
+</AuthorizeView>

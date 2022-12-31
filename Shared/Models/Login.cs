@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Fintech.Shared.Models
 {
     public class Login
     {
-        [Required]
+        [Required, EmailAddress]
         public string Email { get; set; } = string.Empty;
         [Required]
         public string Password { get; set; } = string.Empty;
