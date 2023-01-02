@@ -1,6 +1,6 @@
 ﻿@page "/portfoliodetails/{id:int}"
 
-@if (portfolio != null)
+@*@if (portfolio != null)
 {
     <div class="row w-100">
         <div class="col-6">
@@ -33,10 +33,29 @@
             <button type="button" class="btn btn-danger" @onclick="async () => OpenDeleteDialog(portfolio)">Delete</button>
         </div>
     </div>
-    }
-    
-@if (DeleteDialogOpen)
-{
-    <ModelDialog Title="Are you sure?" Text="Do you want to delete the security?" OnClose="@OnDeleteDialogClose" DialogType="ModelDialog.ModalDialogType.DeleteCancel"></ModelDialog>
-}
+    }*@
 
+@if (portfolio == null)
+{
+    <MudText Typo="Typo.subtitle1">Loading...</MudText>
+}
+else
+{
+    <AuthorizeView>
+        <Authorized>
+            <MudLayout>
+                <MudPaper Class="pa-4 ma-4" Style="width: 600px;">
+                    <MudForm Model="@portfolio">
+                        <MudTextField Disabled="true" Style="width: 200px;" T="string" Label="Portfolio Name" Required="true" @bind-Value="@portfolio.NameOfPortfolio"></MudTextField>
+                        <MudTextField Disabled="true" Lines="5" Style="width: 200px;" T="string" Label="Description" Required="false" @bind-Value="@portfolio.Description"></MudTextField>
+                        <MudButton Class="mt-5" Href="@($"/editportfolio/{portfolio.Id}")" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Edit" Color="Color.Primary">Edit</MudButton>
+                        <MudButton Class="mt-5" OnClick="async () => OpenDeleteDialog(portfolio)" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Secondary">Delete</MudButton>
+                    </MudForm>
+                </MudPaper>
+            </MudLayout>
+        </Authorized>
+        <NotAuthorized>
+            <MudText Typo="Typo.h3">Please first <a href="login">login</a> to view this page</MudText>
+        </NotAuthorized>
+    </AuthorizeView>
+}

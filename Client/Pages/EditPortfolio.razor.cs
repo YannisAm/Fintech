@@ -25,6 +25,7 @@ namespace Fintech.Client.Pages
 
         async Task HandleSubmit()
         {
+            portfolio.DateTimeModified = DateTime.UtcNow;
             await PortfolioService.EditPortfolio(portfolio);
             NavigationManager.NavigateTo("/portfolio", true);
         }

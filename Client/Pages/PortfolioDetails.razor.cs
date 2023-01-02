@@ -1,5 +1,6 @@
 ﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace Fintech.Client.Pages
 {
@@ -9,10 +10,10 @@ namespace Fintech.Client.Pages
         public IPortfolioService PortfolioService { get; set; }
         [Inject]
         public NavigationManager NavigationManager { get; set; }
+        [Inject]
+        private IDialogService DialogService { get; set; }
 
         private Fintech.Shared.Models.Portfolio? portfolio;
-        private Fintech.Shared.Models.Portfolio _portfolioToDelete;
-        public bool DeleteDialogOpen { get; set; }
 
         [Parameter]
         public int id { get; set; }
@@ -22,38 +23,17 @@ namespace Fintech.Client.Pages
             portfolio = await PortfolioService.GetPortfolioById(id);
         }
 
-
-        private void NavigationToSecurity()
-        {
-            NavigationManager.NavigateTo("/portfolio", true);
-        }
-        private async Task OnDeleteDialogClose(bool accepted)
-        {
-            if (accepted)
-            {
-                await Delete(id);
-                _portfolioToDelete = null;
-                NavigationToSecurity();
-            }
-            DeleteDialogOpen = false;
-            StateHasChanged();
-        }
-
         private async Task OpenDeleteDialog(Fintech.Shared.Models.Portfolio portfolio)
         {
-            DeleteDialogOpen = true;
-            _portfolioToDelete = portfolio;
-            StateHasChanged();
-        }
-
-        public async Task Delete(int id)
-        {
-            if (portfolio != null)
-            {
+            string state;
+            bool? result = await DialogService.ShowMessageBox(
+            "Warning",
+            "Are you sure you want to delete this portfolio and all it's securities?",
+            yesText: "Delete!", cancelText: "Cancel");
+            state = result == null ? "Cancelled" : "Deleted!";
+            if(state == "Deleted!")
                 await PortfolioService.DeletePortfolio(id);
-
-            }
+            NavigationManager.NavigateTo("/portfolio", true);
         }
-
     }
 }
