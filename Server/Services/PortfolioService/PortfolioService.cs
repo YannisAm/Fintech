@@ -69,7 +69,7 @@ namespace Fintech.Server.Services.PortfolioService
             return new ServiceResponse<List<Portfolio>>
             {
                 Data = await _context.Portofolios
-                        .Where(p => p.UserEmail == email)    
+                        .Where(p => p.UserEmail == email)
                         .ToListAsync()
             };
         }

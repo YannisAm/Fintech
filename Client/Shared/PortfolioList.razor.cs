@@ -22,8 +22,9 @@ namespace Fintech.Client.Shared
 
         private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
         private List<Fintech.Shared.Models.Security> Securities = new();
-        private List<int> securitiesCount = new List<int>();
+        private int[] securitiesCount;
         private int iterator;
+        private int i;
 
         protected override async Task OnInitializedAsync()
         {
@@ -37,21 +38,16 @@ namespace Fintech.Client.Shared
             }
 
             Portfolios = await PortfolioService.GetPortfolios(userEmail);
-            Securities = await SecurityService.GetSecurities(userEmail);
             
             foreach(var portfolio in Portfolios)
             {
-                int count = 0;
-                foreach(var security in Securities)
-                {
-                    if (portfolio.Id == security.PortfolioId)
-                    {
-                        count++;
-                    }
-                        
-                }
-                securitiesCount.Add(count);
+                if (portfolio.Securities == null)
+                    iterator = 0;
+                else
+                    iterator = portfolio.Securities.Count;
+                iterator++;
             }
+            securitiesCount = new int[iterator];
         }
 
         private void NavigationToPortfolio()

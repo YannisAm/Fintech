@@ -25,13 +25,13 @@ else
                 </HeaderContent>
                 <RowTemplate Context="portfolio">
                     <MudTd DataLabel="Portfolio Name">@portfolio.NameOfPortfolio</MudTd>
-                    <MudTd DataLabel="Securities Owned">@securitiesCount.</MudTd>
+                    <MudTd DataLabel="Securities Owned">@iterator</MudTd>
                     <MudTd DataLabel="Date-Time Created">@portfolio.DateTimeCreated</MudTd>
                     <MudTd DataLabel="Description">@portfolio.Description</MudTd>
                 </RowTemplate>
                 <FooterContent>
                     <MudTd>Sum</MudTd>
-                    <MudTd>@securitiesCount.Sum()</MudTd>
+                    <MudTd></MudTd>
                     <MudTd>-</MudTd>
                     <MudTd>-</MudTd>
                 </FooterContent>
