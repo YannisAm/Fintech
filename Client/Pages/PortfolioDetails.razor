@@ -1,40 +1,5 @@
 ﻿@page "/portfoliodetails/{id:int}"
 
-@*@if (portfolio != null)
-{
-    <div class="row w-100">
-        <div class="col-6">
-            Portfolio Name
-        </div>
-        <div class="col-6">
-            <p>@portfolio.NameOfPortfolio</p>
-        </div>
-    </div>
-
-    <div class="row w-100">
-        <div class="col-6">
-            Date-Time Created
-        </div>
-        <div class="col-6">
-            <p>@portfolio.DateTimeCreated</p>
-        </div>
-    </div>
-    <div class="row w-100">
-        <div class="col-6">
-            Description
-        </div>
-        <div class="col-6">
-            <p>@portfolio.Description</p>
-        </div>
-    </div>
-    <div class="row w-100">
-        <div class="col-12">
-            <a href="/editportfolio/@portfolio.Id" class="btn btn-primary">Edit</a>
-            <button type="button" class="btn btn-danger" @onclick="async () => OpenDeleteDialog(portfolio)">Delete</button>
-        </div>
-    </div>
-    }*@
-
 @if (portfolio == null)
 {
     <MudText Typo="Typo.subtitle1">Loading...</MudText>

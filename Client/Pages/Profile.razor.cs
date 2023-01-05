@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MudBlazor;
+using System;
 
 namespace Fintech.Client.Pages
 {
@@ -18,8 +19,9 @@ namespace Fintech.Client.Pages
         bool isShow;
         InputType PasswordInput = InputType.Password;
         string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+        private Color messageColor; 
 
-        void ButtonTestclick()
+        private void ButtonTestclick()
         {
             if (isShow)
             {
@@ -39,6 +41,18 @@ namespace Fintech.Client.Pages
         {
             var result = await AuthService.ChangePassword(request);
             message = result.Message;
+            if (!result.Success)
+                messageColor = Color.Error;
+            else
+                messageColor = Color.Tertiary;
+
+            Navigate();
+        }
+
+        private async Task Navigate()
+        {
+            await Task.Delay(5000);
+            NavigationManager.NavigateTo("/home");
         }
     }
 }

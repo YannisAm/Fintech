@@ -11,8 +11,9 @@
                 <MudForm Model="request">
                     <MudTextField For="@(() => request.Password)" Style="width: 200px;" T="string" Label="Password" Required="true" @bind-Value="@request.Password" InputType="@PasswordInput" Adornment="Adornment.End" AdornmentIcon="@PasswordInputIcon" OnAdornmentClick="ButtonTestclick" AdornmentAriaLabel="Show Password"></MudTextField>
                     <MudTextField For="@(() => request.ConfirmPassword)" Style="width: 200px;" T="string" Label="Password" Required="true" @bind-Value="@request.ConfirmPassword" InputType="@PasswordInput"></MudTextField>
-                    <MudButton Class="mt-5" OnClick="(() => ChangePassword())" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Change Password</MudButton>
-                    <MudText Class="text-danger" Color="Color.Error">@message</MudText>
+                    <MudButton ButtonType="ButtonType.Button" Class="mt-5" OnClick="ChangePassword" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Change Password</MudButton>
+                    <br />
+                    <MudText Class="text-danger" Color="messageColor">@message</MudText>
                     <br />
                     <MudText Class="mt-5" Typo="Typo.caption">* The field is required.</MudText>
                 </MudForm>

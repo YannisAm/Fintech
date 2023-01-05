@@ -122,7 +122,7 @@ namespace Fintech.Server.Services.AuthService
                 return new ServiceResponse<bool> 
                 { 
                     Success = false,
-                    Message = "Uset not found"
+                    Message = "User not found"
                 };
 
             CreatePasswordHash(newPassword, out byte[] passwordHash, out byte[] passwordSalt);

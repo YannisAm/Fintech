@@ -39,6 +39,8 @@ namespace Fintech.Client.Pages
 
         async Task HandleSubmit()
         {
+            security.StocksValue = security.StockesOwned * security.Price;
+            security.DateTimeModified = DateTime.UtcNow;
             await SecurityService.EditSecurity(security);
             NavigationManager.NavigateTo("/securities", true);
         }

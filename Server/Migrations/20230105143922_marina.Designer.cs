@@ -4,6 +4,7 @@ using Fintech.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fintech.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230105143922_marina")]
+    partial class marina
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,17 +130,12 @@ namespace Fintech.Server.Migrations
             modelBuilder.Entity("Fintech.Shared.Models.Security", b =>
                 {
                     b.HasOne("Fintech.Shared.Models.Portfolio", "Portfolio")
-                        .WithMany("Securities")
+                        .WithMany()
                         .HasForeignKey("PortfolioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Portfolio");
-                });
-
-            modelBuilder.Entity("Fintech.Shared.Models.Portfolio", b =>
-                {
-                    b.Navigation("Securities");
                 });
 #pragma warning restore 612, 618
         }

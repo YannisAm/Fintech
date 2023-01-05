@@ -1,58 +1,30 @@
 ﻿@page "/securitydetails/{id:int}"
 
-@*<title>@security.SecurityName</title> Γιατί όταν το κάνω κομεντ λειτουργεί, αμα το σβήσω δεν λειτουργεί και εαν το αφήσω ανοιχτό παλι δεν λειτουργεί*@
 
+@if (security == null)
+{
+    <MudText Typo="Typo.subtitle1">Loading...</MudText>
+}
+else
+{
+    <AuthorizeView>
+        <Authorized>
+            <MudLayout>
+                <MudPaper Class="pa-4 ma-4" Style="width: 600px;">
+                    <MudForm Model="@security">
+                        <MudTextField Disabled="true" Style="width: 200px;" T="string" Label="Portfolio Name" Required="true" @bind-Value="@security.SecurityName"></MudTextField>
+                        <MudNumericField Disabled="true" Style="width: 200px;" Label="Price" Required="true" @bind-Value="@security.Price"></MudNumericField>
+                        <MudNumericField Disabled="true" Style="width: 200px;" Label="Quantity Owned" Required="true" @bind-Value="@security.StockesOwned"></MudNumericField>
+                        <MudTextField Disabled="true" Lines="5" Style="width: 200px;" T="string" Label="Description" Required="false" @bind-Value="@security.Description"></MudTextField>
+                        <MudButton Class="mt-5" Href="@($"/editsecurity/{security.Id}")" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Edit" Color="Color.Primary">Edit</MudButton>
+                        <MudButton Class="mt-5" OnClick="async () => OpenDeleteDialog(security)" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Secondary">Delete</MudButton>
+                    </MudForm>
+                </MudPaper>
+            </MudLayout>
+        </Authorized>
+        <NotAuthorized>
+            <MudText Typo="Typo.h3">Please first <a href="login">login</a> to view this page</MudText>
+        </NotAuthorized>
+    </AuthorizeView>
+}
 
-@if (security != null)
-{
-    <div class="row w-100">
-        <div class="col-6">
-            Security Name
-        </div>
-        <div class="col-6">
-            <p>@security.SecurityName</p>
-        </div>
-    </div>
-    <div class="row w-100">
-        <div class="col-6">
-            Price
-        </div>
-        <div class="col-6">
-            <p>@security.Price</p>
-        </div>
-    </div>
-    <div class="row w-100">
-        <div class="col-6">
-            Stockes Owned
-        </div>
-        <div class="col-6">
-            <p>@security.StockesOwned</p>
-        </div>
-    </div>
-    <div class="row w-100">
-        <div class="col-6">
-            Date-Time Obtained
-        </div>
-        <div class="col-6">
-            <p>@security.DateTimeObtained</p>
-        </div>
-    </div>
-    <div class="row w-100">
-        <div class="col-6">
-            Description
-        </div>
-        <div class="col-6">
-            <p>@security.Description</p>
-        </div>
-    </div>
-    <div class="row w-100">
-        <div class="col-12">
-            <a href="/editsecurity/@security.Id" class="btn btn-primary">Edit</a>
-            <button type="button" class="btn btn-danger" @onclick="async () => OpenDeleteDialog(security)">Delete</button>
-        </div>
-    </div>
-}
-@if (DeleteDialogOpen) 
-{
-    <ModelDialog Title="Are you sure?" Text="Do you want to delete the security?" OnClose="@OnDeleteDialogClose" DialogType="ModelDialog.ModalDialogType.DeleteCancel"></ModelDialog>
-}

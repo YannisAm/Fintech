@@ -1,5 +1,6 @@
 ﻿using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
+using MudBlazor;
 
 namespace Fintech.Client.Pages
 {
@@ -10,49 +11,29 @@ namespace Fintech.Client.Pages
         [Inject]
         public NavigationManager NavigationManager { get; set; }
         private Security? security;
-        [Parameter]
-        public bool DeleteDialogOpen { get; set; }
-        private Security _securityToDelete;
-
+        [Inject]
+        private IDialogService DialogService { get; set; }
         [Parameter]
         public int id { get; set; }
 
-        private async Task OnDeleteDialogClose(bool accepted)
-        {
-            if (accepted)
-            {
-                await Delete(id);
-                _securityToDelete = null;
-                Navigate();
-            }
-            DeleteDialogOpen = false;
-            StateHasChanged();
-        }
-
-        private async Task OpenDeleteDialog(Security security)
-        {
-            DeleteDialogOpen = true;
-            _securityToDelete = security;
-            StateHasChanged();
-        }
 
         protected override async Task OnInitializedAsync()
         {
             security = await SecurityService.GetSecurityById(id);
         }
 
-        public async Task Delete(int id)
+        private async Task OpenDeleteDialog(Fintech.Shared.Models.Security security)
         {
-            if (security != null)
-            {
+            string state;
+            bool? result = await DialogService.ShowMessageBox(
+            "Warning",
+            "Are you sure you want to delete this security?",
+            yesText: "Delete!", cancelText: "Cancel");
+            state = result == null ? "Cancelled" : "Deleted!";
+            if (state == "Deleted!")
                 await SecurityService.DeleteSecurity(id);
-
-            }
-        }
-
-        private void Navigate()
-        {
             NavigationManager.NavigateTo("/securities", true);
         }
+
     }
 }

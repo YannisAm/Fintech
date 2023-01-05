@@ -1,4 +1,5 @@
-﻿@if (Portfolios == null || Portfolios.Count == 0)
+﻿
+@if (Portfolios == null || Portfolios.Count == 0)
 {
     <AuthorizeView>
         <Authorized>
@@ -15,39 +16,27 @@ else
 {
     <AuthorizeView>
         <Authorized>
-            <table class="table">
-                <caption>
-                    Portfolio List
-                </caption>
-                <thead>
-                    <tr>
-                        <th scope="col">Portfolio Name</th>
-                        <th scope="col">Securities owned</th>
-                        <th scope="col">Date-time created</th>
-                        <th scope="col">Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var portfolio in Portfolios)
-                    {
-                        <tr>
-                            <th scope="row"><a href="/portfoliodetails/@portfolio.Id">@portfolio.NameOfPortfolio</a></th>
-                            <th>@securitiesCount[iterator++]</th>
-                            <th>@portfolio.DateTimeCreated</th>
-                            <th>@portfolio.Description</th>
-                        </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th scope="col">Sum</th>
-                        <th scope="col">@sumOfSecurities</th>
-                        <th>-</th>
-                        <th>-</th>
-                    </tr>
-                </tfoot>
-            </table>
-            <button class="btn btn-primary" @onclick="NavigationToPortfolio">Add Portfolio</button>
+            <MudTable Items="Portfolios" FixedHeader="true" Hover="true" Bordered="true" >
+                <HeaderContent>
+                    <MudTh>Portfolio Name</MudTh>
+                    <MudTh>Securities Owned</MudTh>
+                    <MudTh>Date-Time Created</MudTh>
+                    <MudTh>Description</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="portfolio">
+                    <MudTd DataLabel="Portfolio Name">@portfolio.NameOfPortfolio</MudTd>
+                    <MudTd DataLabel="Securities Owned">@securitiesCount[iterator++]</MudTd>
+                    <MudTd DataLabel="Date-Time Created">@portfolio.DateTimeCreated</MudTd>
+                    <MudTd DataLabel="Description">@portfolio.Description</MudTd>
+                </RowTemplate>
+                <FooterContent>
+                    <MudTd>Sum</MudTd>
+                    <MudTd>@securitiesCount.Sum()</MudTd>
+                    <MudTd>-</MudTd>
+                    <MudTd>-</MudTd>
+                </FooterContent>
+            </MudTable>
+            <MudButton ButtonType="ButtonType.Button" Class="mt-5" OnClick="NavigationToPortfolio" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Add Portfolio</MudButton>
         </Authorized>
         <NotAuthorized>
             <h3>Please first <a href="login">login</a> to see the portfolios</h3>

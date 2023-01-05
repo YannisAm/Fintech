@@ -1,11 +1,14 @@
 ﻿using Fintech.Client.Pages;
 using Fintech.Shared.Models;
 using Microsoft.AspNetCore.Components;
+using System.Net.Http;
 using System.Security.Claims;
+using System.Xml.Linq;
+using static MudBlazor.CategoryTypes;
 
 namespace Fintech.Client.Shared
 {
-    public partial class PortfolioList : ComponentBase
+    public partial class PortfolioList : Microsoft.AspNetCore.Components.ComponentBase
     {
         [Inject]
         public IPortfolioService? PortfolioService { get; set; }
@@ -20,8 +23,7 @@ namespace Fintech.Client.Shared
         private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
         private List<Fintech.Shared.Models.Security> Securities = new();
         private List<int> securitiesCount = new List<int>();
-        private int iterator = 0;
-        private int sumOfSecurities = 0;
+        private int iterator;
 
         protected override async Task OnInitializedAsync()
         {
@@ -45,7 +47,6 @@ namespace Fintech.Client.Shared
                     if (portfolio.Id == security.PortfolioId)
                     {
                         count++;
-                        sumOfSecurities++;
                     }
                         
                 }
@@ -57,6 +58,5 @@ namespace Fintech.Client.Shared
         {
             NavigationManager.NavigateTo("/addPortfolio", true);
         }
-
     }
 }

@@ -16,7 +16,8 @@ namespace Fintech.Shared.Models
         public int StockesOwned { get; set; } = 0;
         [Required]
         public double StocksValue { get; set; }
-        public DateTime DateTimeObtained { get; set; } = DateTime.UtcNow; //  apply an option for user to change it if he wants
+        public DateTime DateTimeObtained { get; set; } = DateTime.UtcNow;
+        public DateTime? DateTimeModified { get; set; } = null;
         public string? Description { get; set; } = string.Empty;
         public string UserEmail { get; set; } = string.Empty;
 
