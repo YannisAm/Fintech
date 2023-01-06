@@ -3,20 +3,27 @@
 {
     <AuthorizeView>
         <Authorized>
-            <span>you have no Portfolios. Plase click <button class="btn btn-primary" @onclick="NavigationToPortfolio">Add Portfolio</button> to add a new portfolio</span>
+            <MudText Typo="Typo.body1">
+                You have not yet a Portfolio to display something. Please
+                press <MudButton DisableRipple="true" Style="text-transform:none" Href="/addPortfolio" Variant="Variant.Text">Add Portfolio</MudButton> to be redirected to
+                add a new portfolio
+            </MudText>
         </Authorized>
         <NotAuthorized>
-            <h3>Please first <a href="login">login</a> to see the portfolios</h3>
+            <MudText Typo="Typo.subtitle1">Please first <MudLink Href="/login">login</MudLink> to see this page</MudText>
         </NotAuthorized>
     </AuthorizeView>
-
-    //make it to wait for 3 seconds before it show the message above
 }
 else
 {
     <AuthorizeView>
         <Authorized>
-            <MudTable Items="Portfolios" FixedHeader="true" Hover="true" Bordered="true" >
+            <MudTable Items="Portfolios" FixedHeader="true" Hover="true" Bordered="true" Filter="new Func<Portfolio,bool>(FilterFunc1)" @bind-SelectedItem="_selectedItem1">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h4"><u>Portfolios</u></MudText>
+                    <MudSpacer />
+                    <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                </ToolBarContent>
                 <HeaderContent>
                     <MudTh>Portfolio Name</MudTh>
                     <MudTh>Securities Owned</MudTh>
@@ -24,28 +31,26 @@ else
                     <MudTh>Description</MudTh>
                 </HeaderContent>
                 <RowTemplate Context="portfolio">
-                    <MudTd DataLabel="Portfolio Name">@portfolio.NameOfPortfolio</MudTd>
-                    <MudTd DataLabel="Securities Owned">@iterator</MudTd>
+                    <MudTd DataLabel="Portfolio Name"><MudLink Href="@($"/portfoliodetails/{portfolio.Id}")">@portfolio.NameOfPortfolio</MudLink></MudTd>
+                    <MudTd DataLabel="Securities Owned">@securitiesCount[iterator++] </MudTd>
                     <MudTd DataLabel="Date-Time Created">@portfolio.DateTimeCreated</MudTd>
-                    <MudTd DataLabel="Description">@portfolio.Description</MudTd>
+                    <MudTd DataLabel="Description">@CutTheText(portfolio.Description)</MudTd>
                 </RowTemplate>
                 <FooterContent>
                     <MudTd>Sum</MudTd>
-                    <MudTd></MudTd>
+                    <MudTd>@securitiesCount.Sum()</MudTd>
                     <MudTd>-</MudTd>
                     <MudTd>-</MudTd>
                 </FooterContent>
+                <PagerContent>
+                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100 }" InfoFormat="@($"{infoFormat}")" HorizontalAlignment="HorizontalAlignment.End" />
+                </PagerContent>
             </MudTable>
-            <MudButton ButtonType="ButtonType.Button" Class="mt-5" OnClick="NavigationToPortfolio" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Add Portfolio</MudButton>
+            <MudButton ButtonType="ButtonType.Button" Class="mt-5 mb-5" Href="/addPortfolio" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Add" Color="Color.Primary">Add Portfolio</MudButton>
         </Authorized>
         <NotAuthorized>
-            <h3>Please first <a href="login">login</a> to see the portfolios</h3>
+            <MudText Typo="Typo.subtitle1">Please first <MudLink Href="/login">login</MudLink> to see this page</MudText>
         </NotAuthorized>
     </AuthorizeView>
     
 }
-
-
-
-
-

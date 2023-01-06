@@ -12,7 +12,7 @@ else
             <MudLayout>
                 <MudPaper Class="pa-4 ma-4" Style="width: 600px;">
                     <MudForm Model="@security">
-                        <MudTextField Disabled="true" Style="width: 200px;" T="string" Label="Portfolio Name" Required="true" @bind-Value="@security.SecurityName"></MudTextField>
+                        <MudTextField Disabled="true" Style="width: 200px;" T="string" Label="Security Name" Required="true" @bind-Value="@security.SecurityName"></MudTextField>
                         <MudNumericField Disabled="true" Style="width: 200px;" Label="Price" Required="true" @bind-Value="@security.Price"></MudNumericField>
                         <MudNumericField Disabled="true" Style="width: 200px;" Label="Quantity Owned" Required="true" @bind-Value="@security.StockesOwned"></MudNumericField>
                         <MudTextField Disabled="true" Lines="5" Style="width: 200px;" T="string" Label="Description" Required="false" @bind-Value="@security.Description"></MudTextField>

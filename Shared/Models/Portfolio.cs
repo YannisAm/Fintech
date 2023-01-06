@@ -12,7 +12,5 @@ namespace Fintech.Shared.Models
         public DateTime DateTimeCreated { get; set; } = DateTime.UtcNow;
         public DateTime? DateTimeModified { get; set; } = null;
         public string UserEmail { get; set; } = string.Empty;
-
-        public ICollection<Security>? Securities { get; set; }
     } 
 }

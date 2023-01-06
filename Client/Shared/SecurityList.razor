@@ -2,10 +2,14 @@
 {
     <AuthorizeView>
         <Authorized>
-            <span>you have no Securities. Plase click <button class="btn btn-primary" @onclick="NavigationToSecurity">Add Security</button> to add a new security</span>
+            <MudText Typo="Typo.body1">
+                You have not yet a security. Please
+                press <MudButton DisableRipple="true" Style="text-transform:none" Href="/addSecurity" Variant="Variant.Text">Add Security</MudButton> to be redirected to
+                add a new security
+            </MudText>
         </Authorized>
         <NotAuthorized>
-            <h3>Please first <a href="login">login</a> to see the securities</h3>
+            <MudText Typo="Typo.subtitle1">Please first <MudLink Href="/login">login</MudLink> to see this page</MudText>
         </NotAuthorized>
     </AuthorizeView>
 }
@@ -13,55 +17,49 @@ else
 {
     <AuthorizeView>
         <Authorized>
-            <table class="table">
-                <caption>
-                    Security List
-                </caption>
-                <thead>
-                    <tr>
-                        <th scope="col">Security Name</th>
-                        <th scope="col">Price of the security</th>
-                        <th scope="col">Securities owned</th>
-                        <th scope="col">Value of stocks</th>
-                        <th scope="col">Date-time obtained</th>
-                        <th scope="col">Portfolio</th>
-                        <th scope="col">Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var security in Securities)
-                    {
-                        <tr>
-                            <th scope="row"><a href="/securitydetails/@security.Id">@security.SecurityName</a></th>
-                            <th>$ @security.Price</th>
-                            <th>@security.StockesOwned</th>
-                            <th>$ @security.StocksValue</th>
-                            <th>@security.DateTimeObtained</th>
-                            <th>@names[iterator++]</th> <!--We get the iterator for the razor.cs page to present every name in our list-->
-                            <th>@CutTheText(security.Description)</th>
-                        </tr>
-                    }
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th scope="col">Sum</th>
-                        <th scope="col">-</th>
-                        <th scope="col">@NumberOfStocks()</th>
-                        <th scope="col">$ @SumOfStocks()</th>
-                        <th scope="col">-</th>
-                        <th scope="col">-</th>
-                        <th scope="col">-</th>
-                    </tr>
-                </tfoot>
-            </table>
-
-            <button id="button-need-margin" class="btn btn-primary" @onclick="NavigationToSecurity">Add Security</button>
+            <MudTable Items="Securities" FixedHeader="true" Hover="true" Bordered="true" Filter="new Func<Security,bool>(FilterFunc1)" @bind-SelectedItem="_selectedItem1">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h4"><u>Securities</u></MudText>
+                    <MudSpacer />
+                    <MudTextField @bind-Value="searchString1" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh>Security Name</MudTh>
+                    <MudTh>Price of the Security</MudTh>
+                    <MudTh>Securities Owned</MudTh>
+                    <MudTh>Value of Stocks</MudTh>
+                    <MudTh>Date-time obtained</MudTh>
+                    <MudTh>Portfolio</MudTh>
+                    <MudTh>Description</MudTh>
+                </HeaderContent>
+                <RowTemplate Context="security">
+                    <MudTd DataLabel="Security Name"><MudLink Href="@($"/securitydetails/{security.Id}")">@security.SecurityName</MudLink></MudTd>
+                    <MudTd DataLabel="Price of the Security">$ @security.Price</MudTd>
+                    <MudTd DataLabel="Securities Owned">@security.StockesOwned</MudTd>
+                    <MudTd DataLabel="Value of Stocks">$ @security.StocksValue</MudTd>
+                    <MudTd DataLabel="Date-time obtained">@security.DateTimeObtained</MudTd>
+                    <MudTd DataLabel="Portfolio">@names[iterator++]</MudTd>
+                    <MudTd DataLabel="Description">@CutTheText(security.Description)</MudTd>
+                </RowTemplate>
+                <FooterContent>
+                    <MudTd>Sum</MudTd>
+                    <MudTd>-</MudTd>
+                    <MudTd>@NumberOfStocks()</MudTd>
+                    <MudTd>$ @SumOfStocks()</MudTd>
+                    <MudTd>-</MudTd>
+                    <MudTd>-</MudTd>
+                    <MudTd>-</MudTd>
+                </FooterContent>
+                <PagerContent>
+                    <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100 }" InfoFormat="@($"{infoFormat}")" HorizontalAlignment="HorizontalAlignment.End" />
+                </PagerContent>
+            </MudTable>
+            <MudButton ButtonType="ButtonType.Button" Class="mt-5 mb-5" Href="/addSecurity" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Add" Color="Color.Primary">Add Security</MudButton>
         </Authorized>
         <NotAuthorized>
-            <h3>Please first <a href="login">login</a> to see the securities</h3>
+            <MudText Typo="Typo.subtitle1">Please first <MudLink Href="/login">login</MudLink> to see this page</MudText>
         </NotAuthorized>
     </AuthorizeView>
-    
 }
 
 

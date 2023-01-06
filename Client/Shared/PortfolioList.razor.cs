@@ -18,13 +18,19 @@ namespace Fintech.Client.Shared
         public NavigationManager NavigationManager { get; set; }
         [Inject]
         public AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        
         private string userEmail;
+        private string searchString1 = "";
+        private Fintech.Shared.Models.Portfolio _selectedItem1 = null;
 
         private List<Fintech.Shared.Models.Portfolio> Portfolios = new();
         private List<Fintech.Shared.Models.Security> Securities = new();
-        private int[] securitiesCount;
+        private List<int> securitiesCount = new();
         private int iterator;
-        private int i;
+        private int count;
+        private bool FilterFunc1(Fintech.Shared.Models.Portfolio portfolio) => FilterFunc(portfolio, searchString1);
+
+        private string infoFormat = "{first_item}-{last_item} of {all_items}";
 
         protected override async Task OnInitializedAsync()
         {
@@ -38,21 +44,54 @@ namespace Fintech.Client.Shared
             }
 
             Portfolios = await PortfolioService.GetPortfolios(userEmail);
-            
+            Securities = await SecurityService.GetSecurities(userEmail);
+
             foreach(var portfolio in Portfolios)
             {
-                if (portfolio.Securities == null)
-                    iterator = 0;
-                else
-                    iterator = portfolio.Securities.Count;
-                iterator++;
+                count = 0;
+                foreach (var security in Securities)
+                {
+                    if (security.PortfolioId == portfolio.Id)
+                    {
+                        count++;
+                    }
+                }
+                securitiesCount.Add(count);
             }
-            securitiesCount = new int[iterator];
         }
 
-        private void NavigationToPortfolio()
+        private bool FilterFunc(Fintech.Shared.Models.Portfolio portfolio, string searchString)
         {
-            NavigationManager.NavigateTo("/addPortfolio", true);
+            if (string.IsNullOrWhiteSpace(searchString))
+                return true;
+            if ($"{portfolio.NameOfPortfolio} {portfolio.Description}".Contains(searchString))
+                return true;
+            return false;
         }
+
+        public string CutTheText(string description)
+        {
+            const int maxLength = 20;
+
+            var words = description.Split(' ');
+            if (words.Length > maxLength)
+            {
+                var totalCharacters = 0;
+                var summaryWords = new List<string>();
+
+                foreach (var word in words)
+                {
+                    summaryWords.Add(word);
+
+                    totalCharacters += word.Length + 1;
+                    if (totalCharacters > maxLength)
+                        break;
+                }
+
+                return String.Join(" ", summaryWords) + "...";
+            }
+            return description;
+        }
+
     }
 }

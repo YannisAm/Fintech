@@ -19,10 +19,10 @@ else
                             <MudTextField Lines="5" Style="width: 200px;" T="string" Label="Description" Required="false" @bind-Value="@Security.Description"></MudTextField>
                             <MudNumericField Style="width: 200px;" Label="Security Price" Required="true" @bind-Value="@Security.Price"></MudNumericField>
                             <MudNumericField Style="width: 200px;" Label="Quantity Owned" Required="true" @bind-Value="@Security.StockesOwned"></MudNumericField>
-                            <MudSelect Style="width: 200px;" T="Fintech.Shared.Models.Portfolio" Label="Portfolio" AnchorOrigin="Origin.BottomCenter" FullWidth="true" Required="true">
+                            <MudSelect @bind-Value="@Security.PortfolioId" Style="width: 200px;" T="int" Label="Portfolio" AnchorOrigin="Origin.BottomCenter" FullWidth="true" Required="true">
                                 @foreach (var portfolio in Portfolios)
                                 {
-                                    <MudSelectItem Value="@(portfolio)">@portfolio.NameOfPortfolio</MudSelectItem>
+                                    <MudSelectItem Value="@(portfolio.Id)">@portfolio.NameOfPortfolio</MudSelectItem>
                                 }
                             </MudSelect>
                             <MudButton Class="mt-5" OnClick="(() => HandleSubmit())" Style="text-transform:none" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary">Submit</MudButton>
